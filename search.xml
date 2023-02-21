@@ -1,342 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>计算机网络基础</title>
-    <url>/2022/08/27/000%E2%80%94%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/</url>
-    <content><![CDATA[<h1 id="OSI七层参考模型"><a href="#OSI七层参考模型" class="headerlink" title="OSI七层参考模型"></a>OSI七层参考模型</h1><p>​	产生：由于早期计算机厂商使用的是私有的网络模型，给彼此通信带来不少麻烦，于是乎，1984年ISO颁布了OSI参考模型</p>
-<p><strong>功能</strong></p>
-<ul>
-<li>物理层：属于最底层，将二进制数转换为传输的电信号或光信号（建立、维护、断开物理链接）</li>
-<li>数据链路层：建立逻辑链接，进行硬件地址寻址（MAC地址）、差错校验</li>
-<li>网络层：进行逻辑地址寻址（IP地址）、实现不同网络之间路径选择</li>
-<li>传输层：定义传输数据的协议端口号、流控（流量控制）、差错校验</li>
-<li>会话层：建立、管理、终止会话</li>
-<li>表示层：数据的表示：加密、压缩…………</li>
-<li>应用层：将原始的数据转换为电脑可识别的二进制数</li>
-</ul>
-<h2 id="数据链路层-交换机"><a href="#数据链路层-交换机" class="headerlink" title="数据链路层(交换机)"></a>数据链路层(交换机)</h2><p><strong>工作原理</strong></p>
-<p>​	交换机里面维护了一张 MAC地址表，主要记录的是 MAC地址 和 接口 的对应关系，初始状态下为空</p>
-<p>​	<strong>假设交换机上有 3 个接口，主机A——1号口、主机B——2号口、主机C——3号口</strong></p>
-<ul>
-<li><p>当交换机收到发来的 数据帧 后查看 帧头部，首先查看 <strong>源MAC地址</strong> 有无记录在自己的 MAC表 中</p>
-</li>
-<li><p>没有的话记录：主机A——接口1，接着查看 <strong>目的MAC地址</strong> 是否有记录在内</p>
-</li>
-<li><p>没有则直接从除接收接口（1号口）外 的所有连接的接口转发（广播），主机B 与 主机C 都收到后，主机C丢弃，主机B回应（主机解封数据后会比对目的MAC地址，若不对应则丢弃）</p>
-</li>
-<li><p>因 主机B 的MAC地址并未记录，所以交换机会记录 主机B 的MAC地址：主机B——接口2，然后直接从1号接口转发（单播）</p>
-</li>
-</ul>
-<p><em>总结：交换机学习源 MAC、广播数据帧、接收方回应、回应方单播直接转发</em></p>
-<h2 id="网络层（路由器）"><a href="#网络层（路由器）" class="headerlink" title="网络层（路由器）"></a>网络层（路由器）</h2><p><strong>功能</strong></p>
-<ul>
-<li>进行逻辑地址（IP 地址）寻址，实现不同网络（网络地址不等 或 内网和外网分割）之间的路径选择</li>
-<li>查找目的是否可以到达，如果可以到达，选择一条最优路径；如果不能，直接返回 发送方 一个消息</li>
-</ul>
-<p>网络层 所封装的的是IP头部，所传输的 PDU（传输数据单元）是 数据包（IP数据包）</p>
-<p><strong>路由</strong></p>
-<ul>
-<li>概念：从 源主机 到 目标主机 的 转发数据包 的过程（跨网络访问）</li>
-<li>确定最佳路径（手动指定、根据动态路由协商方式）、通过网络传输信息</li>
-</ul>
-<p><strong>路由表</strong>（路由器里维护了一张路由表）</p>
-<ul>
-<li><p>直连路由表：当路由器的接口 配置好对应的 IP地址 并开启接口后自动生成</p>
-</li>
-<li><p>非直连：需要手动配置静态路由 或 使用动态路由协议学习</p>
-</li>
-<li><p>静态路由</p>
-<ul>
-<li>由管理员手动配置，不灵活 且 是单向的</li>
-<li>特殊的静态路由：默认路由，当在路由器中找不到目标网络的路由条目时，再去查看默认路由；一般应用于   末节（末梢）网络（网络的最末端）</li>
-</ul>
-</li>
-<li><p>动态路由</p>
-<ul>
-<li>通过某种动态路由协议自动建立自己的路由表</li>
-<li>常见协议：RIP、OSPF、IS-IS、BGP、IGRP、EIGRP</li>
-</ul>
-</li>
-</ul>
-<h1 id="TCP-x2F-IP-传输控制-x2F-网际-协议-四层模型"><a href="#TCP-x2F-IP-传输控制-x2F-网际-协议-四层模型" class="headerlink" title="TCP&#x2F;IP(传输控制&#x2F;网际 协议)四层模型"></a>TCP&#x2F;IP(传输控制&#x2F;网际 协议)四层模型</h1><ul>
-<li><p>网络接口层</p>
-</li>
-<li><p>网络层：IP协议（<strong>ARP</strong>：地址解析协议；<strong>RARP</strong>：逆地址解析协议；<strong>ICMP</strong>：网际控制报文协议，ping 命令；<strong>IGMP</strong>：网际组管理协议）</p>
-</li>
-<li><p>传输层：TCP（传输控制协议：<strong>传输数据更加稳定可靠</strong>）、UDP（用户数据报协议：<strong>传输效率更高</strong>）</p>
-</li>
-<li><p>应用层：HTTP、HTTPS、SSH、DNS、POP3、IMAP、TFTP…………</p>
-</li>
-</ul>
-<h2 id="网络层-ARP、ICMP"><a href="#网络层-ARP、ICMP" class="headerlink" title="网络层(ARP、ICMP)"></a>网络层(ARP、ICMP)</h2><h3 id="ARP-协议"><a href="#ARP-协议" class="headerlink" title="ARP 协议"></a><strong>ARP 协议</strong></h3><p>​	<strong>将一个已知的 IP 地址解析为MAC 地址</strong>，从而进行二层（数据链路层）数据的交互，是一个三层（网络层）的协议，但工作在二层，可以说是一个2.5层协议</p>
-<p><strong>工作流程</strong></p>
-<ul>
-<li>ARP 请求，以广播方式发送请求（广播：一种信息的传播方式，一对多的方式）</li>
-<li>ARP 响应，响应时是单播</li>
-</ul>
-<p>​	ARP 缓存：为了避免重复发送 ARP 请求，动态条目会有老化时间（在一定时间内，若表中某一行没有使用，就会被删）</p>
-<blockquote>
-<p>在 windows 中可直接使用 arp 命令<br>arp -a		通过询问当前协议数据，显示当前 ARP 项。<br>arp -d		删除 inet_addr 指定的主机。inet_addr 可以是通配符 *，以删除所有主机。<br>        inet_addr 为指定 Internet 地址。（IP 地址）</p>
-</blockquote>
-<p>​	网关：与主机直连的 路由器接口、防火墙 等边界网络设备的 IP地址</p>
-<p><strong>ARP 攻击（仅欺骗 主机）</strong> </p>
-<ul>
-<li><p>伪造 ARP 应答报文，向被攻击主机响应<strong>虚假</strong>的 MAC 地址；当被攻击主机进行网络通信时，会将数据交给虚假的 MAC 地址进行转发，但虚假的 MAC 地址不存在，所以造成被攻击主机无法访问网络</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">arpspoof [-i interface] [-c own|host|both] [-t target] [-r] host</span><br><span class="line">		-i interface  指定要使用的网卡</span><br><span class="line">		-t target   指定要攻击的主机(如果没有指定，则认为是局域网中所有主机)重复可以指定多个主机</span><br><span class="line">		host   		host是你想要截获数据包的主机 (通常是网关)</span><br><span class="line">arpspoof -i eth0 -t 192.168.0.106 192.168.0.1			按 ctrl+Z 即可停止</span><br></pre></td></tr></table></figure></li>
-</ul>
-<p><strong>ARP 欺骗 （欺骗 网关 与 主机）</strong></p>
-<ul>
-<li><p>伪造 ARP 应答报文，向 <strong>被攻击主机</strong> 和 <strong>网关</strong> 响应真实的 MAC 地址，当 被攻击主机 进行网络通信时，会将数据交给真实的 MAC 地址进行转发，从而截获被攻击主机的数据（攻击主机 要开启 IP 转发功能）</p>
-<p>​	在上方的基础上，打开 IP 转发功能，开启后，被攻击主机可正常上网，但我们可以用 wirehark 进行抓包（因为被攻击主机的流量是从 kali 转发出去的）;</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">echo 1 &gt;&gt; /proc/sys/net/ipv4/ip_forward			1 是开启，0 是关闭</span><br></pre></td></tr></table></figure>
-
-<p>​	也可以用 driftnet 抓取被攻击主机所访问的图片（明文上的）</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">driftnet [options] [filter code]</span><br><span class="line">			-d　　指定临时目录</span><br><span class="line">			-a　　附加模式：捕获图片并保存到临时目录；不显示捕获图片窗口。</span><br><span class="line">			-i　　设置要监听的接口（网卡）</span><br><span class="line">driftnet -i eth0</span><br><span class="line">driftnet -d /img -a -i eth0</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="ICMP-协议"><a href="#ICMP-协议" class="headerlink" title="ICMP 协议"></a><strong>ICMP 协议</strong></h3><ul>
-<li>Internet 控制报文协议</li>
-<li>用于在 <strong>IP主机 、路由器之间传递控制信息</strong>（控制消息：网络通不通、主机是否可达、路由是否可用）</li>
-<li>属于网络层的协议，封装在传输层与网络层之间</li>
-</ul>
-<p>​	Ping 程序会发送一个 ICMP echo 请求消息给 目的主机，并报告应答情况</p>
-<p><strong>ICMP重定向</strong></p>
-<p>​	在某些特定的情况下，路由器检测到主机使用非优化路由时，会向主机发送一个 ICMP重定向报文，使主机的路由改变</p>
-<h2 id="传输层-TCP、UDP"><a href="#传输层-TCP、UDP" class="headerlink" title="传输层(TCP、UDP)"></a>传输层(TCP、UDP)</h2><h3 id="TCP-协议"><a href="#TCP-协议" class="headerlink" title="TCP 协议"></a><strong>TCP 协议</strong></h3><ul>
-<li>面向连接的传输协议</li>
-<li>要求数据在传输之前必须建立连接，数据传输完成后，必须释放连接</li>
-<li>仅支持单播传输：在两个终端之间建立的点对点连接，不支持广播</li>
-</ul>
-<p><strong>三次握手</strong></p>
-<p><img src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/000-00N/000/000%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80-01.png"></p>
-<p>​	TCP确认号(Acknowledgment Number,ACK number)：表示 接收方 期望收到 发送方 下一个报文段的 第一个字节数据的编号，其值是 接收计算机即将收到的 下一个序列号，即 上一个请求报文的字节序列号 加1</p>
-<p>​	SYN：在建立连接时使用，用来同步序号。当 SYN&#x3D;1，ACK&#x3D;0时，表示这是一个请求建立连接的报文段；当 SYN&#x3D;1，ACK&#x3D;1时，表示对方同意建立连接；只有在前两次握手中 SYN&#x3D;1</p>
-<p>​	ACK：表示前面的确认号字段是否有效，ACK&#x3D;1 时有效。TCP规定，连接建立后，ACK必须为 1</p>
-<p>​	RST：表示 是否重置连接，若 RST&#x3D;1，说明 TCP连接出现错误(如主机崩溃)，必须释放连接，在重新建立</p>
-<p>​	FIN：标记 数据是否发送完毕，若 FIN&#x3D;1，表示数据已经发送完成，可以释放连接</p>
-<p><strong>UDP 协议</strong></p>
-<ul>
-<li>用户数据报协议，传输层的另一个协议</li>
-<li>不需要建立连接，直接发送数据，不会去重新排序，不能够确认</li>
-</ul>
-<h2 id="应用层-HTTP、DHCP、DNS"><a href="#应用层-HTTP、DHCP、DNS" class="headerlink" title="应用层(HTTP、DHCP、DNS)"></a>应用层(HTTP、DHCP、DNS)</h2><h3 id="HTTP-协议"><a href="#HTTP-协议" class="headerlink" title="HTTP 协议"></a><strong>HTTP 协议</strong></h3><p><strong>概念</strong></p>
-<ul>
-<li>超文本传输协议，用于在 万维网服务器 上传输超文本(HTML) 到 本地浏览器 的传输协议</li>
-<li>传输 HTML文本、图片、查询结构等，基于传输层 TCP 的80端口</li>
-</ul>
-<p><strong>报文</strong></p>
-<p>​	用于 HTTP 协议交互的信息称为 HTTP报文，请求端的报文叫做<strong>请求</strong>报文，响应端的报文叫做<strong>响应</strong>报文。报文包括：<strong>报文首部</strong>、<strong>空行</strong>（换行）、<strong>报文主体</strong> 组成</p>
-<ol>
-<li>报文首部：客户端 或（服务端） 需处理的 请求 或（响应）的内容或属性</li>
-<li>报文主体：用于传输 请求 或 相应 的实体</li>
-</ol>
-<p>​	在 HTTP 请求中，第一行必须是请求行，用来说明 请求类型、要访问的资源 和 使用的HTTP版本 ，接着是报文的首部，空行之后就是报文主体，如下是报文首部的一些参数：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">HOST: 请求的目的地</span><br><span class="line">Accept: 指浏览器或其他客户可以接受的 MIME文件格式</span><br><span class="line">User-Agent: 是客户端浏览器名称</span><br><span class="line">Accept-Langeuage: 指出浏览器可以接受的语言种类，如en或en-us，指英语</span><br><span class="line">Cookie: 浏览器用这个属性向服务器发送Cookie</span><br><span class="line">Referer: 提供访问来源的信息，即给出引荐网页的URL，告诉服务器用户在访问当前资源之前的位置，可以追踪用户</span><br><span class="line">X-Forwarded-For: 用来识别连接到 Web 服务器的 客户端的真实IP</span><br><span class="line">Content-Type: 用来表明request的内容类型</span><br><span class="line">Accept-Charset: 指出浏览器可以接受的字符编码。英文浏览器的默认值是ISO-8859-1</span><br><span class="line">Accept-Encoding: 指出浏览器可以接受的编码方式。为了压缩文件并加速文件传递速度。浏览器在接收到web响应之后先解码，然后再检查文件格式</span><br></pre></td></tr></table></figure>
-
-<p><strong>万维网服务</strong></p>
-<p>​	Internet上广泛应用的信息服务技术。采用 C&#x2F;S 架构，但 客户机 是通过 浏览器 请求，从而在 浏览器 上看到对应的图形界面，又称为 浏览器&#x2F;服务器(B&#x2F;S)架构（Browser&#x2F;Server）</p>
-<p><strong>工作原理</strong></p>
-<ul>
-<li>客户端 使用 浏览器通过 URL 向 HTTP服务器 发送请求</li>
-<li>Web服务器 根据收到的请求直接向 客户机 相应信息</li>
-</ul>
-<p><strong>注意事项</strong></p>
-<ul>
-<li>无连接：限制每次连接只能处理一个请求。（只需TCP三次握手成功 后就可以发送请求）</li>
-<li>无状态：没有记忆能力，当后续处理的内容需要用到 之前的内容时，必须重传（登录）。于是就有了 cookie与session</li>
-<li>独立的：只有 客户端 和 服务器 知道如何处理数据内容，任何类型的数据都可以通过 HTTP发送，客户端 和 服务器 指定使用适合的 MIME-type（文件类型）</li>
-</ul>
-<p><strong>状态码</strong></p>
-<table>
-<thead>
-<tr>
-<th>Status Code</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>2XX</td>
-<td>请求成功</td>
-</tr>
-<tr>
-<td>3XX</td>
-<td>重定向，需要进一步的操作以完成请求</td>
-</tr>
-<tr>
-<td>4XX</td>
-<td>客户端错误</td>
-</tr>
-<tr>
-<td>5XX</td>
-<td>服务器错误，服务器在请求过程中发生错误</td>
-</tr>
-</tbody></table>
-<h4 id="cookie、session"><a href="#cookie、session" class="headerlink" title="cookie、session"></a>cookie、session</h4><p>Cookie：在 客户端 记录信息确定用户身份，Session：在 服务器端 记录信息确定用户身份。</p>
-<p>​	HTTP协议是 无状态协议(无记忆能力)，一旦数据传输完毕，客户端 与 服务器端 就会断开连接；再次交换数据需要建立新的连接，这就导致其无法 在连接上 跟踪会话，于是就出现了 cookie 和 session</p>
-<p><strong>Cookie</strong></p>
-<p>​	是在浏览器中寄存的小型数据体，它可以记载和服务器相关的用户信息，也可以用来实现会话功能</p>
-<p>​	某些网站为了 <strong>辨别用户身份</strong>，进行 会话跟踪 而储存在用户本地终端上的数据（通常经过加密），由 用户客户端 暂时或永久保存的信息，通俗地说就是 鉴别用户身份的凭证(类似身份证)</p>
-<ol>
-<li>会话级cookie：保存在内存，浏览器关闭时自动消失</li>
-<li>持久化cookie：保存在硬盘，浏览器关闭不会消失，其生命周期 取决于 失效时间(Expires&#x2F;Max-Age)</li>
-</ol>
-<p><strong>cookie鉴权实现</strong></p>
-<ul>
-<li>客户端 第一次<strong>访问</strong> 服务器时 服务器端会生成cookie(当然需要cookie时才会)，然后通过 响应头部 中的 Set-Cookie 传给客户端(格式为key&#x3D;value键值对)，客户端 将其保存</li>
-<li>客户端 再访问 服务器 时，在请求报文中的 请求头 里就会带上 客服端 保存的 cookie，与 服务器端 的cookie 进行对比</li>
-</ul>
-<p><strong>session</strong></p>
-<p>​	服务器为了 <strong>保存用户状态</strong> 而创建的一个特殊的对象，它允许服务器在请求之间保留特定用户的信息，如：用户身份验证凭据、购物车内容等。其有两种传递方式（服务器端存储、cookie、URL重写）</p>
-<ol>
-<li>session 数据存储在服务器端，客户端只保存 session ID，在请求时发送给服务器</li>
-<li>将 sessionid 放在 <strong>cookie</strong> 中，当浏览器关闭就会消失，可以用做临时的cookie存放(会话级)</li>
-<li>通过 response.encodeURL() 重写URL(如果客户端 禁用 或 不支持 session，一般不使用)</li>
-</ol>
-<p><strong>session鉴权</strong></p>
-<ul>
-<li>当客户端 登录 服务器的时候，服务器的内存 创建一个 session内存(该对象有一个唯一的id，一般称为sessionid) 并保存在 服务器</li>
-<li>然后在请求报文的响应头里把 sessionid 通过 cookie 的方式传递给客户端(sessionid<strong>默认</strong>生命周期:半小时)</li>
-<li>之后 客户端 访问 服务器 时所有的请求都会在请求头带上 sessionid，然后和 服务器 保存的 session 进行对比，以此来识别不同的用户</li>
-</ul>
-<p><em>（ps：sessionid 是识别 session 的唯一依据，session 一般保存在服务端，只返回随机生成的 sessionid 给客户端，它们都是后端生成的）</em></p>
-<h3 id="DHCP-协议"><a href="#DHCP-协议" class="headerlink" title="DHCP 协议"></a><strong>DHCP 协议</strong></h3><ul>
-<li>动态主机配置协议，广泛应用于局域网内部，<strong>主要给客户机提供 TCP&#x2F;IP 参数</strong>（IP地址、子网掩码、网关、DNS）</li>
-<li>减少管理员的工作量、避免输入错误、避免IP冲突、提高IP地址利用率</li>
-</ul>
-<p><strong>工作原理</strong></p>
-<ul>
-<li>应用层的协议，基于 UDP，主机发送请求到DHCP服务器的67号端口，服务器应答消息给主机的68号端口</li>
-<li>客户机于服务器的交互过程<ul>
-<li>客户机以广播方式发送 DHCP discover报文，网络中所有 DHCP服务器都会收到，并去响应；客户机会向 收到第一个发送offer报文服务器 发送 DHCP request 报文，服务器确认，客户机获得 TCP&#x2F;IP参数</li>
-</ul>
-</li>
-</ul>
-<p><strong>DHCP 防御</strong> <strong>（在交换机上配置信任端口）</strong></p>
-<ul>
-<li>开启 DHCP 监听</li>
-</ul>
-<blockquote>
-<p>ip dhcp snooping</p>
-</blockquote>
-<ul>
-<li>指定监听 vlan</li>
-</ul>
-<blockquote>
-<p>ip dhcp snooping vlan 1<br>由于开启了监听，所有交换机上的端口都变为非信任端口（会拒绝DHCP报文），需要添加信任端口</p>
-</blockquote>
-<ul>
-<li>添加信任端口</li>
-</ul>
-<blockquote>
-<p>int f0&#x2F;1 		进入端口 f0&#x2F;1<br>ip dhcp snooping trust</p>
-</blockquote>
-<p>​	当交换机开启 dhcp snooping 后，所有端口变为非信任端口（拒绝 dhcp discover），当交换机上的某一个端口设置为信任端口后，其他所有端口变成 可信任端口（拒绝 dhcp offer）</p>
-<h3 id="DNS-协议"><a href="#DNS-协议" class="headerlink" title="DNS 协议"></a><strong>DNS 协议</strong></h3><p>​	域名系统，作为将 域名 与 IP地址 的相互映射关系存放在一个分布式的数据库，使用的是UDP的53号端口</p>
-<p><strong>域名空间</strong></p>
-<p>​	树状结构</p>
-<ul>
-<li>根域（全世界只有13台根域服务器）：” . “</li>
-<li>顶级域：主要用于区分域名用途，商业类：com、教育和学习：edu、社会非盈利组织：org、中国：cn</li>
-<li>二级域</li>
-</ul>
-<p><strong>DNS 查询过程</strong></p>
-<ul>
-<li>客户机想要访问 <code>www.baidu.com</code>，会根据自己的 TCP&#x2F;IP 参数向自己的首选DNS服务器发送 DNS请求</li>
-<li>首选DNS服务器收到客户机的请求后，回去查询自己的区域文件，若找不到 域名 的IP地址信息，将请求转发到根域服务器（需要配置根提示）；若可以找到 IP地址，直接响应给客户机</li>
-<li>根域服务器收到请求后，由于根服务器只维护 顶级域服务器信息，会响应顶级域服务器IP（com），首选DNS 根据根域服务器 相应的信息，将请求转发到 com顶级域</li>
-<li>com顶级域服务器 收到请求，由于 com顶级域服务器 只维护 二级域信息，会响应二级域服务器IP （baidu.com）  ，首选DNS 根据 顶级域响应的信息，将请求转发到 baidu.com 二级域</li>
-<li>baidu.com二级域 收到请求，baidu.com DNS服务器里维护的是 baidu.com区域的所有主机信息，当然也包含了<code> www.baidu.com</code> 的信息，直接将 <code>www.baidu.com</code> 的IP地址响应给 首选DNS</li>
-<li>首选DNS 最后响应给客户机</li>
-</ul>
-<p><strong>两种查询方式</strong></p>
-<ol>
-<li>递归查询：当客户机请求自己的 首选DNS服务器，首选DNS服务器 上有域名记录信息，直接响应给客户机</li>
-<li>迭代查询：首选DNS 没有域名记录信息，通过一步步请求根域服务器、顶级域服务器、二级域服务器，最终找到域名记录信息</li>
-</ol>
-<h1 id="IP地址"><a href="#IP地址" class="headerlink" title="IP地址"></a>IP地址</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><ul>
-<li><p>用来表示网络中的某一台主机（某一个网络接口），是主机的唯一标识，保障主机间的正常通信（主机想要进行网络通信，就必须配置相应的IP地址）</p>
-</li>
-<li><p>一种网络编码，确定网络中的一个节点</p>
-</li>
-<li><p>IP地址由32位二进制组成</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">192.168.0.105</span><br><span class="line">11000000.10101000.00000000.1101001</span><br></pre></td></tr></table></figure></li>
-</ul>
-<p><strong>组成</strong></p>
-<ol>
-<li><p>网络部分：标识网络的范围</p>
-</li>
-<li><p>主机部分：标识网络范围中的一个节点</p>
-</li>
-</ol>
-<p>  网络部分越长，表示网络的范围越小；网络部分越短，表示网络的范围越大</p>
-<h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><p><strong>1.公有 IP 地址</strong></p>
-<p>​		地址分为A、B、C、D、E五类</p>
-<ul>
-<li><p>A类：前 8 位为网络位（以 0 为开头，即首位为 0 ，下同），后 24 位位主机位</p>
-<p>​	<em><strong>第一个 8 位</strong>组范围为 0-127，但 0 表示本地网络，127 开头的地址一般用于回路检测，最终范围：1-126</em></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">0 0000000.		0</span><br><span class="line">0 1111111.		127</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>B类：前 16 位位网络位（以 10 为开头），后 16 位位主机位</p>
-<p>​	网络位的范围为 128.0-191.255</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">10 000000.00000000		128.0	</span><br><span class="line">10 111111.11111111		191.255</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>C类：前 24 位位网络位（以 110 为开头），后 8 位位主机位</p>
-<p>​	网络位的范围为192.0.0-223.255.255</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">110 00000.00000000.00000000		192.0.0</span><br><span class="line">110 11111.11111111.11111111		223.255.255</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>A类：10.0.0.0-10.255.255.255</p>
-</li>
-<li><p>B类：172.16.0.0-172.31.255.255</p>
-</li>
-<li><p>C类：192.168.0.0-192.168.255.255</p>
-</li>
-</ul>
-<p>私网地址是不能在公网上进行直接访问的，需要网络地址转换将 私网地址 转换为 公网地址 才可访问公网内容</p>
-<h1 id="子网掩码"><a href="#子网掩码" class="headerlink" title="子网掩码"></a>子网掩码</h1><h2 id="概念-1"><a href="#概念-1" class="headerlink" title="概念"></a>概念</h2><ul>
-<li><p>用来确定IP地址的网络部分</p>
-</li>
-<li><p>由 32 位二进制组成，对应IP的网络部分由 1 表示（二进制，下同），主机部分由 0 表示</p>
-<ul>
-<li><p>根据子网掩码得出网络部分与主机部分。在本网络的首个地址是网络地址；最后一个是广播地址</p>
-</li>
-<li><p>网络地址：本网段的网络号，代表的是一个范围，不能给主机使用</p>
-</li>
-<li><p>广播地址：代表本网段的所有地址，同样不能直接给主机使用</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">172.16.230.222/16		/16 子网掩码为 16 位</span><br><span class="line">255.255.0.0</span><br><span class="line">10101100.00010000.11100110.11011110			IP地址二进制</span><br><span class="line">11111111.11111111.00000000.00000000			子网掩码二进制</span><br><span class="line">10101100.00010000.00000000.00000000			网络地址	172.16.0.0</span><br><span class="line">10101100.00010000.11111111.11111111			广播地址	172.16.255.255</span><br><span class="line">===========================================================================</span><br><span class="line">192.168.100.233/19	   19位子网掩码</span><br><span class="line">255.255.224.0		   子网掩码，当不是255时，转换为二进制，1 位置的是网络部分</span><br><span class="line">       .111 00000	   网络部分位 11111111.11111111.111</span><br><span class="line">192.168.011 00100	   网络地址：192.168.96.0，广播地址：192.168.127.255</span><br><span class="line">===========================================================================</span><br><span class="line">172.24.88.99/23					23位子网掩码</span><br><span class="line">      .0101100 0.00000000			网络地址</span><br><span class="line">      .0101100 1.11111111 			广播地址</span><br><span class="line">11111111.11111111.1111111 0.00000000		子网掩码二进制</span><br><span class="line">255.255.254.0</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li><p>默认子网掩码</p>
-<ul>
-<li>A类：255.0.0.0			   8 位</li>
-<li>B类：255.255.0.0 	     16 位</li>
-<li>C类：255.255.255.0  	24位</li>
-</ul>
-</li>
-</ul>
-<p>子网掩码越长，代表网络部分越长，即网络范围越小；子网掩码越短，代表网络部分越短，网络范围越大</p>
-<h2 id="子网划分"><a href="#子网划分" class="headerlink" title="子网划分"></a>子网划分</h2><p><strong>原因</strong></p>
-<ul>
-<li>从公网层面讲：A类地址总共有 126 个网络，如果A类网络给一个机构或企业使用，由于A类地址中主机部分范围广，使机构或企业无法使用完全，造成 IP 浪费（节省IP地址）</li>
-<li>实现网络的层次性</li>
-<li>满足不同网络多 IP 地址的需求IP 地址分类</li>
-</ul>
-<p><strong>IP 地址分类</strong></p>
-<ul>
-<li>有类地址：一个 IP 地址采用的 <strong>是</strong> 默认的子网掩码</li>
-<li>无类地址：一个 IP 地址采用的 <strong>不是</strong> 默认的子网掩码</li>
-</ul>
-<p><strong>原理</strong></p>
-<p>​	子网位划分：增加网络部分（向主机位借位，借的位数称为 <strong>子网位</strong>）</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">192.168.1.20/24</span><br><span class="line">192.168.1.0/24		网络地址</span><br><span class="line">此网络范围 IP 地址有256个（192.168.1.0~192.168.1.255）</span><br><span class="line">可用主机数（192.168.1.1~192.168.1.254）</span><br><span class="line">======================================================================================</span><br><span class="line">	向主机部分借1位，24 位的子网掩码划分后变成了两个网段</span><br><span class="line">192.168.1.00000000/24	</span><br><span class="line">192.168.1.0 0000000/25------&gt;192.168.1.0/25</span><br><span class="line">192.168.1.1 0000000/25------&gt;192.168.1.128/25</span><br><span class="line">===============================================================================</span><br><span class="line">	向主机部分借 3 位，</span><br><span class="line">192.168.1.0/24</span><br><span class="line">192.168.1.000 00000------&gt;192.168.1.0/27</span><br><span class="line">192.168.1.001 00000------&gt;192.168.1.32</span><br><span class="line">192.168.1.010 00000------&gt;192.168.1.64</span><br><span class="line">192.168.1.011 00000------&gt;192.168.1.96</span><br><span class="line">192.168.1.100 00000------&gt;192.168.1.128</span><br><span class="line">192.168.1.101 00000------&gt;192.168.1.160</span><br><span class="line">192.168.1.110 00000------&gt;192.168.1.192</span><br><span class="line">192.168.1.111 00000------&gt;192.168.1.224</span><br><span class="line">===============================================================================</span><br><span class="line">	假设子网位为 n,则可划分网络个数为 2的 n 次方</span><br><span class="line">借 1 位：2 个网段		主机位 7 位			每个网络中的 IP 地址个数：128</span><br><span class="line">借 2 位：4 个网段		主机位 6 位			每个网络中的 IP 地址个数：64</span><br><span class="line">借 3 位：8 个网段		主机位 5 位			每个网络中的 IP 地址个数：32</span><br><span class="line">借 4 位：16 个网段	主机位 4 位			每个网络中的 IP 地址个数：16</span><br><span class="line">借 5 位：32 个网段	主机位 3 位			每个网络中的 IP 地址个数：8</span><br><span class="line">借 6 位：64 个网段	主机位 2 位			每个网络中的 IP 地址个数：4	</span><br><span class="line">借 7 位：128 个网段	主机位 1 位（没有可用的IP地址给主机使用，此网段一个是网络地址，一个是广播地址）</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>锻体</category>
-      </categories>
-      <tags>
-        <tag>基础</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>kali-Linux命令</title>
     <url>/2022/09/23/001%E2%80%94kali-Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%EF%BC%88%E5%BE%85%E6%9B%B4%E6%96%B0%EF%BC%89/</url>
     <content><![CDATA[<p>​	Linux，全称GNU&#x2F;Linux，是一种 类UNIX 操作系统，有上百种不同的发行版，下图是 Linux 的大分支图示</p>
@@ -814,389 +478,336 @@
       </tags>
   </entry>
   <entry>
-    <title>Docker-基本学习</title>
-    <url>/2023/01/30/003%E2%80%94Docker/</url>
-    <content><![CDATA[<p>​	学习了B站狂神老师的docker入门课程，下面是我的学习笔记，老师讲的很好！(当时还担心学生认证时领的ECS会没有用武之地呢，以下的所有测试都是在其上面进行的)</p>
-<p>视频链接：<a href="https://www.bilibili.com/video/BV1og4y1q7M4/">【狂神说Java】Docker最新超详细版教程通俗易懂</a></p>
-<h1 id="Docker简介"><a href="#Docker简介" class="headerlink" title="Docker简介"></a>Docker简介</h1><p>​	一个开源的应用容器引擎，让开发者可以打包他们的 应用 和 依赖包 到一个可移植的镜像中，然后发布到操作系统的机器上，也可以实现虚拟化。容器之间使用隔离机制，相互不会有任何干扰</p>
-<p>​	是内核级别的虚拟化，可以在一个物理机上运行很多容器实例</p>
-<p>理念：将 应用 和 运行的环境 打包为一个镜像，发布之后启动运行就变成了一个容器</p>
-<p><strong>比较与 虚拟机技术 的不同</strong></p>
+    <title>计算机网络基础</title>
+    <url>/2022/08/27/000%E2%80%94%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/</url>
+    <content><![CDATA[<h1 id="OSI七层参考模型"><a href="#OSI七层参考模型" class="headerlink" title="OSI七层参考模型"></a>OSI七层参考模型</h1><p>​	产生：由于早期计算机厂商使用的是私有的网络模型，给彼此通信带来不少麻烦，于是乎，1984年ISO颁布了OSI参考模型</p>
+<p><strong>功能</strong></p>
 <ul>
-<li><p>虚拟机：虚拟出一套硬件，运行一个完整的操作系统，然后在操作系统上 安装 和 运行 软件</p>
-<p><img src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/000-00N/003/docker-01.jpg" alt="docker-01"></p>
+<li>物理层：属于最底层，将二进制数转换为传输的电信号或光信号（建立、维护、断开物理链接）</li>
+<li>数据链路层：建立逻辑链接，进行硬件地址寻址（MAC地址）、差错校验</li>
+<li>网络层：进行逻辑地址寻址（IP地址）、实现不同网络之间路径选择</li>
+<li>传输层：定义传输数据的协议端口号、流控（流量控制）、差错校验</li>
+<li>会话层：建立、管理、终止会话</li>
+<li>表示层：数据的表示：加密、压缩…………</li>
+<li>应用层：将原始的数据转换为电脑可识别的二进制数</li>
+</ul>
+<h2 id="数据链路层-交换机"><a href="#数据链路层-交换机" class="headerlink" title="数据链路层(交换机)"></a>数据链路层(交换机)</h2><p><strong>工作原理</strong></p>
+<p>​	交换机里面维护了一张 MAC地址表，主要记录的是 MAC地址 和 接口 的对应关系，初始状态下为空</p>
+<p>​	<strong>假设交换机上有 3 个接口，主机A——1号口、主机B——2号口、主机C——3号口</strong></p>
+<ul>
+<li><p>当交换机收到发来的 数据帧 后查看 帧头部，首先查看 <strong>源MAC地址</strong> 有无记录在自己的 MAC表 中</p>
 </li>
-<li><p>而容器内的 应用 是直接运行在 宿主机 的内核，容器没有自己的内核(利用 宿主机 的内核)，也没有虚拟硬件，很轻便（宿主机：当前应用运行在哪，哪就是宿主机）</p>
-<p>​	每个容器间相互隔离，各自都有一个属于自己的文件系统，互不影响</p>
-<p><img src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/000-00N/003/docker-02.jpg" alt="docker-02"></p>
+<li><p>没有的话记录：主机A——接口1，接着查看 <strong>目的MAC地址</strong> 是否有记录在内</p>
+</li>
+<li><p>没有则直接从除接收接口（1号口）外 的所有连接的接口转发（广播），主机B 与 主机C 都收到后，主机C丢弃，主机B回应（主机解封数据后会比对目的MAC地址，若不对应则丢弃）</p>
+</li>
+<li><p>因 主机B 的MAC地址并未记录，所以交换机会记录 主机B 的MAC地址：主机B——接口2，然后直接从1号接口转发（单播）</p>
 </li>
 </ul>
-<h2 id="名词概念"><a href="#名词概念" class="headerlink" title="名词概念"></a>名词概念</h2><ul>
-<li><p><strong>镜像</strong>：好比是一个模板，通过这个模板可以用来创建 容器服务，通过 run 命令来运行。一个镜像可以创建多个容器（最终的 服务 或是 项目 是运行在容器中的）</p>
+<p><em>总结：交换机学习源 MAC、广播数据帧、接收方回应、回应方单播直接转发</em></p>
+<h2 id="网络层（路由器）"><a href="#网络层（路由器）" class="headerlink" title="网络层（路由器）"></a>网络层（路由器）</h2><p><strong>功能</strong></p>
+<ul>
+<li>进行逻辑地址（IP 地址）寻址，实现不同网络（网络地址不等 或 内网和外网分割）之间的路径选择</li>
+<li>查找目的是否可以到达，如果可以到达，选择一条最优路径；如果不能，直接返回 发送方 一个消息</li>
+</ul>
+<p>网络层 所封装的的是IP头部，所传输的 PDU（传输数据单元）是 数据包（IP数据包）</p>
+<p><strong>路由</strong></p>
+<ul>
+<li>概念：从 源主机 到 目标主机 的 转发数据包 的过程（跨网络访问）</li>
+<li>确定最佳路径（手动指定、根据动态路由协商方式）、通过网络传输信息</li>
+</ul>
+<p><strong>路由表</strong>（路由器里维护了一张路由表）</p>
+<ul>
+<li><p>直连路由表：当路由器的接口 配置好对应的 IP地址 并开启接口后自动生成</p>
 </li>
-<li><p><strong>容器</strong>：Docker利用容器技术可以独立运行一个或者一组应用，是通过 镜像 创建的</p>
+<li><p>非直连：需要手动配置静态路由 或 使用动态路由协议学习</p>
 </li>
-<li><p><strong>仓库</strong>：存放镜像的地方，分为公有仓库（Docker hub、腾讯云、阿里云等等）和私有仓库（公有仓库是国外的话需要配置镜像加速）</p>
+<li><p>静态路由</p>
+<ul>
+<li>由管理员手动配置，不灵活 且 是单向的</li>
+<li>特殊的静态路由：默认路由，当在路由器中找不到目标网络的路由条目时，再去查看默认路由；一般应用于   末节（末梢）网络（网络的最末端）</li>
+</ul>
+</li>
+<li><p>动态路由</p>
+<ul>
+<li>通过某种动态路由协议自动建立自己的路由表</li>
+<li>常见协议：RIP、OSPF、IS-IS、BGP、IGRP、EIGRP</li>
+</ul>
 </li>
 </ul>
-<h2 id="Run的流程"><a href="#Run的流程" class="headerlink" title="Run的流程"></a>Run的流程</h2><blockquote>
-<p>docker run 镜像名称</p>
-</blockquote>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@root ~]# docker run hello-world</span><br><span class="line">Unable to find image &#x27;hello-world:latest&#x27; locally	# 试图寻找镜像但是并没有在本地找到</span><br><span class="line">latest: Pulling from library/hello-world			# 使用pull远程拉取镜像</span><br><span class="line">2db29710123e: Pull complete 						# 返回签名信息证明成功拉取到</span><br><span class="line">Digest: sha256:2498fce14358aa50ead0cc6c19990fc6ff866ce72aeb5546e1d59caac3d0d60f</span><br><span class="line">Status: Downloaded newer image for hello-world:latest</span><br><span class="line"></span><br><span class="line">Hello from Docker!									# hello-world镜像安装成功</span><br><span class="line">This message shows that your installation appears to be working correctly.</span><br><span class="line"></span><br><span class="line">To generate this message, Docker took the following steps:</span><br><span class="line"> 1. The Docker client contacted the Docker daemon.</span><br><span class="line"> 2. The Docker daemon pulled the &quot;hello-world&quot; image from the Docker Hub.(amd64)</span><br><span class="line"> 3. The Docker daemon created a new container from that image which runs the executable that produces the output you are currently reading.</span><br><span class="line"> 4. The Docker daemon streamed that output to the Docker client, which sent it to your terminal.</span><br><span class="line"></span><br><span class="line">To try something more ambitious, you can run an Ubuntu container with:</span><br><span class="line"><span class="meta prompt_"> $ </span><span class="language-bash">docker run -it ubuntu bash</span></span><br><span class="line"></span><br><span class="line">Share images, automate workflows, and more with a free Docker ID:</span><br><span class="line"> https://hub.docker.com/</span><br><span class="line"></span><br><span class="line">For more examples and ideas, visit:</span><br><span class="line"> https://docs.docker.com/get-started/</span><br></pre></td></tr></table></figure>
-
-<p>​	Docker会先在本机寻找是否有这个镜像，有则运行；没有的话就去Dokcer hub寻找，如果找不到则会提示找不到；找的的话则会下载镜像到本地，然后运行这个镜像，如下图所示</p>
-<p><img src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/000-00N/003/docker-03.jpg" alt="docker-03"></p>
-<h2 id="底层原理-如何工作？"><a href="#底层原理-如何工作？" class="headerlink" title="底层原理(如何工作？)"></a>底层原理(如何工作？)</h2><p>​	Docker是一个C&#x2F;S架构的系统，它的守护进程(服务)一直运行在 服务端主机的后台，客户端可通过 Socket 与 服务端 通信。服务端 接收到 客户端 的命令后，就会执行这个命令</p>
-<p><img src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/000-00N/003/docker-04.jpg" alt="docker-04"></p>
-<h1 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h1><p><strong>帮助命令</strong></p>
-<table>
-<thead>
-<tr>
-<th>命令</th>
-<th>功能</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>docker version</td>
-<td>显示 docker 的版本信息</td>
-</tr>
-<tr>
-<td>docker info</td>
-<td>显示 docker 的系统信息，包括镜像和容器的数量</td>
-</tr>
-<tr>
-<td>docker 命令 –help</td>
-<td>帮助命令</td>
-</tr>
-</tbody></table>
-<p>官方文档位置：<a href="https://docs.docker.com/reference/">Reference documentation</a>，从 Reference 中可以查看全部命令解析</p>
-<h2 id="镜像命令"><a href="#镜像命令" class="headerlink" title="镜像命令"></a>镜像命令</h2><h3 id="docker-images"><a href="#docker-images" class="headerlink" title="docker images"></a>docker images</h3><p>查看本地主机上的镜像</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">参数说明</span></span><br><span class="line">-a, --all             # 列出所有的镜像</span><br><span class="line">-q, --quiet           # 只显示镜像的ID</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">命令执行</span></span><br><span class="line">[root@root ~]# docker images</span><br><span class="line">REPOSITORY          TAG            IMAGE ID            CREATED             SIZE</span><br><span class="line">hello-world         latest         feb5d9fea6a5        16 months ago       13.3kB</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">REPOSITORY:镜像的仓库源(名字)</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">TAG:镜像的版本标签信息</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">IMAGE ID:镜像ID</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">CREATED:镜像创建时间</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">SIZE:镜像大小</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="docker-search"><a href="#docker-search" class="headerlink" title="docker search"></a>docker search</h3><p>搜索镜像</p>
-<p>官方的镜像商店：<a href="https://hub.docker.com/">Docker Hub</a>，所有的镜像可以在上面找，与用命令来寻找是一样的</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@root ~]# docker search mysql</span><br><span class="line">NAME                            DESCRIPTION                                     STARS               OFFICIAL            AUTOMATED</span><br><span class="line">mysql                           MySQL is a widely used, open-source relation…   13767               [OK]                </span><br><span class="line">mariadb                         MariaDB Server is a high performing open sou…   5253                [OK]                </span><br><span class="line">phpmyadmin                      phpMyAdmin - A web interface for MySQL and M…   731                 [OK]                </span><br><span class="line">percona                         Percona Server is a fork of the MySQL relati…   599                 [OK]                </span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">返回的结果太多了,就不一一展示了</span></span><br></pre></td></tr></table></figure>
-
-<p>举个例子，搜索 Tomcat 镜像</p>
-<p><img src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/000-00N/003/docker-04.png" alt="docker-04"></p>
-<h3 id="docker-pull"><a href="#docker-pull" class="headerlink" title="docker pull"></a>docker pull</h3><p>下载镜像</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">格式: docker pull 镜像名[:tag]</span></span><br><span class="line">[root@root ~]# docker pull mysql</span><br><span class="line">Using default tag: latest			# 若没有用tag要求具体的版本号,下载的就是最新版(latest)</span><br><span class="line">latest: Pulling from library/mysql	</span><br><span class="line">72a69066d2fe: Pull complete 		# 分层下载，docker镜像 的核心(联合文件系统)</span><br><span class="line">93619dbc5b36: Pull complete </span><br><span class="line">99da31dd6142: Pull complete </span><br><span class="line">626033c43d70: Pull complete </span><br><span class="line">37d5d7efb64e: Pull complete </span><br><span class="line">ac563158d721: Pull complete </span><br><span class="line">d2ba16033dad: Pull complete </span><br><span class="line">688ba7d5c01a: Pull complete </span><br><span class="line">00e060b6d11d: Pull complete </span><br><span class="line">1c04857f594f: Pull complete </span><br><span class="line">4d7cfa90e6ea: Pull complete </span><br><span class="line">e0431212d27d: Pull complete </span><br><span class="line">Digest: sha256:e9027fe4d91c0153429607251656806cc784e914937271037f7738bd5b8e7709 # 签名信息（防伪标志)</span><br><span class="line">Status: Downloaded newer image for mysql:latest</span><br></pre></td></tr></table></figure>
-
-<p>下载指定版本，当然只能下载Docker Hub中存在的版本</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@root ~]# docker pull mysql:5.7</span><br><span class="line">5.7: Pulling from library/mysql</span><br><span class="line">72a69066d2fe: Already exists	# 使用分层下载,重复的部分就可以共用,不用重新下载(联合文件系统)</span><br><span class="line">…………………… </span><br><span class="line">d2ba16033dad: Already exists </span><br><span class="line">0ceb82207cd7: Pull complete </span><br><span class="line">37f2405cae96: Pull complete </span><br><span class="line">e2482e017e53: Pull complete </span><br><span class="line">70deed891d42: Pull complete </span><br><span class="line">Digest: sha256:f2ad209efe9c67104167fc609cca6973c8422939491c9345270175a300419f94</span><br><span class="line">Status: Downloaded newer image for mysql:5.7</span><br></pre></td></tr></table></figure>
-
-<h3 id="docker-rmi"><a href="#docker-rmi" class="headerlink" title="docker rmi"></a>docker rmi</h3><p>删除镜像（rmi代表的是remove image）</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">格式: docker rmi -f 镜像ID, -f为强制删除</span></span><br><span class="line">[root@root ~]# docker rmi -f 3218b38490ce</span><br><span class="line">Untagged: mysql:latest</span><br><span class="line">Untagged: mysql@sha256:e9027fe4d91c0153429607251656806cc784e914937271037f7738bd5b8e7709</span><br><span class="line">Deleted: sha256:3218b38490cec8d31976a40b92e09d61377359eab878db49f025e5d464367f3b</span><br><span class="line">Deleted: sha256:aa81ca46575069829fe1b3c654d9e8feb43b4373932159fe2cad1ac13524a2f5</span><br><span class="line">Deleted: sha256:0558823b9fbe967ea6d7174999be3cc9250b3423036370dc1a6888168cbd224d</span><br><span class="line">Deleted: sha256:a46013db1d31231a0e1bac7eeda5ad4786dea0b1773927b45f92ea352a6d7ff9</span><br><span class="line">Deleted: sha256:af161a47bb22852e9e3caf39f1dcd590b64bb8fae54315f9c2e7dc35b025e4e3</span><br><span class="line">Deleted: sha256:feff1495e6982a7e91edc59b96ea74fd80e03674d92c7ec8a502b417268822ff</span><br></pre></td></tr></table></figure>
-
-<p>删除所有的镜像</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker rmi -f $(docker images -aq)</span><br><span class="line"><span class="meta prompt_">	# </span><span class="language-bash">将括号的返回值作为参数进行传参，递归删除所有镜像(也可以用内联)</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="容器命令"><a href="#容器命令" class="headerlink" title="容器命令"></a>容器命令</h2><p><strong>ps：有了镜像才可以创建容器，下面运行一个centos的容器来进行学习</strong></p>
-<h3 id="docker-run"><a href="#docker-run" class="headerlink" title="docker run"></a><strong>docker run</strong></h3><blockquote>
-<p>格式：docker run [参数] 镜像名</p>
-</blockquote>
-<p>一些常用参数：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">--name=&quot;NAME&quot;    # 给容器起的名字</span><br><span class="line">-d               # 以后台方式运行</span><br><span class="line">-it			     # 使用交互方式运行，可以进入容器查看内容</span><br><span class="line">-p               # 指定容器的端口,可以主机映射 比如：-p 8080:8080</span><br><span class="line">	-p (ip:主机端口：容器端口)</span><br><span class="line">    -p (主机端口：容器端口)    # 常用</span><br><span class="line">    -p (容器端口)</span><br><span class="line">-P               # 表示随机指定端口(上边的是小写的p，这个是大写的)</span><br></pre></td></tr></table></figure>
-
-<p>接下来实操测试一下在 centos 中下载一个 centos 镜像</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">	# </span><span class="language-bash">启动并进入容器(新的主机名默认就是镜像ID)</span></span><br><span class="line">[root@root ~]# docker run -it centos</span><br><span class="line">[root@43c5c0bbd669 /]# ls</span><br><span class="line">bin  dev  etc  home  lib  lib64  lost+found  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var</span><br></pre></td></tr></table></figure>
-
-<p>​	可以看到这里的主机名已经不同，说明我们已进入了容器内的 centos，容器内 centos 有很多命令不完善</p>
-<p>​	按 <code>exit</code> 可以退出容器，快捷键：<code>ctrl+D</code>；以上都是使容器停止并退出，还有使容器依然保持后台运行的快捷键：<code>crtl+P+Q </code></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@root ~]# docker ps</span><br><span class="line">CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES</span><br><span class="line">[root@root ~]# docker run -it centos</span><br><span class="line">[root@503c0c19d2cb /]# [root@root ~]# docker ps</span><br><span class="line">CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES</span><br><span class="line">503c0c19d2cb        centos              &quot;/bin/bash&quot;         7 seconds ago       Up 6 seconds  </span><br></pre></td></tr></table></figure>
-
-<p><strong>常见的坑</strong></p>
+<h1 id="TCP-x2F-IP-传输控制-x2F-网际-协议-四层模型"><a href="#TCP-x2F-IP-传输控制-x2F-网际-协议-四层模型" class="headerlink" title="TCP&#x2F;IP(传输控制&#x2F;网际 协议)四层模型"></a>TCP&#x2F;IP(传输控制&#x2F;网际 协议)四层模型</h1><ul>
+<li><p>网络接口层</p>
+</li>
+<li><p>网络层：IP协议（<strong>ARP</strong>：地址解析协议；<strong>RARP</strong>：逆地址解析协议；<strong>ICMP</strong>：网际控制报文协议，ping 命令；<strong>IGMP</strong>：网际组管理协议）</p>
+</li>
+<li><p>传输层：TCP（传输控制协议：<strong>传输数据更加稳定可靠</strong>）、UDP（用户数据报协议：<strong>传输效率更高</strong>）</p>
+</li>
+<li><p>应用层：HTTP、HTTPS、SSH、DNS、POP3、IMAP、TFTP…………</p>
+</li>
+</ul>
+<h2 id="网络层-ARP、ICMP"><a href="#网络层-ARP、ICMP" class="headerlink" title="网络层(ARP、ICMP)"></a>网络层(ARP、ICMP)</h2><h3 id="ARP-协议"><a href="#ARP-协议" class="headerlink" title="ARP 协议"></a><strong>ARP 协议</strong></h3><p>​	<strong>将一个已知的 IP 地址解析为MAC 地址</strong>，从而进行二层（数据链路层）数据的交互，是一个三层（网络层）的协议，但工作在二层，可以说是一个2.5层协议</p>
+<p><strong>工作流程</strong></p>
+<ul>
+<li>ARP 请求，以广播方式发送请求（广播：一种信息的传播方式，一对多的方式）</li>
+<li>ARP 响应，响应时是单播</li>
+</ul>
+<p>​	ARP 缓存：为了避免重复发送 ARP 请求，动态条目会有老化时间（在一定时间内，若表中某一行没有使用，就会被删）</p>
 <blockquote>
-<p>用 -d 以后台方式启动容器后，docker ps发现启动的容器已经停止</p>
+<p>在 windows 中可直接使用 arp 命令<br>arp -a		通过询问当前协议数据，显示当前 ARP 项。<br>arp -d		删除 inet_addr 指定的主机。inet_addr 可以是通配符 *，以删除所有主机。<br>        inet_addr 为指定 Internet 地址。（IP 地址）</p>
 </blockquote>
-<p>原因：docker容器使用 后台运行时，就必须要有一个 前台进程，如若 docker 发现没有 前台应用 提供服务，它就会自动停止</p>
-<h3 id="docker-ps"><a href="#docker-ps" class="headerlink" title="docker ps"></a>docker ps</h3><p>查看所有正在运行中的容器</p>
-<p>常用参数：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">-a			#列出当前正在运行的容器和曾经运行过的容器</span><br><span class="line">-n=a	    #显示最近创建的容器，a表示想要显示的个数</span><br><span class="line">-q			#只显示容器的编号</span><br></pre></td></tr></table></figure>
-
-<h3 id="docker-rm"><a href="#docker-rm" class="headerlink" title="docker rm"></a>docker rm</h3><p>删除指定的容器</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">格式: docker <span class="built_in">rm</span> 容器ID，-f强制删除容器</span></span><br><span class="line">docker rm -f $(docker ps -aq)    	# 删除所有容器</span><br><span class="line">docker ps -a -q|xargs docker rm		# 同上</span><br></pre></td></tr></table></figure>
-
-<h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><p><strong>启动和停止</strong></p>
-<table>
-<thead>
-<tr>
-<th>命令</th>
-<th>功能</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>docker start 容器ID</td>
-<td>启动容器</td>
-</tr>
-<tr>
-<td>docker restart ID</td>
-<td>重启容器</td>
-</tr>
-<tr>
-<td>docker stop ID</td>
-<td>停止当前正在运行的容器</td>
-</tr>
-<tr>
-<td>docker kill ID</td>
-<td>强制停止当前容器(停止容器报错的话用这个)</td>
-</tr>
-</tbody></table>
+<p>​	网关：与主机直连的 路由器接口、防火墙 等边界网络设备的 IP地址</p>
+<p><strong>ARP 攻击（仅欺骗 主机）</strong> </p>
 <ul>
-<li><p><strong>docker logs</strong>：查看日志</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">格式: docker logs 容器ID</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">参数说明</span></span><br><span class="line">-t					# 显示时间戳</span><br><span class="line">-f					# 跟踪日志输出(两参数可以直接合并 -tf)</span><br><span class="line">--tail &lt;number&gt;     # 显示条数限制</span><br></pre></td></tr></table></figure>
-
-<p>当容器中没有日志时，什么也不会显示</p>
-</li>
-<li><p><strong>docker top</strong>：查看容器中的进程信息</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">格式: docker top 容器ID</span></span><br><span class="line">[root@root ~]# docker top 6dea9e3ce101</span><br><span class="line">UID        PID       PPID      C      STIME      TTY       TIME         CMD</span><br><span class="line">root       2750      2735      0      21:40      pts/0     00:00:00     /bin/bash</span><br></pre></td></tr></table></figure>
-
-<p>这里的 容器ID 实际上是 完整ID的一部分，可以通过下面的 <code>inspect</code> 查询到</p>
-</li>
-<li><p><strong>docker inspect</strong>：查看容器的元数据</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker inspect 容器ID</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>进入当前正在运行中的容器</strong></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker exec -it 容器ID /bin/bash	# 进入容器后会开启一个新的终端，可以在里面输入命令进行操作(常用)</span><br><span class="line">docekr attach 容器ID				# 进入容器正在执行的终端，不会启动新的进程(如果执行的文件中有死循环则会一直执行)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>docker cp</strong>：将容器内的文件拷贝到主机中（也可以反过来将主机内文件复制到容器内）</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker cp 容器ID:容器内的路径 主机的路径</span><br></pre></td></tr></table></figure>
-
-<p>​	拷贝文件时要记得退出容器，直接输入 <code>exit</code> 退出也没问题，可以用 <code>docker ps -a</code> 查询到所有创建过的容器ID，因为是刚退出的所以第一个就是需拷贝的容器</p>
-</li>
+<li><p>伪造 ARP 应答报文，向被攻击主机响应<strong>虚假</strong>的 MAC 地址；当被攻击主机进行网络通信时，会将数据交给虚假的 MAC 地址进行转发，但虚假的 MAC 地址不存在，所以造成被攻击主机无法访问网络</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">arpspoof [-i interface] [-c own|host|both] [-t target] [-r] host</span><br><span class="line">		-i interface  指定要使用的网卡</span><br><span class="line">		-t target   指定要攻击的主机(如果没有指定，则认为是局域网中所有主机)重复可以指定多个主机</span><br><span class="line">		host   		host是你想要截获数据包的主机 (通常是网关)</span><br><span class="line">arpspoof -i eth0 -t 192.168.0.106 192.168.0.1			按 ctrl+Z 即可停止</span><br></pre></td></tr></table></figure></li>
 </ul>
-<h2 id="Nginx与Tomcat部署"><a href="#Nginx与Tomcat部署" class="headerlink" title="Nginx与Tomcat部署"></a>Nginx与Tomcat部署</h2><h3 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h3><p>​	搜索到镜像后用 <code>pull</code> 下载到本地后，运行测试一下</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@root ~]# docker images</span><br><span class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</span><br><span class="line">nginx               latest              605c77e624dd        13 months ago       141MB</span><br><span class="line">centos              latest              5d0da3dc9764        17 months ago       231MB</span><br><span class="line">[root@root ~]# docker run -d --name nginx00 -p 3389:80 nginx</span><br><span class="line">9aa9b3e29208d9cb7c28c5dd920e717b751f0b8b8c3e268096c03cd984f9e415</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">进入容器</span></span><br><span class="line">[root@root ~]# docker exec -it nginx00 /bin/bash</span><br><span class="line">root@9aa9b3e29208:/# whereis nginx</span><br><span class="line">nginx: /usr/sbin/nginx /usr/lib/nginx /etc/nginx /usr/share/nginx</span><br><span class="line">root@9aa9b3e29208:/etc/nginx# cd /usr/share/nginx</span><br><span class="line">root@9aa9b3e29208:/usr/share/nginx# ls</span><br><span class="line">html</span><br></pre></td></tr></table></figure>
-
-<p>参数解释</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-d: 后台方式运行</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">--name: 给容器命名,以后可以用名字来代替容器ID</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-p 宿主机端口:容器内端口</span></span><br></pre></td></tr></table></figure>
-
-<p>端口暴露的概念</p>
-<p><img src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/000-00N/003/docker-05.jpg" alt="docker-05"></p>
-<p>​	通过外网访问3389端口可以访问到容器内的80端口，相当于将docker容器内的80端口映射到了主机的3389端口，用浏览器访问测试一下发现部署成功</p>
-<p><img src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/000-00N/003/docker-06.jpg" alt="docker-06"></p>
-<h3 id="Tomcat"><a href="#Tomcat" class="headerlink" title="Tomcat"></a>Tomcat</h3><p>步骤与 Nginx 是一样的，下载好后运行如下命令，tomcat就启动成功了</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker run -d --name tomcat00 -p 3389:8080 tomcat</span><br></pre></td></tr></table></figure>
-
-<p>可是用浏览器访问时会直接404，没有访问到tomcat，但是外网测试访问没有问题</p>
-<p><img src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/000-00N/003/docker-07.jpg" alt="docker-07"></p>
-<p>我们先进入容器看看，发现 webapps是个空文件夹，Linux命令也少了</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@root ~]# docker exec -it tomcat00 /bin/bash</span><br><span class="line">root@6da16b2102d6:/usr/local/tomcat# ls</span><br><span class="line">BUILDING.txt	 NOTICE		RUNNING.txt  lib	     temp	   work</span><br><span class="line">CONTRIBUTING.md  README.md	bin	     logs	     webapps</span><br><span class="line">LICENSE		 RELEASE-NOTES	conf	     native-jni-lib  webapps.dist</span><br></pre></td></tr></table></figure>
-
-<p>下面是Tomcat的目录说明</p>
-<table>
-<thead>
-<tr>
-<th>子目录</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>bin</td>
-<td>命令中心（启动命令，关闭命令）</td>
-</tr>
-<tr>
-<td>conf</td>
-<td>配置中心（端口号，内存大小）</td>
-</tr>
-<tr>
-<td>lib</td>
-<td>Tomcat 的库文件（运行时需要的 jar 包）</td>
-</tr>
-<tr>
-<td>logs</td>
-<td>存放日志文件</td>
-</tr>
-<tr>
-<td>temp</td>
-<td>存储临时产生的文件，即缓存</td>
-</tr>
-<tr>
-<td>webapps</td>
-<td>存放应用程序（网站）</td>
-</tr>
-<tr>
-<td>work</td>
-<td>编译以后的 class 文件</td>
-</tr>
-</tbody></table>
-<p>​	<strong>原因</strong>：这些镜像默认是最小的镜像，即仅保留了必须的文件，把不必要的文件都剔除掉了，保证最小可运行的环境</p>
-<p><strong>解决方法</strong></p>
-<p>​	这里还有一个目录 <code>webapps.dist</code> 存放着 webapps目录 的原始文件<del>(真是……藏这里干什么)</del>，可以将这个目录拷贝到 webapps(也可以修改目录名字)</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">root@6da16b2102d6:/usr/local/tomcat# ls</span><br><span class="line">BUILDING.txt	 NOTICE		RUNNING.txt  lib	     temp	   work</span><br><span class="line">CONTRIBUTING.md  README.md	bin	     logs	     webapps</span><br><span class="line">LICENSE		 RELEASE-NOTES	conf	     native-jni-lib  webapps.dist</span><br><span class="line">root@6da16b2102d6:/usr/local/tomcat# cp -r webapps.dist/* webapps</span><br></pre></td></tr></table></figure>
-
-<p>这样就好了，也就是说之前 <code>webapps</code> 目录没有项目(网站)，部署好了就可以访问了</p>
-<p><img src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/000-00N/003/docker-08.jpg" alt="docker-08"></p>
-<h1 id="镜像详解"><a href="#镜像详解" class="headerlink" title="镜像详解"></a>镜像详解</h1><p>​	镜像是一个轻量级、可执行的独立软件包，用来打包 软件运行环境 和 基于运行环境开发的软件，它包含某个软件运行所需的所有内容，包括代码、运行时的库、环境变量 和 配置文件</p>
-<p><strong>联合文件系统(UnionFS)</strong> （我们看到下载镜像时分层进行就是因为这个）</p>
-<p>​	是一种分层、轻量级并且高性能的文件系统，它支持将对文件系统的修改作为一次提交来一层层的叠加，同时可以将不同目录挂载到同一个虚拟文件系统下。简单来说就是镜像重复的文件可以公用，无需再次下载</p>
-<h2 id="镜像加载原理"><a href="#镜像加载原理" class="headerlink" title="镜像加载原理"></a>镜像加载原理</h2><p>​	Docker镜像实际上是由一层一层的文件系统构成，这种层级的文件系统叫做 UnionFS</p>
-<p>​	任何系统启动都需要引导加载，典型的 Linux 启动到运行需要两个文件系统，bootfs 和 rootfs</p>
-<p><strong>bootfs</strong>(boot file system)</p>
-<p>​	包含 bootloader(启动加载) 和 kernel(操作系统内核)，bootloader主要是引导加载 kernel，Linux刚启动时会加载bootfs文件系统，Docker镜像的最底层是bootfs，与典型的Linux系统一样</p>
-<p>​	当boot加载完成之后整个内核就都在内存中了，此时内存的使用权已由bootfs转交给内核，此时系统也会卸载bootfs</p>
-<p><strong>rootfs</strong>(root file system)</p>
-<p>​	在 bootfs 之上，包含的是典型的 Linux系统中的 &#x2F;dev、&#x2F;proc、&#x2F;bin、&#x2F;etc等 标准目录和文件，rootfs 就是各种不同的操作系统发行版，如Ubuntu，Centos等等</p>
-<p><strong>同样是安装centos，Docker只有几百兆的原因</strong></p>
-<p>​	对于一个精简的OS(操作系统)，rootfs可以很小，只需要最基本的命令、工具和程序即可，因为底层直接使用了 主机 的 kernel，docker 只要提供 rootfs 就可以了。由此可见不同的Linux发行版 bootfs 基本一致，只有 rootfs 会有差别</p>
-<h2 id="分层理解"><a href="#分层理解" class="headerlink" title="分层理解"></a>分层理解</h2><p>​	所有的镜像都起始于一个基础镜像层，当进行 修改 或 增加 新内容时，就会在当前镜像之上创建型的镜像层</p>
-<p><img src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/000-00N/003/docker-09.jpg" alt="docker-09"></p>
-<p>​	<strong>特点</strong>：Docker镜像 都是只读的，当容器启动时，一个新的 可写层 会被加载到镜像的顶部，这一层就是我们通常所说的 容器层，容器层之下的都叫镜像层</p>
-<p><strong>docker commit</strong> ：提交容器成为一个新的副本(镜像)</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker commit -a=&quot;作者&quot; -m=&quot;提交的描述信息&quot; 容器ID 目标镜像名:[TAG]</span><br></pre></td></tr></table></figure>
-
-<h3 id="实战测试"><a href="#实战测试" class="headerlink" title="实战测试"></a>实战测试</h3><ul>
-<li><p>启动一个默认的 tomcat 镜像，这个镜像中 webapps目录下没有文件</p>
-</li>
-<li><p>将原始的 webapps目录的所有文件 拷贝进去</p>
-</li>
-<li><p>将 修改后的容器 通过 commit 提交为一个镜像，这就是我们自己修改过的一个新的镜像</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@root ~]# docker commit -a=&quot;nikaido&quot; -m=&quot;test&quot; 339fde10712f tomcat0:0.0</span><br><span class="line">sha256:7f0dc8c7dc4bf011f892116649780fdc54da00a53fedcf85a74f0717dd39664d</span><br><span class="line">[root@root ~]# docker images</span><br><span class="line">REPOSITORY        TAG                 IMAGE ID            CREATED             SIZE</span><br><span class="line">tomcat0           0.0                 7f0dc8c7dc4b        7 seconds ago       685MB</span><br><span class="line">nginx             latest              605c77e624dd        13 months ago       141MB</span><br><span class="line">tomcat            9.0                 b8e65a4d736d        13 months ago       680MB</span><br><span class="line">centos            latest              5d0da3dc9764        17 months ago       231MB</span><br></pre></td></tr></table></figure></li>
-</ul>
-<p>如果想要保存当前容器的状态，可以通过 commit 来获得一个新的镜像，相当于 VM 的快照</p>
-<h1 id="容器数据卷"><a href="#容器数据卷" class="headerlink" title="容器数据卷"></a>容器数据卷</h1><p>​	容器之间有一个 数据共享 的技术，Dokcer 容器产生的数据同步到本地后，数据就不会丢失了，这就是卷技术，也就是 目录挂载：将我们 容器 内的目录挂载到Linux上</p>
-<p>总结：容器的持久化和同步操作，容器间也是可以数据共享的</p>
-<h2 id="使用数据卷"><a href="#使用数据卷" class="headerlink" title="使用数据卷"></a>使用数据卷</h2><h3 id="指定目录挂载"><a href="#指定目录挂载" class="headerlink" title="指定目录挂载"></a>指定目录挂载</h3><p>适用 docker run 的 <code>-v</code> 参数</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker run -it -v 主机目录:容器内的目录 镜像</span><br></pre></td></tr></table></figure>
-
-<p>可以用 inspect 查看挂载的信息</p>
-<p><img src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/000-00N/003/docker-10.jpg" alt="docker-10"></p>
-<p>类比端口映射，相当于目录映射，把我们想要保存的文件从 容器内的目录 映射到 宿主机目录</p>
+<p><strong>ARP 欺骗 （欺骗 网关 与 主机）</strong></p>
 <ul>
-<li><p>测试一下文件的同步（左边是容器内右边是宿主机）</p>
-<p><img src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/000-00N/003/docker-11.jpg" alt="docker-11"></p>
-</li>
-<li><p>停止容器后在宿主机修改文件，启动容器后数据依然是同步的</p>
-<p><img src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/000-00N/003/docker-12.jpg" alt="docker-12"></p>
-<p>好处：我们以后可以在本地修改，容器内的目录会自动同步</p>
-</li>
+<li><p>伪造 ARP 应答报文，向 <strong>被攻击主机</strong> 和 <strong>网关</strong> 响应真实的 MAC 地址，当 被攻击主机 进行网络通信时，会将数据交给真实的 MAC 地址进行转发，从而截获被攻击主机的数据（攻击主机 要开启 IP 转发功能）</p>
+<p>​	在上方的基础上，打开 IP 转发功能，开启后，被攻击主机可正常上网，但我们可以用 wirehark 进行抓包（因为被攻击主机的流量是从 kali 转发出去的）;</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">echo 1 &gt;&gt; /proc/sys/net/ipv4/ip_forward			1 是开启，0 是关闭</span><br></pre></td></tr></table></figure>
+
+<p>​	也可以用 driftnet 抓取被攻击主机所访问的图片（明文上的）</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">driftnet [options] [filter code]</span><br><span class="line">			-d　　指定临时目录</span><br><span class="line">			-a　　附加模式：捕获图片并保存到临时目录；不显示捕获图片窗口。</span><br><span class="line">			-i　　设置要监听的接口（网卡）</span><br><span class="line">driftnet -i eth0</span><br><span class="line">driftnet -d /img -a -i eth0</span><br></pre></td></tr></table></figure></li>
 </ul>
-<h3 id="匿名和具名挂载"><a href="#匿名和具名挂载" class="headerlink" title="匿名和具名挂载"></a>匿名和具名挂载</h3><p>docker volume的命令</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">Commands:</span><br><span class="line">  create      Create a volume</span><br><span class="line">  inspect     Display detailed information on one or more volumes</span><br><span class="line">  ls          List volumes # (查看所有卷的情况)</span><br><span class="line">  prune       Remove all unused local volumes</span><br><span class="line">  rm          Remove one or more volumes	</span><br></pre></td></tr></table></figure>
-
-<p><strong>匿名挂载</strong></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-v 容器内路径</span></span><br><span class="line">docker run -d -P --name nginx00 -v /etc/nginx nginx</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看所有 volume 的情况</span></span><br><span class="line">[root@root ~]# docker volume ls</span><br><span class="line">DRIVER              VOLUME NAME</span><br><span class="line">local               9a122b9f60fbb296429f71d29fd1cdf8dad7fb7319a76432e0a26696c3ac3e43</span><br><span class="line">………………</span><br></pre></td></tr></table></figure>
-
-<p>这就是匿名挂载，我们在 <code>-v</code> 后只写了容器内的路径，没有写容器外的路径</p>
-<p><strong>具名挂载</strong></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-v 卷名:容器内路径</span></span><br><span class="line">docker run -d -P --name nginx01 -v juming-nginx:/etc/nginx nginx</span><br><span class="line"></span><br><span class="line">[root@root ~]# docker volume ls</span><br><span class="line">DRIVER              VOLUME NAME</span><br><span class="line">local               9a122b9f60fbb296429f71d29fd1cdf8dad7fb7319a76432e0a26696c3ac3e43</span><br><span class="line">……………………</span><br><span class="line">local               juming-nginx</span><br></pre></td></tr></table></figure>
-
-<p><code>docker volume inspect 卷名</code> 可以查看卷的一些详细信息</p>
-<p><img src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/000-00N/003/docker-15.jpg" alt="docker-15"></p>
-<p>​	所有的docker容器内的卷，如果没有指定目录的话都是在 <code>/var/lib/docker/volumes/xxx/_data</code>，通过具名挂载可以很快找到相应的卷(多数情况下使用)</p>
-<p><strong>区分</strong></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">-v 容器内路径		 		  # 匿名挂载</span><br><span class="line">-v 卷名:容器内路径				# 具名挂载</span><br><span class="line">-v /宿主机路径:容器内路径		  # 指定目录挂载</span><br></pre></td></tr></table></figure>
-
-<p><strong>拓展</strong></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">通过 -v ……容器内路径:ro/rw 来改变读写权限</span></span><br><span class="line">ro	readonly	# 只读</span><br><span class="line">rw	readwrite	# 可读可写</span><br><span class="line"></span><br><span class="line">docker run -d -P --name nginx01 -v juming-nginx:/etc/nginx:ro nginx</span><br><span class="line">docker run -d -P --name nginx01 -v juming-nginx:/etc/nginx:rw nginx</span><br></pre></td></tr></table></figure>
-
-<p>如果出现 <code>ro</code> 就说明这个路径只能通过 宿主机 来操作，容器内部无法操作</p>
-<h2 id="MySQL同步数据"><a href="#MySQL同步数据" class="headerlink" title="MySQL同步数据"></a>MySQL同步数据</h2><p>第一次安装启动 mysql 是要设置密码的，官方给出的测试如下：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker run --name some-mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:tag</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">some-mysql: 命名的名字</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">my-secret-pw: 自己设置的密码</span></span><br></pre></td></tr></table></figure>
-
-<p>运行容器，并将 mysql 的重要文件挂载到本地</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker run -d -p 3389:3306 -v /home/mysql/conf:/etc/mysql/conf.d -v /home/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=test --name mysql00 mysql:5.7</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-d: 后台运行</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-p: 端口映射</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-v: 卷挂载,想要挂载多个卷,只要在前面加个 -v 即可</span></span><br><span class="line"><span class="meta prompt_">	# </span><span class="language-bash">/etc/mysql/conf.d: mysql的配置文件</span></span><br><span class="line"><span class="meta prompt_">	# </span><span class="language-bash">/var/lib/mysql: mysql的数据</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-e: 环境配置(mysql的密码)</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">--name: 容器名字</span></span><br></pre></td></tr></table></figure>
-
-<p>运行成功后用 Navicat 测试连接，中途也是也好几次试错终于成功了</p>
-<p><img src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/000-00N/003/docker-13.jpg" alt="docker-13"></p>
-<p>如果将容器删除，挂载到本地的数据卷依旧没有丢失，这就实现了容器数据持久化</p>
-<p><img src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/000-00N/003/docker-14.jpg" alt="docker-14"></p>
-<h1 id="DockerFile"><a href="#DockerFile" class="headerlink" title="DockerFile"></a>DockerFile</h1><p>​	用来构建 docker镜像 的构建文件，是一段命令脚本，通过这个脚本可以生成镜像</p>
+<h3 id="ICMP-协议"><a href="#ICMP-协议" class="headerlink" title="ICMP 协议"></a><strong>ICMP 协议</strong></h3><ul>
+<li>Internet 控制报文协议</li>
+<li>用于在 <strong>IP主机 、路由器之间传递控制信息</strong>（控制消息：网络通不通、主机是否可达、路由是否可用）</li>
+<li>属于网络层的协议，封装在传输层与网络层之间</li>
+</ul>
+<p>​	Ping 程序会发送一个 ICMP echo 请求消息给 目的主机，并报告应答情况</p>
+<p><strong>ICMP重定向</strong></p>
+<p>​	在某些特定的情况下，路由器检测到主机使用非优化路由时，会向主机发送一个 ICMP重定向报文，使主机的路由改变</p>
+<h2 id="传输层-TCP、UDP"><a href="#传输层-TCP、UDP" class="headerlink" title="传输层(TCP、UDP)"></a>传输层(TCP、UDP)</h2><h3 id="TCP-协议"><a href="#TCP-协议" class="headerlink" title="TCP 协议"></a><strong>TCP 协议</strong></h3><ul>
+<li>面向连接的传输协议</li>
+<li>要求数据在传输之前必须建立连接，数据传输完成后，必须释放连接</li>
+<li>仅支持单播传输：在两个终端之间建立的点对点连接，不支持广播</li>
+</ul>
+<p><strong>三次握手</strong></p>
+<p><img src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/000-00N/000/000%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80-01.png"></p>
+<p>​	TCP确认号(Acknowledgment Number,ACK number)：表示 接收方 期望收到 发送方 下一个报文段的 第一个字节数据的编号，其值是 接收计算机即将收到的 下一个序列号，即 上一个请求报文的字节序列号 加1</p>
+<p>​	SYN：在建立连接时使用，用来同步序号。当 SYN&#x3D;1，ACK&#x3D;0时，表示这是一个请求建立连接的报文段；当 SYN&#x3D;1，ACK&#x3D;1时，表示对方同意建立连接；只有在前两次握手中 SYN&#x3D;1</p>
+<p>​	ACK：表示前面的确认号字段是否有效，ACK&#x3D;1 时有效。TCP规定，连接建立后，ACK必须为 1</p>
+<p>​	RST：表示 是否重置连接，若 RST&#x3D;1，说明 TCP连接出现错误(如主机崩溃)，必须释放连接，在重新建立</p>
+<p>​	FIN：标记 数据是否发送完毕，若 FIN&#x3D;1，表示数据已经发送完成，可以释放连接</p>
+<p><strong>UDP 协议</strong></p>
+<ul>
+<li>用户数据报协议，传输层的另一个协议</li>
+<li>不需要建立连接，直接发送数据，不会去重新排序，不能够确认</li>
+</ul>
+<h2 id="应用层-HTTP、DHCP、DNS"><a href="#应用层-HTTP、DHCP、DNS" class="headerlink" title="应用层(HTTP、DHCP、DNS)"></a>应用层(HTTP、DHCP、DNS)</h2><h3 id="HTTP-协议"><a href="#HTTP-协议" class="headerlink" title="HTTP 协议"></a><strong>HTTP 协议</strong></h3><p><strong>概念</strong></p>
+<ul>
+<li>超文本传输协议，用于在 万维网服务器 上传输超文本(HTML) 到 本地浏览器 的传输协议</li>
+<li>传输 HTML文本、图片、查询结构等，基于传输层 TCP 的80端口</li>
+</ul>
+<p><strong>报文</strong></p>
+<p>​	用于 HTTP 协议交互的信息称为 HTTP报文，请求端的报文叫做<strong>请求</strong>报文，响应端的报文叫做<strong>响应</strong>报文。报文包括：<strong>报文首部</strong>、<strong>空行</strong>（换行）、<strong>报文主体</strong> 组成</p>
 <ol>
-<li>编写一个 dockerfile 文件</li>
-<li>docker build 构建为一个镜像</li>
-<li>docker run 运行镜像</li>
-<li>docker push 发布镜像(Docker Hub、阿里云镜像仓库)</li>
+<li>报文首部：客户端 或（服务端） 需处理的 请求 或（响应）的内容或属性</li>
+<li>报文主体：用于传输 请求 或 相应 的实体</li>
 </ol>
-<p>很多官方镜像都是基础包，有些功能不能使用，用不惯的话可以制作自己的镜像</p>
+<p>​	在 HTTP 请求中，第一行必须是请求行，用来说明 请求类型、要访问的资源 和 使用的HTTP版本 ，接着是报文的首部，空行之后就是报文主体，如下是报文首部的一些参数：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">HOST: 请求的目的地</span><br><span class="line">Accept: 指浏览器或其他客户可以接受的 MIME文件格式</span><br><span class="line">User-Agent: 是客户端浏览器名称</span><br><span class="line">Accept-Langeuage: 指出浏览器可以接受的语言种类，如en或en-us，指英语</span><br><span class="line">Cookie: 浏览器用这个属性向服务器发送Cookie</span><br><span class="line">Referer: 提供访问来源的信息，即给出引荐网页的URL，告诉服务器用户在访问当前资源之前的位置，可以追踪用户</span><br><span class="line">X-Forwarded-For: 用来识别连接到 Web 服务器的 客户端的真实IP</span><br><span class="line">Content-Type: 用来表明request的内容类型</span><br><span class="line">Accept-Charset: 指出浏览器可以接受的字符编码。英文浏览器的默认值是ISO-8859-1</span><br><span class="line">Accept-Encoding: 指出浏览器可以接受的编码方式。为了压缩文件并加速文件传递速度。浏览器在接收到web响应之后先解码，然后再检查文件格式</span><br></pre></td></tr></table></figure>
+
+<p><strong>万维网服务</strong></p>
+<p>​	Internet上广泛应用的信息服务技术。采用 C&#x2F;S 架构，但 客户机 是通过 浏览器 请求，从而在 浏览器 上看到对应的图形界面，又称为 浏览器&#x2F;服务器(B&#x2F;S)架构（Browser&#x2F;Server）</p>
+<p><strong>工作原理</strong></p>
 <ul>
-<li><p>Dockerfile：构建文件，定义了一切的步骤(源代码)</p>
-</li>
-<li><p>Docker images：通过 Dockerfile 构建生成的镜像，最终发布和运行的产品</p>
-</li>
-<li><p>Docker容器：镜像运行起来提供服务</p>
-</li>
+<li>客户端 使用 浏览器通过 URL 向 HTTP服务器 发送请求</li>
+<li>Web服务器 根据收到的请求直接向 客户机 相应信息</li>
 </ul>
-<h2 id="构建过程"><a href="#构建过程" class="headerlink" title="构建过程"></a>构建过程</h2><p><strong>基础知识</strong></p>
+<p><strong>注意事项</strong></p>
 <ul>
-<li><p>每个 指令(保留关键字) 都必须是大写字母</p>
-</li>
-<li><p><code>#</code> 表示注释</p>
-</li>
-<li><p>每一个指令都会 创建提交 一个新的镜像层并将这个新的镜像其提交</p>
-<p><img src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/000-00N/003/docker-16.png"></p>
-</li>
-<li><p>dockerfile是面向开发的，如果要发布项目、做镜像就要编写 dockerfile 文件</p>
-</li>
+<li>无连接：限制每次连接只能处理一个请求。（只需TCP三次握手成功 后就可以发送请求）</li>
+<li>无状态：没有记忆能力，当后续处理的内容需要用到 之前的内容时，必须重传（登录）。于是就有了 cookie与session</li>
+<li>独立的：只有 客户端 和 服务器 知道如何处理数据内容，任何类型的数据都可以通过 HTTP发送，客户端 和 服务器 指定使用适合的 MIME-type（文件类型）</li>
 </ul>
-<h2 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h2><p><img src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/000-00N/003/docker-17.jpg" alt="docker-17"></p>
-<p>以前都是用现成的镜像，现在知道了这些指令后，我们就可以来制作一个自己的镜像了</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">FROM			# 基础镜像,一切从这里开始构建</span><br><span class="line">MAINTAINER		# 镜像是谁写的,格式: 姓名+邮箱</span><br><span class="line">RUN				# 镜像构建时需要运行的命令</span><br><span class="line">ADD				# 比如我们要搭建包含tomcat的镜像,就要添加tomcat的压缩包</span><br><span class="line">WORKDIR			# 镜像的工作目录</span><br><span class="line">VOLUME			# 挂载的目录</span><br><span class="line">EXPOSE			# 暴露端口设置,相当于 -p</span><br><span class="line">CMD				# 指定这个容器启动时要运行的命令(只有最后一个会生效,可以被替代)</span><br><span class="line">ENTRYPOINT		# 指定这个容器启动时要运行的命令(可以追加命令)</span><br><span class="line">ONBUILD			# 当构建一个被继承的 Dockerfile 时会运行此指令(触发指令)</span><br><span class="line">COPY			# 类似ADD,将文件拷贝到镜像中</span><br><span class="line">ENV				# 构建时设置的环境变量</span><br></pre></td></tr></table></figure>
-
-<h3 id="CMD与ENTRYPOINT"><a href="#CMD与ENTRYPOINT" class="headerlink" title="CMD与ENTRYPOINT"></a>CMD与ENTRYPOINT</h3><p><strong>CMD</strong></p>
-<p>编写的dockerfile如下（文件名为 cmd_test）</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">FROM centos:7</span><br><span class="line">CMD [&quot;ls&quot;,&quot;-a&quot;]</span><br></pre></td></tr></table></figure>
-
-<p>制作成功后，运行镜像发现执行了 <code>ls -a</code> 命令</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@root test]# docker build -f cmd_test .</span><br><span class="line">Sending build context to Docker daemon  3.072kB</span><br><span class="line">………………</span><br><span class="line">Successfully built fc177cc88120</span><br><span class="line">[root@root test]# docker run fc177cc88120</span><br><span class="line">.</span><br><span class="line">..</span><br><span class="line">.dockerenv</span><br><span class="line">anaconda-post.log</span><br><span class="line">bin</span><br><span class="line">dev</span><br><span class="line">………………</span><br></pre></td></tr></table></figure>
-
-<p>追加一个参数 -l，想要执行 <code>ls -al</code> 命令却报错了</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@root test]# docker run fc177cc88120 -l</span><br><span class="line">docker: Error response from daemon: OCI runtime create failed: container_linux.go:348: starting container process caused &quot;exec: \&quot;-l\&quot;: executable file not found in $PATH&quot;: unknown.</span><br><span class="line">ERRO[0000] error waiting for container: context canceled </span><br></pre></td></tr></table></figure>
-
-<p>​	因为CMD的情况下，<code>-l</code> 替换了 <code>CMD [&quot;ls&quot;,&quot;-a&quot;]</code> 命令，<code>-l</code> 不是命令所以才报错了，所以我们要写完整的命令<code>ls -al</code></p>
-<p><strong>ENTRYPOINT</strong></p>
-<p>​	编写的dockerfile文件和上面一样，将 CMD 换成 ENTRYPOINT 即可，构建好镜像后，如上面测试时一样追加一个参数 <code>-l</code> ，命令可以执行，说明追加命令直接拼接在 ENTRYPOINT 命令后面</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@root test]# docker build -f test_entrypoint .</span><br><span class="line">Sending build context to Docker daemon  4.096kB</span><br><span class="line">…………</span><br><span class="line">Successfully built c6573fd50089</span><br><span class="line">[root@root test]# docker run  c6573fd50089 -l</span><br><span class="line">total 64</span><br><span class="line">drwxr-xr-x   1 root root  4096 Feb 15 11:52 .</span><br><span class="line">drwxr-xr-x   1 root root  4096 Feb 15 11:52 ..</span><br><span class="line">-rwxr-xr-x   1 root root     0 Feb 15 11:52 .dockerenv</span><br><span class="line">-rw-r--r--   1 root root 12114 Nov 13  2020 anaconda-post.log</span><br><span class="line">………………</span><br></pre></td></tr></table></figure>
-
-<h3 id="查看本地镜像变更历史"><a href="#查看本地镜像变更历史" class="headerlink" title="查看本地镜像变更历史"></a>查看本地镜像变更历史</h3><p>可以用 <code>docker history 镜像ID</code> 查看镜像的创建过程</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@root test]# docker history fd615d6ff973</span><br><span class="line">IMAGE               CREATED             CREATED BY                                      SIZE                COMMENT</span><br><span class="line">fd615d6ff973        26 minutes ago      /bin/sh -c #(nop)  CMD [&quot;/bin/sh&quot; &quot;-c&quot; &quot;/bin…   0B                  </span><br><span class="line">80097bd57eb6        26 minutes ago      /bin/sh -c #(nop)  CMD [&quot;/bin/sh&quot; &quot;-c&quot; &quot;echo…   0B                  </span><br><span class="line">e2ce79d8de03        26 minutes ago      /bin/sh -c #(nop)  EXPOSE 80                    0B                  </span><br><span class="line">ca3bd3fc8264        26 minutes ago      /bin/sh -c yum -y install net-tools             199MB               </span><br><span class="line">8a9aaca756cf        26 minutes ago      /bin/sh -c yum -y install vim                   254MB               </span><br><span class="line">8120bc59003d        26 minutes ago      /bin/sh -c #(nop) WORKDIR /usr/local            0B                  </span><br><span class="line">8741afe6768e        26 minutes ago      /bin/sh -c #(nop)  ENV MYPATH=/usr/local        0B                  </span><br><span class="line">59148671933a        26 minutes ago      /bin/sh -c #(nop)  MAINTAINER nikaido&lt;158128…   0B                  </span><br><span class="line">eeb6ee3f44bd        17 months ago       /bin/sh -c #(nop)  CMD [&quot;/bin/bash&quot;]            0B                  </span><br><span class="line">&lt;missing&gt;           17 months ago       /bin/sh -c #(nop)  LABEL org.label-schema.sc…   0B                  </span><br><span class="line">&lt;missing&gt;           17 months ago       /bin/sh -c #(nop) ADD file:b3ebbe8bd304723d4…   204MB               </span><br></pre></td></tr></table></figure>
-
-<h2 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h2><h3 id="制作自己的centos镜像"><a href="#制作自己的centos镜像" class="headerlink" title="制作自己的centos镜像"></a>制作自己的centos镜像</h3><p>​	这个是官方的centos制作镜像的dockerfile文件，Docker Hub中大多数镜像都是基于scatch开发的(是一个基础镜像)</p>
-<p><img src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/000-00N/003/docker-19.png" alt="docker-19"></p>
-<p>制作一个自己的centos(添加 vim、net-tools 命令)</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">FROM centos:7				# 基于centos7的基础镜像</span><br><span class="line">MAINTAINER nikaido&lt;1581283149@qq.com&gt;</span><br><span class="line"></span><br><span class="line">ENV MYPATH /usr/local		# 定义环境变量MYPATH</span><br><span class="line">WORKDIR $MYPATH				# 定义工作目录</span><br><span class="line"></span><br><span class="line">RUN yum -y install vim</span><br><span class="line">RUN yum -y install net-tools</span><br><span class="line"></span><br><span class="line">EXPOSE 80					# 暴露80端口</span><br><span class="line"></span><br><span class="line">CMD echo $MYPATH</span><br><span class="line">CMD /bin/bash				# 使用/bin/bash终端</span><br></pre></td></tr></table></figure>
-
-<p>用 <code>docker build</code> 构建镜像 nikaido:0.0 <strong>(不要忘记后面的 <code>.</code> )</strong></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker build -f test_centos -t nikaido:0.0 .</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-f dockerfile文件路径</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-t 镜像名:[tag]</span></span><br></pre></td></tr></table></figure>
-
-<p>测试运行一下</p>
-<p><img src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/000-00N/003/docker-18.jpg" alt="docker-18"></p>
-<h3 id="制作Tomcat镜像"><a href="#制作Tomcat镜像" class="headerlink" title="制作Tomcat镜像"></a>制作Tomcat镜像</h3><ul>
-<li><p>准备好 Tomcat 的压缩包，因为Tomcat是依赖于java的，所以还需要 jdk 的压缩包</p>
-<p><img src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/000-00N/003/docker-20.jpg" alt="docker-20"></p>
-</li>
-<li><p>编写dockerfile文件，官方命名 <code>Dockerfile</code> （build时会自动寻找这个文件，不需要 <code>-f</code> 指定）</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">照葫芦画瓢的</span></span><br><span class="line">FROM centos:7</span><br><span class="line">MAINTAINER nikaido&lt;1581283149@qq.com&gt;</span><br><span class="line"></span><br><span class="line">ADD jdk-8u151-linux-x64.tar.gz  /usr/local/</span><br><span class="line">ADD apache-tomcat-9.0.71.tar.gz /usr/local/</span><br><span class="line"></span><br><span class="line">RUN yum -y install vim</span><br><span class="line"></span><br><span class="line">ENV MYPATH /usr/local/</span><br><span class="line">WORKDIR $MYPATH</span><br><span class="line"></span><br><span class="line">ENV JAVA_HOME /usr/local/jdk1.8.0_151</span><br><span class="line">ENV CLASSPATH JAVA_HOME/lib/dt.jar:JAVA_HOME/lib/tools.jar</span><br><span class="line">ENV TOM_HOME /usr/local/apache-tomcat-9.0.71</span><br><span class="line">ENV TOM_BASH /usr/local/apache-tomcat-9.0.71</span><br><span class="line">ENV PATH $PATH:$JAVA_HOME/bin:$TOM_HOME/lib:$TOM_HOME/bin</span><br><span class="line"> </span><br><span class="line">EXPOSE 8080</span><br><span class="line"> </span><br><span class="line">CMD /usr/local/apache-tomcat-9.0.71/bin/startup.sh &amp;&amp; tail -F /usr/local/apache-tomcat-9.0.71/bin/logs/catalina.out</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><code>docker build -t testtomcat .</code> 构建镜像成功后，直接运行<del>（挂载什么的太麻烦了~这里就不挂了）</del>，用浏览器测试一下访问成功</p>
-</li>
-</ul>
-  <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@root test]# docker run -d -p 3389:8080 testtomcat</span><br></pre></td></tr></table></figure>
-
-<p>  <img src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/000-00N/003/docker-21.jpg" alt="docker-21"></p>
-<h2 id="发布镜像到DockerHub"><a href="#发布镜像到DockerHub" class="headerlink" title="发布镜像到DockerHub"></a>发布镜像到DockerHub</h2><ol>
-<li><p>首先要注册一个可以登录的账号</p>
-</li>
-<li><p>在主机通过命令行登录docker</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@root test]# docker login --help</span><br><span class="line"></span><br><span class="line">Usage:	docker login [OPTIONS] [SERVER]</span><br><span class="line"></span><br><span class="line">Log in to a Docker registry</span><br><span class="line"></span><br><span class="line">Options:</span><br><span class="line">  -p, --password string   Password</span><br><span class="line">      --password-stdin    Take the password from stdin</span><br><span class="line">  -u, --username string   Usernam</span><br><span class="line"><span class="meta prompt_">  </span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">登录</span></span><br><span class="line">docker login -u 用户名</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>登陆完就可以用 <code>docker push</code>命令 提交镜像了，<code>docker logout</code> 登出用户</p>
-</li>
+<p><strong>状态码</strong></p>
+<table>
+<thead>
+<tr>
+<th>Status Code</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2XX</td>
+<td>请求成功</td>
+</tr>
+<tr>
+<td>3XX</td>
+<td>重定向，需要进一步的操作以完成请求</td>
+</tr>
+<tr>
+<td>4XX</td>
+<td>客户端错误</td>
+</tr>
+<tr>
+<td>5XX</td>
+<td>服务器错误，服务器在请求过程中发生错误</td>
+</tr>
+</tbody></table>
+<h4 id="cookie、session"><a href="#cookie、session" class="headerlink" title="cookie、session"></a>cookie、session</h4><p>Cookie：在 客户端 记录信息确定用户身份，Session：在 服务器端 记录信息确定用户身份。</p>
+<p>​	HTTP协议是 无状态协议(无记忆能力)，一旦数据传输完毕，客户端 与 服务器端 就会断开连接；再次交换数据需要建立新的连接，这就导致其无法 在连接上 跟踪会话，于是就出现了 cookie 和 session</p>
+<p><strong>Cookie</strong></p>
+<p>​	是在浏览器中寄存的小型数据体，它可以记载和服务器相关的用户信息，也可以用来实现会话功能</p>
+<p>​	某些网站为了 <strong>辨别用户身份</strong>，进行 会话跟踪 而储存在用户本地终端上的数据（通常经过加密），由 用户客户端 暂时或永久保存的信息，通俗地说就是 鉴别用户身份的凭证(类似身份证)</p>
+<ol>
+<li>会话级cookie：保存在内存，浏览器关闭时自动消失</li>
+<li>持久化cookie：保存在硬盘，浏览器关闭不会消失，其生命周期 取决于 失效时间(Expires&#x2F;Max-Age)</li>
 </ol>
+<p><strong>cookie鉴权实现</strong></p>
+<ul>
+<li>客户端 第一次<strong>访问</strong> 服务器时 服务器端会生成cookie(当然需要cookie时才会)，然后通过 响应头部 中的 Set-Cookie 传给客户端(格式为key&#x3D;value键值对)，客户端 将其保存</li>
+<li>客户端 再访问 服务器 时，在请求报文中的 请求头 里就会带上 客服端 保存的 cookie，与 服务器端 的cookie 进行对比</li>
+</ul>
+<p><strong>session</strong></p>
+<p>​	服务器为了 <strong>保存用户状态</strong> 而创建的一个特殊的对象，它允许服务器在请求之间保留特定用户的信息，如：用户身份验证凭据、购物车内容等。其有两种传递方式（服务器端存储、cookie、URL重写）</p>
+<ol>
+<li>session 数据存储在服务器端，客户端只保存 session ID，在请求时发送给服务器</li>
+<li>将 sessionid 放在 <strong>cookie</strong> 中，当浏览器关闭就会消失，可以用做临时的cookie存放(会话级)</li>
+<li>通过 response.encodeURL() 重写URL(如果客户端 禁用 或 不支持 session，一般不使用)</li>
+</ol>
+<p><strong>session鉴权</strong></p>
+<ul>
+<li>当客户端 登录 服务器的时候，服务器的内存 创建一个 session内存(该对象有一个唯一的id，一般称为sessionid) 并保存在 服务器</li>
+<li>然后在请求报文的响应头里把 sessionid 通过 cookie 的方式传递给客户端(sessionid<strong>默认</strong>生命周期:半小时)</li>
+<li>之后 客户端 访问 服务器 时所有的请求都会在请求头带上 sessionid，然后和 服务器 保存的 session 进行对比，以此来识别不同的用户</li>
+</ul>
+<p><em>（ps：sessionid 是识别 session 的唯一依据，session 一般保存在服务端，只返回随机生成的 sessionid 给客户端，它们都是后端生成的）</em></p>
+<h3 id="DHCP-协议"><a href="#DHCP-协议" class="headerlink" title="DHCP 协议"></a><strong>DHCP 协议</strong></h3><ul>
+<li>动态主机配置协议，广泛应用于局域网内部，<strong>主要给客户机提供 TCP&#x2F;IP 参数</strong>（IP地址、子网掩码、网关、DNS）</li>
+<li>减少管理员的工作量、避免输入错误、避免IP冲突、提高IP地址利用率</li>
+</ul>
+<p><strong>工作原理</strong></p>
+<ul>
+<li>应用层的协议，基于 UDP，主机发送请求到DHCP服务器的67号端口，服务器应答消息给主机的68号端口</li>
+<li>客户机于服务器的交互过程<ul>
+<li>客户机以广播方式发送 DHCP discover报文，网络中所有 DHCP服务器都会收到，并去响应；客户机会向 收到第一个发送offer报文服务器 发送 DHCP request 报文，服务器确认，客户机获得 TCP&#x2F;IP参数</li>
+</ul>
+</li>
+</ul>
+<p><strong>DHCP 防御</strong> <strong>（在交换机上配置信任端口）</strong></p>
+<ul>
+<li>开启 DHCP 监听</li>
+</ul>
 <blockquote>
-<p>格式：docker push 用户名&#x2F;镜像名:tag</p>
+<p>ip dhcp snooping</p>
 </blockquote>
-<p>直接 <code>push</code> 会被拒绝 </p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@root test]# docker push testtomcat</span><br><span class="line">The push refers to repository [docker.io/library/testtomcat]</span><br><span class="line">06e882770dce: Preparing </span><br><span class="line">e0c442ed4b6b: Preparing </span><br><span class="line">6cb9ad15625b: Preparing </span><br><span class="line">174f56854903: Preparing </span><br><span class="line">denied: requested access to the resource is denied</span><br></pre></td></tr></table></figure>
+<ul>
+<li>指定监听 vlan</li>
+</ul>
+<blockquote>
+<p>ip dhcp snooping vlan 1<br>由于开启了监听，所有交换机上的端口都变为非信任端口（会拒绝DHCP报文），需要添加信任端口</p>
+</blockquote>
+<ul>
+<li>添加信任端口</li>
+</ul>
+<blockquote>
+<p>int f0&#x2F;1 		进入端口 f0&#x2F;1<br>ip dhcp snooping trust</p>
+</blockquote>
+<p>​	当交换机开启 dhcp snooping 后，所有端口变为非信任端口（拒绝 dhcp discover），当交换机上的某一个端口设置为信任端口后，其他所有端口变成 可信任端口（拒绝 dhcp offer）</p>
+<h3 id="DNS-协议"><a href="#DNS-协议" class="headerlink" title="DNS 协议"></a><strong>DNS 协议</strong></h3><p>​	域名系统，作为将 域名 与 IP地址 的相互映射关系存放在一个分布式的数据库，使用的是UDP的53号端口</p>
+<p><strong>域名空间</strong></p>
+<p>​	树状结构</p>
+<ul>
+<li>根域（全世界只有13台根域服务器）：” . “</li>
+<li>顶级域：主要用于区分域名用途，商业类：com、教育和学习：edu、社会非盈利组织：org、中国：cn</li>
+<li>二级域</li>
+</ul>
+<p><strong>DNS 查询过程</strong></p>
+<ul>
+<li>客户机想要访问 <code>www.baidu.com</code>，会根据自己的 TCP&#x2F;IP 参数向自己的首选DNS服务器发送 DNS请求</li>
+<li>首选DNS服务器收到客户机的请求后，回去查询自己的区域文件，若找不到 域名 的IP地址信息，将请求转发到根域服务器（需要配置根提示）；若可以找到 IP地址，直接响应给客户机</li>
+<li>根域服务器收到请求后，由于根服务器只维护 顶级域服务器信息，会响应顶级域服务器IP（com），首选DNS 根据根域服务器 相应的信息，将请求转发到 com顶级域</li>
+<li>com顶级域服务器 收到请求，由于 com顶级域服务器 只维护 二级域信息，会响应二级域服务器IP （baidu.com）  ，首选DNS 根据 顶级域响应的信息，将请求转发到 baidu.com 二级域</li>
+<li>baidu.com二级域 收到请求，baidu.com DNS服务器里维护的是 baidu.com区域的所有主机信息，当然也包含了<code> www.baidu.com</code> 的信息，直接将 <code>www.baidu.com</code> 的IP地址响应给 首选DNS</li>
+<li>首选DNS 最后响应给客户机</li>
+</ul>
+<p><strong>两种查询方式</strong></p>
+<ol>
+<li>递归查询：当客户机请求自己的 首选DNS服务器，首选DNS服务器 上有域名记录信息，直接响应给客户机</li>
+<li>迭代查询：首选DNS 没有域名记录信息，通过一步步请求根域服务器、顶级域服务器、二级域服务器，最终找到域名记录信息</li>
+</ol>
+<h1 id="IP地址"><a href="#IP地址" class="headerlink" title="IP地址"></a>IP地址</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><ul>
+<li><p>用来表示网络中的某一台主机（某一个网络接口），是主机的唯一标识，保障主机间的正常通信（主机想要进行网络通信，就必须配置相应的IP地址）</p>
+</li>
+<li><p>一种网络编码，确定网络中的一个节点</p>
+</li>
+<li><p>IP地址由32位二进制组成</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">192.168.0.105</span><br><span class="line">11000000.10101000.00000000.1101001</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><strong>组成</strong></p>
+<ol>
+<li><p>网络部分：标识网络的范围</p>
+</li>
+<li><p>主机部分：标识网络范围中的一个节点</p>
+</li>
+</ol>
+<p>  网络部分越长，表示网络的范围越小；网络部分越短，表示网络的范围越大</p>
+<h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><p><strong>1.公有 IP 地址</strong></p>
+<p>​		地址分为A、B、C、D、E五类</p>
+<ul>
+<li><p>A类：前 8 位为网络位（以 0 为开头，即首位为 0 ，下同），后 24 位位主机位</p>
+<p>​	<em><strong>第一个 8 位</strong>组范围为 0-127，但 0 表示本地网络，127 开头的地址一般用于回路检测，最终范围：1-126</em></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">0 0000000.		0</span><br><span class="line">0 1111111.		127</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>B类：前 16 位位网络位（以 10 为开头），后 16 位位主机位</p>
+<p>​	网络位的范围为 128.0-191.255</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">10 000000.00000000		128.0	</span><br><span class="line">10 111111.11111111		191.255</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>C类：前 24 位位网络位（以 110 为开头），后 8 位位主机位</p>
+<p>​	网络位的范围为192.0.0-223.255.255</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">110 00000.00000000.00000000		192.0.0</span><br><span class="line">110 11111.11111111.11111111		223.255.255</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>A类：10.0.0.0-10.255.255.255</p>
+</li>
+<li><p>B类：172.16.0.0-172.31.255.255</p>
+</li>
+<li><p>C类：192.168.0.0-192.168.255.255</p>
+</li>
+</ul>
+<p>私网地址是不能在公网上进行直接访问的，需要网络地址转换将 私网地址 转换为 公网地址 才可访问公网内容</p>
+<h1 id="子网掩码"><a href="#子网掩码" class="headerlink" title="子网掩码"></a>子网掩码</h1><h2 id="概念-1"><a href="#概念-1" class="headerlink" title="概念"></a>概念</h2><ul>
+<li><p>用来确定IP地址的网络部分</p>
+</li>
+<li><p>由 32 位二进制组成，对应IP的网络部分由 1 表示（二进制，下同），主机部分由 0 表示</p>
+<ul>
+<li><p>根据子网掩码得出网络部分与主机部分。在本网络的首个地址是网络地址；最后一个是广播地址</p>
+</li>
+<li><p>网络地址：本网段的网络号，代表的是一个范围，不能给主机使用</p>
+</li>
+<li><p>广播地址：代表本网段的所有地址，同样不能直接给主机使用</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">172.16.230.222/16		/16 子网掩码为 16 位</span><br><span class="line">255.255.0.0</span><br><span class="line">10101100.00010000.11100110.11011110			IP地址二进制</span><br><span class="line">11111111.11111111.00000000.00000000			子网掩码二进制</span><br><span class="line">10101100.00010000.00000000.00000000			网络地址	172.16.0.0</span><br><span class="line">10101100.00010000.11111111.11111111			广播地址	172.16.255.255</span><br><span class="line">===========================================================================</span><br><span class="line">192.168.100.233/19	   19位子网掩码</span><br><span class="line">255.255.224.0		   子网掩码，当不是255时，转换为二进制，1 位置的是网络部分</span><br><span class="line">       .111 00000	   网络部分位 11111111.11111111.111</span><br><span class="line">192.168.011 00100	   网络地址：192.168.96.0，广播地址：192.168.127.255</span><br><span class="line">===========================================================================</span><br><span class="line">172.24.88.99/23					23位子网掩码</span><br><span class="line">      .0101100 0.00000000			网络地址</span><br><span class="line">      .0101100 1.11111111 			广播地址</span><br><span class="line">11111111.11111111.1111111 0.00000000		子网掩码二进制</span><br><span class="line">255.255.254.0</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>默认子网掩码</p>
+<ul>
+<li>A类：255.0.0.0			   8 位</li>
+<li>B类：255.255.0.0 	     16 位</li>
+<li>C类：255.255.255.0  	24位</li>
+</ul>
+</li>
+</ul>
+<p>子网掩码越长，代表网络部分越长，即网络范围越小；子网掩码越短，代表网络部分越短，网络范围越大</p>
+<h2 id="子网划分"><a href="#子网划分" class="headerlink" title="子网划分"></a>子网划分</h2><p><strong>原因</strong></p>
+<ul>
+<li>从公网层面讲：A类地址总共有 126 个网络，如果A类网络给一个机构或企业使用，由于A类地址中主机部分范围广，使机构或企业无法使用完全，造成 IP 浪费（节省IP地址）</li>
+<li>实现网络的层次性</li>
+<li>满足不同网络多 IP 地址的需求IP 地址分类</li>
+</ul>
+<p><strong>IP 地址分类</strong></p>
+<ul>
+<li>有类地址：一个 IP 地址采用的 <strong>是</strong> 默认的子网掩码</li>
+<li>无类地址：一个 IP 地址采用的 <strong>不是</strong> 默认的子网掩码</li>
+</ul>
+<p><strong>原理</strong></p>
+<p>​	子网位划分：增加网络部分（向主机位借位，借的位数称为 <strong>子网位</strong>）</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">192.168.1.20/24</span><br><span class="line">192.168.1.0/24		网络地址</span><br><span class="line">此网络范围 IP 地址有256个（192.168.1.0~192.168.1.255）</span><br><span class="line">可用主机数（192.168.1.1~192.168.1.254）</span><br><span class="line">======================================================================================</span><br><span class="line">	向主机部分借1位，24 位的子网掩码划分后变成了两个网段</span><br><span class="line">192.168.1.00000000/24	</span><br><span class="line">192.168.1.0 0000000/25------&gt;192.168.1.0/25</span><br><span class="line">192.168.1.1 0000000/25------&gt;192.168.1.128/25</span><br><span class="line">===============================================================================</span><br><span class="line">	向主机部分借 3 位，</span><br><span class="line">192.168.1.0/24</span><br><span class="line">192.168.1.000 00000------&gt;192.168.1.0/27</span><br><span class="line">192.168.1.001 00000------&gt;192.168.1.32</span><br><span class="line">192.168.1.010 00000------&gt;192.168.1.64</span><br><span class="line">192.168.1.011 00000------&gt;192.168.1.96</span><br><span class="line">192.168.1.100 00000------&gt;192.168.1.128</span><br><span class="line">192.168.1.101 00000------&gt;192.168.1.160</span><br><span class="line">192.168.1.110 00000------&gt;192.168.1.192</span><br><span class="line">192.168.1.111 00000------&gt;192.168.1.224</span><br><span class="line">===============================================================================</span><br><span class="line">	假设子网位为 n,则可划分网络个数为 2的 n 次方</span><br><span class="line">借 1 位：2 个网段		主机位 7 位			每个网络中的 IP 地址个数：128</span><br><span class="line">借 2 位：4 个网段		主机位 6 位			每个网络中的 IP 地址个数：64</span><br><span class="line">借 3 位：8 个网段		主机位 5 位			每个网络中的 IP 地址个数：32</span><br><span class="line">借 4 位：16 个网段	主机位 4 位			每个网络中的 IP 地址个数：16</span><br><span class="line">借 5 位：32 个网段	主机位 3 位			每个网络中的 IP 地址个数：8</span><br><span class="line">借 6 位：64 个网段	主机位 2 位			每个网络中的 IP 地址个数：4	</span><br><span class="line">借 7 位：128 个网段	主机位 1 位（没有可用的IP地址给主机使用，此网段一个是网络地址，一个是广播地址）</span><br></pre></td></tr></table></figure>
 
-<p>解决方法：使用 <code>docker tag</code> 命令修改镜像的版本和名字再重新上传</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@root test]# docker tag 4f7712a34ee4 nik5d0/testtomcat:1.0</span><br><span class="line">[root@root test]# docker push nik5d0/testtomcat:1.0</span><br><span class="line">The push refers to repository [docker.io/nik5d0/testtomcat]</span><br><span class="line">06e882770dce: Pushing [==&gt;                                                ]   12.5MB/253.7MB</span><br><span class="line">e0c442ed4b6b: Pushing [===================&gt;                               ]  6.343MB/16.15MB</span><br><span class="line">6cb9ad15625b: Pushing [&gt;                                                  ]  7.081MB/384.4MB</span><br><span class="line">174f56854903: Pushing [===&gt;                                               ]  12.53MB/203.9MB</span><br></pre></td></tr></table></figure>
-
-<h2 id="Docker全流程"><a href="#Docker全流程" class="headerlink" title="Docker全流程"></a>Docker全流程</h2><p><img src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/000-00N/003/docker-22.png" alt="docker-22"></p>
-<p>docker save 和docker load 可以将镜像输出和导入(以文件的形式)</p>
 ]]></content>
       <categories>
-        <category>炼气</category>
+        <category>锻体</category>
       </categories>
       <tags>
         <tag>基础</tag>
@@ -2056,6 +1667,430 @@
       </tags>
   </entry>
   <entry>
+    <title>Docker-基本学习</title>
+    <url>/2023/01/30/003%E2%80%94Docker/</url>
+    <content><![CDATA[<p>​	学习了B站狂神老师的docker入门课程，下面是我的学习笔记，老师讲的很好！(当时还担心学生认证时领的ECS会没有用武之地呢，以下的所有测试都是在其上面进行的)</p>
+<p>视频链接：<a href="https://www.bilibili.com/video/BV1og4y1q7M4/">【狂神说Java】Docker最新超详细版教程通俗易懂</a></p>
+<h1 id="Docker简介"><a href="#Docker简介" class="headerlink" title="Docker简介"></a>Docker简介</h1><p>​	一个开源的应用容器引擎，让开发者可以打包他们的 应用 和 依赖包 到一个可移植的镜像中，然后发布到操作系统的机器上，也可以实现虚拟化。容器之间使用隔离机制，相互不会有任何干扰</p>
+<p>​	是内核级别的虚拟化，可以在一个物理机上运行很多容器实例</p>
+<p>理念：将 应用 和 运行的环境 打包为一个镜像，发布之后启动运行就变成了一个容器</p>
+<p><strong>比较与 虚拟机技术 的不同</strong></p>
+<ul>
+<li><p>虚拟机：虚拟出一套硬件，运行一个完整的操作系统，然后在操作系统上 安装 和 运行 软件</p>
+<p><img src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/000-00N/003/docker-01.jpg" alt="docker-01"></p>
+</li>
+<li><p>而容器内的 应用 是直接运行在 宿主机 的内核，容器没有自己的内核(利用 宿主机 的内核)，也没有虚拟硬件，很轻便（宿主机：当前应用运行在哪，哪就是宿主机）</p>
+<p>​	每个容器间相互隔离，各自都有一个属于自己的文件系统，互不影响</p>
+<p><img src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/000-00N/003/docker-02.jpg" alt="docker-02"></p>
+</li>
+</ul>
+<h2 id="名词概念"><a href="#名词概念" class="headerlink" title="名词概念"></a>名词概念</h2><ul>
+<li><p><strong>镜像</strong>：好比是一个模板，通过这个模板可以用来创建 容器服务，通过 run 命令来运行。一个镜像可以创建多个容器（最终的 服务 或是 项目 是运行在容器中的）</p>
+</li>
+<li><p><strong>容器</strong>：Docker利用容器技术可以独立运行一个或者一组应用，是通过 镜像 创建的</p>
+</li>
+<li><p><strong>仓库</strong>：存放镜像的地方，分为公有仓库（Docker hub、腾讯云、阿里云等等）和私有仓库（公有仓库是国外的话需要配置镜像加速）</p>
+</li>
+</ul>
+<h2 id="Run的流程"><a href="#Run的流程" class="headerlink" title="Run的流程"></a>Run的流程</h2><blockquote>
+<p>docker run 镜像名称</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@root ~]# docker run hello-world</span><br><span class="line">Unable to find image &#x27;hello-world:latest&#x27; locally	# 试图寻找镜像但是并没有在本地找到</span><br><span class="line">latest: Pulling from library/hello-world			# 使用pull远程拉取镜像</span><br><span class="line">2db29710123e: Pull complete 						# 返回签名信息证明成功拉取到</span><br><span class="line">Digest: sha256:2498fce14358aa50ead0cc6c19990fc6ff866ce72aeb5546e1d59caac3d0d60f</span><br><span class="line">Status: Downloaded newer image for hello-world:latest</span><br><span class="line"></span><br><span class="line">Hello from Docker!									# hello-world镜像安装成功</span><br><span class="line">This message shows that your installation appears to be working correctly.</span><br><span class="line"></span><br><span class="line">To generate this message, Docker took the following steps:</span><br><span class="line"> 1. The Docker client contacted the Docker daemon.</span><br><span class="line"> 2. The Docker daemon pulled the &quot;hello-world&quot; image from the Docker Hub.(amd64)</span><br><span class="line"> 3. The Docker daemon created a new container from that image which runs the executable that produces the output you are currently reading.</span><br><span class="line"> 4. The Docker daemon streamed that output to the Docker client, which sent it to your terminal.</span><br><span class="line"></span><br><span class="line">To try something more ambitious, you can run an Ubuntu container with:</span><br><span class="line"><span class="meta prompt_"> $ </span><span class="language-bash">docker run -it ubuntu bash</span></span><br><span class="line"></span><br><span class="line">Share images, automate workflows, and more with a free Docker ID:</span><br><span class="line"> https://hub.docker.com/</span><br><span class="line"></span><br><span class="line">For more examples and ideas, visit:</span><br><span class="line"> https://docs.docker.com/get-started/</span><br></pre></td></tr></table></figure>
+
+<p>​	Docker会先在本机寻找是否有这个镜像，有则运行；没有的话就去Dokcer hub寻找，如果找不到则会提示找不到；找的的话则会下载镜像到本地，然后运行这个镜像，如下图所示</p>
+<p><img src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/000-00N/003/docker-03.jpg" alt="docker-03"></p>
+<h2 id="底层原理-如何工作？"><a href="#底层原理-如何工作？" class="headerlink" title="底层原理(如何工作？)"></a>底层原理(如何工作？)</h2><p>​	Docker是一个C&#x2F;S架构的系统，它的守护进程(服务)一直运行在 服务端主机的后台，客户端可通过 Socket 与 服务端 通信。服务端 接收到 客户端 的命令后，就会执行这个命令</p>
+<p><img src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/000-00N/003/docker-04.jpg" alt="docker-04"></p>
+<h1 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h1><p><strong>帮助命令</strong></p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>docker version</td>
+<td>显示 docker 的版本信息</td>
+</tr>
+<tr>
+<td>docker info</td>
+<td>显示 docker 的系统信息，包括镜像和容器的数量</td>
+</tr>
+<tr>
+<td>docker 命令 –help</td>
+<td>帮助命令</td>
+</tr>
+</tbody></table>
+<p>官方文档位置：<a href="https://docs.docker.com/reference/">Reference documentation</a>，从 Reference 中可以查看全部命令解析</p>
+<h2 id="镜像命令"><a href="#镜像命令" class="headerlink" title="镜像命令"></a>镜像命令</h2><h3 id="docker-images"><a href="#docker-images" class="headerlink" title="docker images"></a>docker images</h3><p>查看本地主机上的镜像</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">参数说明</span></span><br><span class="line">-a, --all             # 列出所有的镜像</span><br><span class="line">-q, --quiet           # 只显示镜像的ID</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">命令执行</span></span><br><span class="line">[root@root ~]# docker images</span><br><span class="line">REPOSITORY          TAG            IMAGE ID            CREATED             SIZE</span><br><span class="line">hello-world         latest         feb5d9fea6a5        16 months ago       13.3kB</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">REPOSITORY:镜像的仓库源(名字)</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">TAG:镜像的版本标签信息</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">IMAGE ID:镜像ID</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">CREATED:镜像创建时间</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">SIZE:镜像大小</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="docker-search"><a href="#docker-search" class="headerlink" title="docker search"></a>docker search</h3><p>搜索镜像</p>
+<p>官方的镜像商店：<a href="https://hub.docker.com/">Docker Hub</a>，所有的镜像可以在上面找，与用命令来寻找是一样的</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@root ~]# docker search mysql</span><br><span class="line">NAME                            DESCRIPTION                                     STARS               OFFICIAL            AUTOMATED</span><br><span class="line">mysql                           MySQL is a widely used, open-source relation…   13767               [OK]                </span><br><span class="line">mariadb                         MariaDB Server is a high performing open sou…   5253                [OK]                </span><br><span class="line">phpmyadmin                      phpMyAdmin - A web interface for MySQL and M…   731                 [OK]                </span><br><span class="line">percona                         Percona Server is a fork of the MySQL relati…   599                 [OK]                </span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">返回的结果太多了,就不一一展示了</span></span><br></pre></td></tr></table></figure>
+
+<p>举个例子，搜索 Tomcat 镜像</p>
+<p><img src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/000-00N/003/docker-04.png" alt="docker-04"></p>
+<h3 id="docker-pull"><a href="#docker-pull" class="headerlink" title="docker pull"></a>docker pull</h3><p>下载镜像</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">格式: docker pull 镜像名[:tag]</span></span><br><span class="line">[root@root ~]# docker pull mysql</span><br><span class="line">Using default tag: latest			# 若没有用tag要求具体的版本号,下载的就是最新版(latest)</span><br><span class="line">latest: Pulling from library/mysql	</span><br><span class="line">72a69066d2fe: Pull complete 		# 分层下载，docker镜像 的核心(联合文件系统)</span><br><span class="line">93619dbc5b36: Pull complete </span><br><span class="line">99da31dd6142: Pull complete </span><br><span class="line">626033c43d70: Pull complete </span><br><span class="line">37d5d7efb64e: Pull complete </span><br><span class="line">ac563158d721: Pull complete </span><br><span class="line">d2ba16033dad: Pull complete </span><br><span class="line">688ba7d5c01a: Pull complete </span><br><span class="line">00e060b6d11d: Pull complete </span><br><span class="line">1c04857f594f: Pull complete </span><br><span class="line">4d7cfa90e6ea: Pull complete </span><br><span class="line">e0431212d27d: Pull complete </span><br><span class="line">Digest: sha256:e9027fe4d91c0153429607251656806cc784e914937271037f7738bd5b8e7709 # 签名信息（防伪标志)</span><br><span class="line">Status: Downloaded newer image for mysql:latest</span><br></pre></td></tr></table></figure>
+
+<p>下载指定版本，当然只能下载Docker Hub中存在的版本</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@root ~]# docker pull mysql:5.7</span><br><span class="line">5.7: Pulling from library/mysql</span><br><span class="line">72a69066d2fe: Already exists	# 使用分层下载,重复的部分就可以共用,不用重新下载(联合文件系统)</span><br><span class="line">…………………… </span><br><span class="line">d2ba16033dad: Already exists </span><br><span class="line">0ceb82207cd7: Pull complete </span><br><span class="line">37f2405cae96: Pull complete </span><br><span class="line">e2482e017e53: Pull complete </span><br><span class="line">70deed891d42: Pull complete </span><br><span class="line">Digest: sha256:f2ad209efe9c67104167fc609cca6973c8422939491c9345270175a300419f94</span><br><span class="line">Status: Downloaded newer image for mysql:5.7</span><br></pre></td></tr></table></figure>
+
+<h3 id="docker-rmi"><a href="#docker-rmi" class="headerlink" title="docker rmi"></a>docker rmi</h3><p>删除镜像（rmi代表的是remove image）</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">格式: docker rmi -f 镜像ID, -f为强制删除</span></span><br><span class="line">[root@root ~]# docker rmi -f 3218b38490ce</span><br><span class="line">Untagged: mysql:latest</span><br><span class="line">Untagged: mysql@sha256:e9027fe4d91c0153429607251656806cc784e914937271037f7738bd5b8e7709</span><br><span class="line">Deleted: sha256:3218b38490cec8d31976a40b92e09d61377359eab878db49f025e5d464367f3b</span><br><span class="line">Deleted: sha256:aa81ca46575069829fe1b3c654d9e8feb43b4373932159fe2cad1ac13524a2f5</span><br><span class="line">Deleted: sha256:0558823b9fbe967ea6d7174999be3cc9250b3423036370dc1a6888168cbd224d</span><br><span class="line">Deleted: sha256:a46013db1d31231a0e1bac7eeda5ad4786dea0b1773927b45f92ea352a6d7ff9</span><br><span class="line">Deleted: sha256:af161a47bb22852e9e3caf39f1dcd590b64bb8fae54315f9c2e7dc35b025e4e3</span><br><span class="line">Deleted: sha256:feff1495e6982a7e91edc59b96ea74fd80e03674d92c7ec8a502b417268822ff</span><br></pre></td></tr></table></figure>
+
+<p>删除所有的镜像</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker rmi -f $(docker images -aq)</span><br><span class="line"><span class="meta prompt_">	# </span><span class="language-bash">将括号的返回值作为参数进行传参，递归删除所有镜像(也可以用内联)</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="容器命令"><a href="#容器命令" class="headerlink" title="容器命令"></a>容器命令</h2><p><strong>ps：有了镜像才可以创建容器，下面运行一个centos的容器来进行学习</strong></p>
+<h3 id="docker-run"><a href="#docker-run" class="headerlink" title="docker run"></a><strong>docker run</strong></h3><blockquote>
+<p>格式：docker run [参数] 镜像名</p>
+</blockquote>
+<p>一些常用参数：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">--name=&quot;NAME&quot;    # 给容器起的名字</span><br><span class="line">-d               # 以后台方式运行</span><br><span class="line">-it			     # 使用交互方式运行，可以进入容器查看内容</span><br><span class="line">-p               # 指定容器的端口,可以主机映射 比如：-p 8080:8080</span><br><span class="line">	-p (ip:主机端口：容器端口)</span><br><span class="line">    -p (主机端口：容器端口)    # 常用</span><br><span class="line">    -p (容器端口)</span><br><span class="line">-P               # 表示随机指定端口(上边的是小写的p，这个是大写的)</span><br></pre></td></tr></table></figure>
+
+<p>接下来实操测试一下在 centos 中下载一个 centos 镜像</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">	# </span><span class="language-bash">启动并进入容器(新的主机名默认就是镜像ID)</span></span><br><span class="line">[root@root ~]# docker run -it centos</span><br><span class="line">[root@43c5c0bbd669 /]# ls</span><br><span class="line">bin  dev  etc  home  lib  lib64  lost+found  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var</span><br></pre></td></tr></table></figure>
+
+<p>​	可以看到这里的主机名已经不同，说明我们已进入了容器内的 centos，容器内 centos 有很多命令不完善</p>
+<p>​	按 <code>exit</code> 可以退出容器，快捷键：<code>ctrl+D</code>；以上都是使容器停止并退出，还有使容器依然保持后台运行的快捷键：<code>crtl+P+Q </code></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@root ~]# docker ps</span><br><span class="line">CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES</span><br><span class="line">[root@root ~]# docker run -it centos</span><br><span class="line">[root@503c0c19d2cb /]# [root@root ~]# docker ps</span><br><span class="line">CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES</span><br><span class="line">503c0c19d2cb        centos              &quot;/bin/bash&quot;         7 seconds ago       Up 6 seconds  </span><br></pre></td></tr></table></figure>
+
+<p><strong>常见的坑</strong></p>
+<blockquote>
+<p>用 -d 以后台方式启动容器后，docker ps发现启动的容器已经停止</p>
+</blockquote>
+<p>原因：docker容器使用 后台运行时，就必须要有一个 前台进程，如若 docker 发现没有 前台应用 提供服务，它就会自动停止</p>
+<h3 id="docker-ps"><a href="#docker-ps" class="headerlink" title="docker ps"></a>docker ps</h3><p>查看所有正在运行中的容器</p>
+<p>常用参数：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">-a			#列出当前正在运行的容器和曾经运行过的容器</span><br><span class="line">-n=a	    #显示最近创建的容器，a表示想要显示的个数</span><br><span class="line">-q			#只显示容器的编号</span><br></pre></td></tr></table></figure>
+
+<h3 id="docker-rm"><a href="#docker-rm" class="headerlink" title="docker rm"></a>docker rm</h3><p>删除指定的容器</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">格式: docker <span class="built_in">rm</span> 容器ID，-f强制删除容器</span></span><br><span class="line">docker rm -f $(docker ps -aq)    	# 删除所有容器</span><br><span class="line">docker ps -a -q|xargs docker rm		# 同上</span><br></pre></td></tr></table></figure>
+
+<h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><p><strong>启动和停止</strong></p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>docker start 容器ID</td>
+<td>启动容器</td>
+</tr>
+<tr>
+<td>docker restart ID</td>
+<td>重启容器</td>
+</tr>
+<tr>
+<td>docker stop ID</td>
+<td>停止当前正在运行的容器</td>
+</tr>
+<tr>
+<td>docker kill ID</td>
+<td>强制停止当前容器(停止容器报错的话用这个)</td>
+</tr>
+</tbody></table>
+<ul>
+<li><p><strong>docker logs</strong>：查看日志</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">格式: docker logs 容器ID</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">参数说明</span></span><br><span class="line">-t					# 显示时间戳</span><br><span class="line">-f					# 跟踪日志输出(两参数可以直接合并 -tf)</span><br><span class="line">--tail &lt;number&gt;     # 显示条数限制</span><br></pre></td></tr></table></figure>
+
+<p>当容器中没有日志时，什么也不会显示</p>
+</li>
+<li><p><strong>docker top</strong>：查看容器中的进程信息</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">格式: docker top 容器ID</span></span><br><span class="line">[root@root ~]# docker top 6dea9e3ce101</span><br><span class="line">UID        PID       PPID      C      STIME      TTY       TIME         CMD</span><br><span class="line">root       2750      2735      0      21:40      pts/0     00:00:00     /bin/bash</span><br></pre></td></tr></table></figure>
+
+<p>这里的 容器ID 实际上是 完整ID的一部分，可以通过下面的 <code>inspect</code> 查询到</p>
+</li>
+<li><p><strong>docker inspect</strong>：查看容器的元数据</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker inspect 容器ID</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>进入当前正在运行中的容器</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker exec -it 容器ID /bin/bash	# 进入容器后会开启一个新的终端，可以在里面输入命令进行操作(常用)</span><br><span class="line">docekr attach 容器ID				# 进入容器正在执行的终端，不会启动新的进程(如果执行的文件中有死循环则会一直执行)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>docker cp</strong>：将容器内的文件拷贝到主机中（也可以反过来将主机内文件复制到容器内）</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker cp 容器ID:容器内的路径 主机的路径</span><br></pre></td></tr></table></figure>
+
+<p>​	拷贝文件时要记得退出容器，直接输入 <code>exit</code> 退出也没问题，可以用 <code>docker ps -a</code> 查询到所有创建过的容器ID，因为是刚退出的所以第一个就是需拷贝的容器</p>
+</li>
+</ul>
+<h2 id="Nginx与Tomcat部署"><a href="#Nginx与Tomcat部署" class="headerlink" title="Nginx与Tomcat部署"></a>Nginx与Tomcat部署</h2><h3 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h3><p>​	搜索到镜像后用 <code>pull</code> 下载到本地后，运行测试一下</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@root ~]# docker images</span><br><span class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</span><br><span class="line">nginx               latest              605c77e624dd        13 months ago       141MB</span><br><span class="line">centos              latest              5d0da3dc9764        17 months ago       231MB</span><br><span class="line">[root@root ~]# docker run -d --name nginx00 -p 3389:80 nginx</span><br><span class="line">9aa9b3e29208d9cb7c28c5dd920e717b751f0b8b8c3e268096c03cd984f9e415</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">进入容器</span></span><br><span class="line">[root@root ~]# docker exec -it nginx00 /bin/bash</span><br><span class="line">root@9aa9b3e29208:/# whereis nginx</span><br><span class="line">nginx: /usr/sbin/nginx /usr/lib/nginx /etc/nginx /usr/share/nginx</span><br><span class="line">root@9aa9b3e29208:/etc/nginx# cd /usr/share/nginx</span><br><span class="line">root@9aa9b3e29208:/usr/share/nginx# ls</span><br><span class="line">html</span><br></pre></td></tr></table></figure>
+
+<p>参数解释</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-d: 后台方式运行</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">--name: 给容器命名,以后可以用名字来代替容器ID</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-p 宿主机端口:容器内端口</span></span><br></pre></td></tr></table></figure>
+
+<p>端口暴露的概念</p>
+<p><img src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/000-00N/003/docker-05.jpg" alt="docker-05"></p>
+<p>​	通过外网访问3389端口可以访问到容器内的80端口，相当于将docker容器内的80端口映射到了主机的3389端口，用浏览器访问测试一下发现部署成功</p>
+<p><img src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/000-00N/003/docker-06.jpg" alt="docker-06"></p>
+<h3 id="Tomcat"><a href="#Tomcat" class="headerlink" title="Tomcat"></a>Tomcat</h3><p>步骤与 Nginx 是一样的，下载好后运行如下命令，tomcat就启动成功了</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker run -d --name tomcat00 -p 3389:8080 tomcat</span><br></pre></td></tr></table></figure>
+
+<p>可是用浏览器访问时会直接404，没有访问到tomcat，但是外网测试访问没有问题</p>
+<p><img src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/000-00N/003/docker-07.jpg" alt="docker-07"></p>
+<p>我们先进入容器看看，发现 webapps是个空文件夹，Linux命令也少了</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@root ~]# docker exec -it tomcat00 /bin/bash</span><br><span class="line">root@6da16b2102d6:/usr/local/tomcat# ls</span><br><span class="line">BUILDING.txt	 NOTICE		RUNNING.txt  lib	     temp	   work</span><br><span class="line">CONTRIBUTING.md  README.md	bin	     logs	     webapps</span><br><span class="line">LICENSE		 RELEASE-NOTES	conf	     native-jni-lib  webapps.dist</span><br></pre></td></tr></table></figure>
+
+<p>下面是Tomcat的目录说明</p>
+<table>
+<thead>
+<tr>
+<th>子目录</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>bin</td>
+<td>命令中心（启动命令，关闭命令）</td>
+</tr>
+<tr>
+<td>conf</td>
+<td>配置中心（端口号，内存大小）</td>
+</tr>
+<tr>
+<td>lib</td>
+<td>Tomcat 的库文件（运行时需要的 jar 包）</td>
+</tr>
+<tr>
+<td>logs</td>
+<td>存放日志文件</td>
+</tr>
+<tr>
+<td>temp</td>
+<td>存储临时产生的文件，即缓存</td>
+</tr>
+<tr>
+<td>webapps</td>
+<td>存放应用程序（网站）</td>
+</tr>
+<tr>
+<td>work</td>
+<td>编译以后的 class 文件</td>
+</tr>
+</tbody></table>
+<p>​	<strong>原因</strong>：这些镜像默认是最小的镜像，即仅保留了必须的文件，把不必要的文件都剔除掉了，保证最小可运行的环境</p>
+<p><strong>解决方法</strong></p>
+<p>​	这里还有一个目录 <code>webapps.dist</code> 存放着 webapps目录 的原始文件<del>(真是……藏这里干什么)</del>，可以将这个目录拷贝到 webapps(也可以修改目录名字)</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">root@6da16b2102d6:/usr/local/tomcat# ls</span><br><span class="line">BUILDING.txt	 NOTICE		RUNNING.txt  lib	     temp	   work</span><br><span class="line">CONTRIBUTING.md  README.md	bin	     logs	     webapps</span><br><span class="line">LICENSE		 RELEASE-NOTES	conf	     native-jni-lib  webapps.dist</span><br><span class="line">root@6da16b2102d6:/usr/local/tomcat# cp -r webapps.dist/* webapps</span><br></pre></td></tr></table></figure>
+
+<p>这样就好了，也就是说之前 <code>webapps</code> 目录没有项目(网站)，部署好了就可以访问了</p>
+<p><img src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/000-00N/003/docker-08.jpg" alt="docker-08"></p>
+<h1 id="镜像详解"><a href="#镜像详解" class="headerlink" title="镜像详解"></a>镜像详解</h1><p>​	镜像是一个轻量级、可执行的独立软件包，用来打包 软件运行环境 和 基于运行环境开发的软件，它包含某个软件运行所需的所有内容，包括代码、运行时的库、环境变量 和 配置文件</p>
+<p><strong>联合文件系统(UnionFS)</strong> （我们看到下载镜像时分层进行就是因为这个）</p>
+<p>​	是一种分层、轻量级并且高性能的文件系统，它支持将对文件系统的修改作为一次提交来一层层的叠加，同时可以将不同目录挂载到同一个虚拟文件系统下。简单来说就是镜像重复的文件可以公用，无需再次下载</p>
+<h2 id="镜像加载原理"><a href="#镜像加载原理" class="headerlink" title="镜像加载原理"></a>镜像加载原理</h2><p>​	Docker镜像实际上是由一层一层的文件系统构成，这种层级的文件系统叫做 UnionFS</p>
+<p>​	任何系统启动都需要引导加载，典型的 Linux 启动到运行需要两个文件系统，bootfs 和 rootfs</p>
+<p><strong>bootfs</strong>(boot file system)</p>
+<p>​	包含 bootloader(启动加载) 和 kernel(操作系统内核)，bootloader主要是引导加载 kernel，Linux刚启动时会加载bootfs文件系统，Docker镜像的最底层是bootfs，与典型的Linux系统一样</p>
+<p>​	当boot加载完成之后整个内核就都在内存中了，此时内存的使用权已由bootfs转交给内核，此时系统也会卸载bootfs</p>
+<p><strong>rootfs</strong>(root file system)</p>
+<p>​	在 bootfs 之上，包含的是典型的 Linux系统中的 &#x2F;dev、&#x2F;proc、&#x2F;bin、&#x2F;etc等 标准目录和文件，rootfs 就是各种不同的操作系统发行版，如Ubuntu，Centos等等</p>
+<p><strong>同样是安装centos，Docker只有几百兆的原因</strong></p>
+<p>​	对于一个精简的OS(操作系统)，rootfs可以很小，只需要最基本的命令、工具和程序即可，因为底层直接使用了 主机 的 kernel，docker 只要提供 rootfs 就可以了。由此可见不同的Linux发行版 bootfs 基本一致，只有 rootfs 会有差别</p>
+<h2 id="分层理解"><a href="#分层理解" class="headerlink" title="分层理解"></a>分层理解</h2><p>​	所有的镜像都起始于一个基础镜像层，当进行 修改 或 增加 新内容时，就会在当前镜像之上创建型的镜像层</p>
+<p><img src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/000-00N/003/docker-09.jpg" alt="docker-09"></p>
+<p>​	<strong>特点</strong>：Docker镜像 都是只读的，当容器启动时，一个新的 可写层 会被加载到镜像的顶部，这一层就是我们通常所说的 容器层，容器层之下的都叫镜像层</p>
+<p><strong>docker commit</strong> ：提交容器成为一个新的副本(镜像)</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker commit -a=&quot;作者&quot; -m=&quot;提交的描述信息&quot; 容器ID 目标镜像名:[TAG]</span><br></pre></td></tr></table></figure>
+
+<h3 id="实战测试"><a href="#实战测试" class="headerlink" title="实战测试"></a>实战测试</h3><ul>
+<li><p>启动一个默认的 tomcat 镜像，这个镜像中 webapps目录下没有文件</p>
+</li>
+<li><p>将原始的 webapps目录的所有文件 拷贝进去</p>
+</li>
+<li><p>将 修改后的容器 通过 commit 提交为一个镜像，这就是我们自己修改过的一个新的镜像</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@root ~]# docker commit -a=&quot;nikaido&quot; -m=&quot;test&quot; 339fde10712f tomcat0:0.0</span><br><span class="line">sha256:7f0dc8c7dc4bf011f892116649780fdc54da00a53fedcf85a74f0717dd39664d</span><br><span class="line">[root@root ~]# docker images</span><br><span class="line">REPOSITORY        TAG                 IMAGE ID            CREATED             SIZE</span><br><span class="line">tomcat0           0.0                 7f0dc8c7dc4b        7 seconds ago       685MB</span><br><span class="line">nginx             latest              605c77e624dd        13 months ago       141MB</span><br><span class="line">tomcat            9.0                 b8e65a4d736d        13 months ago       680MB</span><br><span class="line">centos            latest              5d0da3dc9764        17 months ago       231MB</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>如果想要保存当前容器的状态，可以通过 commit 来获得一个新的镜像，相当于 VM 的快照</p>
+<h1 id="容器数据卷"><a href="#容器数据卷" class="headerlink" title="容器数据卷"></a>容器数据卷</h1><p>​	容器之间有一个 数据共享 的技术，Dokcer 容器产生的数据同步到本地后，数据就不会丢失了，这就是卷技术，也就是 目录挂载：将我们 容器 内的目录挂载到Linux上</p>
+<p>总结：容器的持久化和同步操作，容器间也是可以数据共享的</p>
+<h2 id="使用数据卷"><a href="#使用数据卷" class="headerlink" title="使用数据卷"></a>使用数据卷</h2><h3 id="指定目录挂载"><a href="#指定目录挂载" class="headerlink" title="指定目录挂载"></a>指定目录挂载</h3><p>适用 docker run 的 <code>-v</code> 参数</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker run -it -v 主机目录:容器内的目录 镜像</span><br></pre></td></tr></table></figure>
+
+<p>可以用 inspect 查看挂载的信息</p>
+<p><img src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/000-00N/003/docker-10.jpg" alt="docker-10"></p>
+<p>类比端口映射，相当于目录映射，把我们想要保存的文件从 容器内的目录 映射到 宿主机目录</p>
+<ul>
+<li><p>测试一下文件的同步（左边是容器内右边是宿主机）</p>
+<p><img src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/000-00N/003/docker-11.jpg" alt="docker-11"></p>
+</li>
+<li><p>停止容器后在宿主机修改文件，启动容器后数据依然是同步的</p>
+<p><img src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/000-00N/003/docker-12.jpg" alt="docker-12"></p>
+<p>好处：我们以后可以在本地修改，容器内的目录会自动同步</p>
+</li>
+</ul>
+<h3 id="匿名和具名挂载"><a href="#匿名和具名挂载" class="headerlink" title="匿名和具名挂载"></a>匿名和具名挂载</h3><p>docker volume的命令</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">Commands:</span><br><span class="line">  create      Create a volume</span><br><span class="line">  inspect     Display detailed information on one or more volumes</span><br><span class="line">  ls          List volumes # (查看所有卷的情况)</span><br><span class="line">  prune       Remove all unused local volumes</span><br><span class="line">  rm          Remove one or more volumes	</span><br></pre></td></tr></table></figure>
+
+<p><strong>匿名挂载</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-v 容器内路径</span></span><br><span class="line">docker run -d -P --name nginx00 -v /etc/nginx nginx</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看所有 volume 的情况</span></span><br><span class="line">[root@root ~]# docker volume ls</span><br><span class="line">DRIVER              VOLUME NAME</span><br><span class="line">local               9a122b9f60fbb296429f71d29fd1cdf8dad7fb7319a76432e0a26696c3ac3e43</span><br><span class="line">………………</span><br></pre></td></tr></table></figure>
+
+<p>这就是匿名挂载，我们在 <code>-v</code> 后只写了容器内的路径，没有写容器外的路径</p>
+<p><strong>具名挂载</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-v 卷名:容器内路径</span></span><br><span class="line">docker run -d -P --name nginx01 -v juming-nginx:/etc/nginx nginx</span><br><span class="line"></span><br><span class="line">[root@root ~]# docker volume ls</span><br><span class="line">DRIVER              VOLUME NAME</span><br><span class="line">local               9a122b9f60fbb296429f71d29fd1cdf8dad7fb7319a76432e0a26696c3ac3e43</span><br><span class="line">……………………</span><br><span class="line">local               juming-nginx</span><br></pre></td></tr></table></figure>
+
+<p><code>docker volume inspect 卷名</code> 可以查看卷的一些详细信息</p>
+<p><img src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/000-00N/003/docker-15.jpg" alt="docker-15"></p>
+<p>​	所有的docker容器内的卷，如果没有指定目录的话都是在 <code>/var/lib/docker/volumes/xxx/_data</code>，通过具名挂载可以很快找到相应的卷(多数情况下使用)</p>
+<p><strong>区分</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">-v 容器内路径		 		  # 匿名挂载</span><br><span class="line">-v 卷名:容器内路径				# 具名挂载</span><br><span class="line">-v /宿主机路径:容器内路径		  # 指定目录挂载</span><br></pre></td></tr></table></figure>
+
+<p><strong>拓展</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">通过 -v ……容器内路径:ro/rw 来改变读写权限</span></span><br><span class="line">ro	readonly	# 只读</span><br><span class="line">rw	readwrite	# 可读可写</span><br><span class="line"></span><br><span class="line">docker run -d -P --name nginx01 -v juming-nginx:/etc/nginx:ro nginx</span><br><span class="line">docker run -d -P --name nginx01 -v juming-nginx:/etc/nginx:rw nginx</span><br></pre></td></tr></table></figure>
+
+<p>如果出现 <code>ro</code> 就说明这个路径只能通过 宿主机 来操作，容器内部无法操作</p>
+<h2 id="MySQL同步数据"><a href="#MySQL同步数据" class="headerlink" title="MySQL同步数据"></a>MySQL同步数据</h2><p>第一次安装启动 mysql 是要设置密码的，官方给出的测试如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker run --name some-mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:tag</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">some-mysql: 命名的名字</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">my-secret-pw: 自己设置的密码</span></span><br></pre></td></tr></table></figure>
+
+<p>运行容器，并将 mysql 的重要文件挂载到本地</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker run -d -p 3389:3306 -v /home/mysql/conf:/etc/mysql/conf.d -v /home/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=test --name mysql00 mysql:5.7</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-d: 后台运行</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-p: 端口映射</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-v: 卷挂载,想要挂载多个卷,只要在前面加个 -v 即可</span></span><br><span class="line"><span class="meta prompt_">	# </span><span class="language-bash">/etc/mysql/conf.d: mysql的配置文件</span></span><br><span class="line"><span class="meta prompt_">	# </span><span class="language-bash">/var/lib/mysql: mysql的数据</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-e: 环境配置(mysql的密码)</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">--name: 容器名字</span></span><br></pre></td></tr></table></figure>
+
+<p>运行成功后用 Navicat 测试连接，中途也是也好几次试错终于成功了</p>
+<p><img src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/000-00N/003/docker-13.jpg" alt="docker-13"></p>
+<p>如果将容器删除，挂载到本地的数据卷依旧没有丢失，这就实现了容器数据持久化</p>
+<p><img src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/000-00N/003/docker-14.jpg" alt="docker-14"></p>
+<h1 id="DockerFile"><a href="#DockerFile" class="headerlink" title="DockerFile"></a>DockerFile</h1><p>​	用来构建 docker镜像 的构建文件，是一段命令脚本，通过这个脚本可以生成镜像</p>
+<ol>
+<li>编写一个 dockerfile 文件</li>
+<li>docker build 构建为一个镜像</li>
+<li>docker run 运行镜像</li>
+<li>docker push 发布镜像(Docker Hub、阿里云镜像仓库)</li>
+</ol>
+<p>很多官方镜像都是基础包，有些功能不能使用，用不惯的话可以制作自己的镜像</p>
+<ul>
+<li><p>Dockerfile：构建文件，定义了一切的步骤(源代码)</p>
+</li>
+<li><p>Docker images：通过 Dockerfile 构建生成的镜像，最终发布和运行的产品</p>
+</li>
+<li><p>Docker容器：镜像运行起来提供服务</p>
+</li>
+</ul>
+<h2 id="构建过程"><a href="#构建过程" class="headerlink" title="构建过程"></a>构建过程</h2><p><strong>基础知识</strong></p>
+<ul>
+<li><p>每个 指令(保留关键字) 都必须是大写字母</p>
+</li>
+<li><p><code>#</code> 表示注释</p>
+</li>
+<li><p>每一个指令都会 创建提交 一个新的镜像层并将这个新的镜像其提交</p>
+<p><img src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/000-00N/003/docker-16.png"></p>
+</li>
+<li><p>dockerfile是面向开发的，如果要发布项目、做镜像就要编写 dockerfile 文件</p>
+</li>
+</ul>
+<h2 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h2><p><img src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/000-00N/003/docker-17.jpg" alt="docker-17"></p>
+<p>以前都是用现成的镜像，现在知道了这些指令后，我们就可以来制作一个自己的镜像了</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">FROM			# 基础镜像,一切从这里开始构建</span><br><span class="line">MAINTAINER		# 镜像是谁写的,格式: 姓名+邮箱</span><br><span class="line">RUN				# 镜像构建时需要运行的命令</span><br><span class="line">ADD				# 比如我们要搭建包含tomcat的镜像,就要添加tomcat的压缩包</span><br><span class="line">WORKDIR			# 镜像的工作目录</span><br><span class="line">VOLUME			# 挂载的目录</span><br><span class="line">EXPOSE			# 暴露端口设置,相当于 -p</span><br><span class="line">CMD				# 指定这个容器启动时要运行的命令(只有最后一个会生效,可以被替代)</span><br><span class="line">ENTRYPOINT		# 指定这个容器启动时要运行的命令(可以追加命令)</span><br><span class="line">ONBUILD			# 当构建一个被继承的 Dockerfile 时会运行此指令(触发指令)</span><br><span class="line">COPY			# 类似ADD,将文件拷贝到镜像中</span><br><span class="line">ENV				# 构建时设置的环境变量</span><br></pre></td></tr></table></figure>
+
+<h3 id="CMD与ENTRYPOINT"><a href="#CMD与ENTRYPOINT" class="headerlink" title="CMD与ENTRYPOINT"></a>CMD与ENTRYPOINT</h3><p><strong>CMD</strong></p>
+<p>编写的dockerfile如下（文件名为 cmd_test）</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">FROM centos:7</span><br><span class="line">CMD [&quot;ls&quot;,&quot;-a&quot;]</span><br></pre></td></tr></table></figure>
+
+<p>制作成功后，运行镜像发现执行了 <code>ls -a</code> 命令</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@root test]# docker build -f cmd_test .</span><br><span class="line">Sending build context to Docker daemon  3.072kB</span><br><span class="line">………………</span><br><span class="line">Successfully built fc177cc88120</span><br><span class="line">[root@root test]# docker run fc177cc88120</span><br><span class="line">.</span><br><span class="line">..</span><br><span class="line">.dockerenv</span><br><span class="line">anaconda-post.log</span><br><span class="line">bin</span><br><span class="line">dev</span><br><span class="line">………………</span><br></pre></td></tr></table></figure>
+
+<p>追加一个参数 -l，想要执行 <code>ls -al</code> 命令却报错了</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@root test]# docker run fc177cc88120 -l</span><br><span class="line">docker: Error response from daemon: OCI runtime create failed: container_linux.go:348: starting container process caused &quot;exec: \&quot;-l\&quot;: executable file not found in $PATH&quot;: unknown.</span><br><span class="line">ERRO[0000] error waiting for container: context canceled </span><br></pre></td></tr></table></figure>
+
+<p>​	因为CMD的情况下，<code>-l</code> 替换了 <code>CMD [&quot;ls&quot;,&quot;-a&quot;]</code> 命令，<code>-l</code> 不是命令所以才报错了，所以我们要写完整的命令<code>ls -al</code></p>
+<p><strong>ENTRYPOINT</strong></p>
+<p>​	编写的dockerfile文件和上面一样，将 CMD 换成 ENTRYPOINT 即可，构建好镜像后，如上面测试时一样追加一个参数 <code>-l</code> ，命令可以执行，说明追加命令直接拼接在 ENTRYPOINT 命令后面</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@root test]# docker build -f test_entrypoint .</span><br><span class="line">Sending build context to Docker daemon  4.096kB</span><br><span class="line">…………</span><br><span class="line">Successfully built c6573fd50089</span><br><span class="line">[root@root test]# docker run  c6573fd50089 -l</span><br><span class="line">total 64</span><br><span class="line">drwxr-xr-x   1 root root  4096 Feb 15 11:52 .</span><br><span class="line">drwxr-xr-x   1 root root  4096 Feb 15 11:52 ..</span><br><span class="line">-rwxr-xr-x   1 root root     0 Feb 15 11:52 .dockerenv</span><br><span class="line">-rw-r--r--   1 root root 12114 Nov 13  2020 anaconda-post.log</span><br><span class="line">………………</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看本地镜像变更历史"><a href="#查看本地镜像变更历史" class="headerlink" title="查看本地镜像变更历史"></a>查看本地镜像变更历史</h3><p>可以用 <code>docker history 镜像ID</code> 查看镜像的创建过程</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@root test]# docker history fd615d6ff973</span><br><span class="line">IMAGE               CREATED             CREATED BY                                      SIZE                COMMENT</span><br><span class="line">fd615d6ff973        26 minutes ago      /bin/sh -c #(nop)  CMD [&quot;/bin/sh&quot; &quot;-c&quot; &quot;/bin…   0B                  </span><br><span class="line">80097bd57eb6        26 minutes ago      /bin/sh -c #(nop)  CMD [&quot;/bin/sh&quot; &quot;-c&quot; &quot;echo…   0B                  </span><br><span class="line">e2ce79d8de03        26 minutes ago      /bin/sh -c #(nop)  EXPOSE 80                    0B                  </span><br><span class="line">ca3bd3fc8264        26 minutes ago      /bin/sh -c yum -y install net-tools             199MB               </span><br><span class="line">8a9aaca756cf        26 minutes ago      /bin/sh -c yum -y install vim                   254MB               </span><br><span class="line">8120bc59003d        26 minutes ago      /bin/sh -c #(nop) WORKDIR /usr/local            0B                  </span><br><span class="line">8741afe6768e        26 minutes ago      /bin/sh -c #(nop)  ENV MYPATH=/usr/local        0B                  </span><br><span class="line">59148671933a        26 minutes ago      /bin/sh -c #(nop)  MAINTAINER nikaido&lt;158128…   0B                  </span><br><span class="line">eeb6ee3f44bd        17 months ago       /bin/sh -c #(nop)  CMD [&quot;/bin/bash&quot;]            0B                  </span><br><span class="line">&lt;missing&gt;           17 months ago       /bin/sh -c #(nop)  LABEL org.label-schema.sc…   0B                  </span><br><span class="line">&lt;missing&gt;           17 months ago       /bin/sh -c #(nop) ADD file:b3ebbe8bd304723d4…   204MB               </span><br></pre></td></tr></table></figure>
+
+<h2 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h2><h3 id="制作自己的centos镜像"><a href="#制作自己的centos镜像" class="headerlink" title="制作自己的centos镜像"></a>制作自己的centos镜像</h3><p>​	这个是官方的centos制作镜像的dockerfile文件，Docker Hub中大多数镜像都是基于scatch开发的(是一个基础镜像)</p>
+<p><img src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/000-00N/003/docker-19.png" alt="docker-19"></p>
+<p>制作一个自己的centos(添加 vim、net-tools 命令)</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">FROM centos:7				# 基于centos7的基础镜像</span><br><span class="line">MAINTAINER nikaido&lt;1581283149@qq.com&gt;</span><br><span class="line"></span><br><span class="line">ENV MYPATH /usr/local		# 定义环境变量MYPATH</span><br><span class="line">WORKDIR $MYPATH				# 定义工作目录</span><br><span class="line"></span><br><span class="line">RUN yum -y install vim</span><br><span class="line">RUN yum -y install net-tools</span><br><span class="line"></span><br><span class="line">EXPOSE 80					# 暴露80端口</span><br><span class="line"></span><br><span class="line">CMD echo $MYPATH</span><br><span class="line">CMD /bin/bash				# 使用/bin/bash终端</span><br></pre></td></tr></table></figure>
+
+<p>用 <code>docker build</code> 构建镜像 nikaido:0.0 <strong>(不要忘记后面的 <code>.</code> )</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker build -f test_centos -t nikaido:0.0 .</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-f dockerfile文件路径</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-t 镜像名:[tag]</span></span><br></pre></td></tr></table></figure>
+
+<p>测试运行一下</p>
+<p><img src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/000-00N/003/docker-18.jpg" alt="docker-18"></p>
+<h3 id="制作Tomcat镜像"><a href="#制作Tomcat镜像" class="headerlink" title="制作Tomcat镜像"></a>制作Tomcat镜像</h3><ul>
+<li><p>准备好 Tomcat 的压缩包，因为Tomcat是依赖于java的，所以还需要 jdk 的压缩包</p>
+<p><img src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/000-00N/003/docker-20.jpg" alt="docker-20"></p>
+</li>
+<li><p>编写dockerfile文件，官方命名 <code>Dockerfile</code> （build时会自动寻找这个文件，不需要 <code>-f</code> 指定）</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">照葫芦画瓢的</span></span><br><span class="line">FROM centos:7</span><br><span class="line">MAINTAINER nikaido&lt;1581283149@qq.com&gt;</span><br><span class="line"></span><br><span class="line">ADD jdk-8u151-linux-x64.tar.gz  /usr/local/</span><br><span class="line">ADD apache-tomcat-9.0.71.tar.gz /usr/local/</span><br><span class="line"></span><br><span class="line">RUN yum -y install vim</span><br><span class="line"></span><br><span class="line">ENV MYPATH /usr/local/</span><br><span class="line">WORKDIR $MYPATH</span><br><span class="line"></span><br><span class="line">ENV JAVA_HOME /usr/local/jdk1.8.0_151</span><br><span class="line">ENV CLASSPATH JAVA_HOME/lib/dt.jar:JAVA_HOME/lib/tools.jar</span><br><span class="line">ENV TOM_HOME /usr/local/apache-tomcat-9.0.71</span><br><span class="line">ENV TOM_BASH /usr/local/apache-tomcat-9.0.71</span><br><span class="line">ENV PATH $PATH:$JAVA_HOME/bin:$TOM_HOME/lib:$TOM_HOME/bin</span><br><span class="line"> </span><br><span class="line">EXPOSE 8080</span><br><span class="line"> </span><br><span class="line">CMD /usr/local/apache-tomcat-9.0.71/bin/startup.sh &amp;&amp; tail -F /usr/local/apache-tomcat-9.0.71/bin/logs/catalina.out</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>docker build -t testtomcat .</code> 构建镜像成功后，直接运行<del>（挂载什么的太麻烦了~这里就不挂了）</del>，用浏览器测试一下访问成功</p>
+</li>
+</ul>
+  <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@root test]# docker run -d -p 3389:8080 testtomcat</span><br></pre></td></tr></table></figure>
+
+<p>  <img src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/000-00N/003/docker-21.jpg" alt="docker-21"></p>
+<h2 id="发布镜像到DockerHub"><a href="#发布镜像到DockerHub" class="headerlink" title="发布镜像到DockerHub"></a>发布镜像到DockerHub</h2><ol>
+<li><p>首先要注册一个可以登录的账号</p>
+</li>
+<li><p>在主机通过命令行登录docker</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@root test]# docker login --help</span><br><span class="line"></span><br><span class="line">Usage:	docker login [OPTIONS] [SERVER]</span><br><span class="line"></span><br><span class="line">Log in to a Docker registry</span><br><span class="line"></span><br><span class="line">Options:</span><br><span class="line">  -p, --password string   Password</span><br><span class="line">      --password-stdin    Take the password from stdin</span><br><span class="line">  -u, --username string   Usernam</span><br><span class="line"><span class="meta prompt_">  </span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">登录</span></span><br><span class="line">docker login -u 用户名</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>登陆完就可以用 <code>docker push</code>命令 提交镜像了，<code>docker logout</code> 登出用户</p>
+</li>
+</ol>
+<blockquote>
+<p>格式：docker push 用户名&#x2F;镜像名:tag</p>
+</blockquote>
+<p>直接 <code>push</code> 会被拒绝 </p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@root test]# docker push testtomcat</span><br><span class="line">The push refers to repository [docker.io/library/testtomcat]</span><br><span class="line">06e882770dce: Preparing </span><br><span class="line">e0c442ed4b6b: Preparing </span><br><span class="line">6cb9ad15625b: Preparing </span><br><span class="line">174f56854903: Preparing </span><br><span class="line">denied: requested access to the resource is denied</span><br></pre></td></tr></table></figure>
+
+<p>解决方法：使用 <code>docker tag</code> 命令修改镜像的版本和名字再重新上传</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@root test]# docker tag 4f7712a34ee4 nik5d0/testtomcat:1.0</span><br><span class="line">[root@root test]# docker push nik5d0/testtomcat:1.0</span><br><span class="line">The push refers to repository [docker.io/nik5d0/testtomcat]</span><br><span class="line">06e882770dce: Pushing [==&gt;                                                ]   12.5MB/253.7MB</span><br><span class="line">e0c442ed4b6b: Pushing [===================&gt;                               ]  6.343MB/16.15MB</span><br><span class="line">6cb9ad15625b: Pushing [&gt;                                                  ]  7.081MB/384.4MB</span><br><span class="line">174f56854903: Pushing [===&gt;                                               ]  12.53MB/203.9MB</span><br></pre></td></tr></table></figure>
+
+<h2 id="Docker全流程"><a href="#Docker全流程" class="headerlink" title="Docker全流程"></a>Docker全流程</h2><p><img src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/000-00N/003/docker-22.png" alt="docker-22"></p>
+<p>docker save 和docker load 可以将镜像输出和导入(以文件的形式)</p>
+<p><strong>docker-compose常用命令</strong></p>
+<p>​	docker-compose，用于定义和运行多个 docker容器 的应用，它使用 YAML文件 来配置应用程序服务，使用命令就可以启动和停止 应用程序 的服务</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>docker-compose up</td>
+<td>完成包括构建镜像、(重新)创建服务、启动服务、关联相关容器这一系列操作</td>
+</tr>
+<tr>
+<td>docker-compose build</td>
+<td>构建（重新构建）项目中的服务容器</td>
+</tr>
+<tr>
+<td>docker-compose ps</td>
+<td>列出项目中的所有容器</td>
+</tr>
+<tr>
+<td>docker-compose start</td>
+<td>启动已经存在的服务容器（项目中的）</td>
+</tr>
+<tr>
+<td>docker-compose stop</td>
+<td>停止正在运行的容器，但不删除（项目中的）</td>
+</tr>
+<tr>
+<td>docker-compose down</td>
+<td>停止 up 命令启动的容器，并移除网络（项目中的）</td>
+</tr>
+</tbody></table>
+<p>项目：在 docker-compose 定义的一组服务，他们共同构成一个 应用程序，每个服务都可以有自己的配置</p>
+]]></content>
+      <categories>
+        <category>炼气</category>
+      </categories>
+      <tags>
+        <tag>基础</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>pikachu笔记(部分)</title>
     <url>/2022/10/13/101%E2%80%94pikachu/</url>
     <content><![CDATA[<h1 id="CSRF"><a href="#CSRF" class="headerlink" title="CSRF"></a>CSRF</h1><p>​	介绍：跨站请求伪造(Cross-site request forgery，缩写为 CSRF 或 XSRF)，与 XSS 不同，XSS 利用站点内的信任用户，CSRF 则伪装成 受信任用户 请求 受信任的网站。</p>
@@ -2640,6 +2675,145 @@
       </tags>
   </entry>
   <entry>
+    <title>Nmap常见用法总结</title>
+    <url>/2022/09/30/200%E2%80%94Nmap,SQLmap%E7%94%A8%E6%B3%95(%E6%9C%AA%E5%AE%8C%E6%88%90)/</url>
+    <content><![CDATA[<h1 id="Nmap"><a href="#Nmap" class="headerlink" title="Nmap"></a>Nmap</h1><p>Nmap，一款开源的 网络探测 和 安全审核 工具，可用来 快速扫描大型网络，特点如下：</p>
+<ul>
+<li>主机探测：探测网络上的主机</li>
+<li>端口扫描：探测 目标主机 开放的端口</li>
+<li>版本检测：探测 目标主机 的网络服务，判断其服务名称 和 版本号</li>
+<li>系统监测：探测 目标主机 的操作系统 和 网络设备的硬件特性</li>
+<li>探测脚本</li>
+</ul>
+<p>扫描格式：nmap+扫描参数+目标地址或网段。略完整的扫描命令：<code>nmap -T4 -A ip</code></p>
+<p>​	-A 表示使用 进攻性(Aggressive) 方式扫描，-T4 表示指定扫描过程使用的时序(Timing)，共6个级别(0~5)，级别越高，扫描速度越快，但也易被 防火墙 或 IDS 检测并屏蔽。</p>
+<h2 id="主机探测"><a href="#主机探测" class="headerlink" title="主机探测"></a>主机探测</h2><p>相关参数：</p>
+<ul>
+<li><p>-iL：从文件中导入 目标主机 或 目标网段</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">nmap -iL /home/kali/Desktop/targets.txt		#扫描 targets.txt文件中的所有目标地址</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>-exclude：将后面跟着的 主机 或 网段 剔除出扫描范围</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">nmap 192.168.0.110/24 -exclude 192.168.0.110			 </span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">扫描除0.110之外的 在此网段中的 所有主机地址，相当于扫描 192.168.0.x（x≠110且在1~255之间）</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>-excludefile：同上，不过是以文件的形式</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">namp 192.168.0.110/24 -exclude /home/kali/Desktop/notargets.txt</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>–traceroute：路由跟踪扫描，追踪每个路由节点</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">nmap --traceroute www.baidu.com</span><br></pre></td></tr></table></figure>
+
+<p>​	能够了解网络通行情况，通过路由器追踪可以轻松的查处从 我们电脑所在地 到 目标地之间所经过的网络节点，并可以看到通过各个节点所花费的时间</p>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">nmap 192.168.0.110			# 扫描单个目标地址（ping扫描）</span><br><span class="line">nmap 192.168.0.110-120		# 扫描一个范围内的目标地址，一个连续的网段中间用 “-” 连接</span><br><span class="line">nmap 192.168.0.110/24		# 扫描目标地址所在的网段，扫描范围为：192.168.0.1~255</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">┌──(root㉿kali)-[~]</span><br><span class="line">└─# nmap 192.168.0.110/24 </span><br><span class="line">……………………</span><br><span class="line">Not shown: 999 closed tcp ports (reset)</span><br><span class="line">PORT   STATE SERVICE</span><br><span class="line">22/tcp open  ssh</span><br><span class="line"></span><br><span class="line">Nmap done: 256 IP addresses (12 hosts up) scanned in 1095.08 seconds</span><br><span class="line"><span class="meta prompt_">	#</span><span class="language-bash">192.168.0.108 是 kali的 IP，其他的 11 个主机的扫描结果大体类似，就不展示了</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="端口扫描"><a href="#端口扫描" class="headerlink" title="端口扫描"></a>端口扫描</h2><p>相关参数：</p>
+<ul>
+<li><p>-p：扫描指定端口</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">nmap -p 21,22,23,80 192.168.0.110		# 扫描 目标主机 的21、22、23、80 端口</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>-F：Fast mode，快速模式，仅扫描 TOP100 的端口</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">nmap -F 192.168.0.110		# 扫描 TOP100 的端口</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>–top-ports number：扫描开放率最高的 number 个端口。Nmap的作者做过大规模的扫描，统计网络上各个端口可能开放的概率，并列出最有可能开放的端口列表</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">┌──(root㉿kali)-[~]</span><br><span class="line">└─# nmap --top-ports 156 192.168.0.110 </span><br><span class="line">……………………</span><br><span class="line">Not shown: 155 filtered tcp ports (no-response)</span><br><span class="line">PORT     STATE SERVICE</span><br><span class="line">5357/tcp open  wsdapi</span><br><span class="line">MAC Address: 00:E9:3A:96:10:AB (AzureWave Technology)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>​	大部分 扫描器 会对所有端口分为 开放(open) 或 关闭(closed) 两种类型，Nmap对端口状态的分析更加细致分为：开放(open)、关闭(closed)、被过滤(filtered)、未过滤(unfiltered)、开放或被过滤(open|filtered)、关闭或被过滤(closed|filtered)</p>
+<ul>
+<li>open：渗透测试中最关注的一类端口，往往能够为我们提供一条能够进入系统的攻击路径</li>
+<li>closed：主机已相应，但没有应用程序监听。</li>
+<li>filtered：不确认 端口 是否开放，可能被 防火墙 等设备过滤</li>
+<li>unfiltered：在使用 ACK 扫描时，Nmap 无法确认 端口 是否开放，回归为此类。可以用其他扫描</li>
+</ul>
+<h2 id="版本探测"><a href="#版本探测" class="headerlink" title="版本探测"></a>版本探测</h2><p>-sV：检测 目标地址 开放的端口对应的服务版本信息</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">┌──(root㉿kali)-[~]</span><br><span class="line">└─# nmap -sV  192.168.0.110 </span><br><span class="line">……………………</span><br><span class="line">Not shown: 993 filtered tcp ports (no-response)</span><br><span class="line">PORT     STATE SERVICE         VERSION</span><br><span class="line">80/tcp   open  http            nginx 1.15.11</span><br><span class="line">81/tcp   open  http            nginx 1.15.11</span><br><span class="line">82/tcp   open  http            nginx 1.15.11</span><br><span class="line">83/tcp   open  http            nginx 1.15.11</span><br><span class="line">903/tcp  open  ssl/vmware-auth VMware Authentication Daemon 1.10 (Uses VNC, SOAP)</span><br><span class="line">3306/tcp open  mysql           MySQL (unauthorized)</span><br><span class="line">5357/tcp open  http            Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)</span><br><span class="line">MAC Address: 00:E9:3A:96:10:AB (AzureWave Technology)</span><br><span class="line">Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows</span><br><span class="line"></span><br><span class="line">Nmap done: 1 IP address (1 host up) scanned in 17.21 seconds</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>–version-intensity “level”：设置版本扫描强度，强度水平说明了应该使用哪些探测报文。数值越高，服务越有可能被正确识别，默认是7</p>
+</li>
+<li><p>–version-light：打开轻量级模式，为–version-intensity 2的别名</p>
+</li>
+<li><p>–version-all：尝试所有探测，为–version-intensity 9的别名</p>
+</li>
+</ul>
+<h2 id="脚本使用"><a href="#脚本使用" class="headerlink" title="脚本使用"></a>脚本使用</h2><p><strong>脚本分类</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">- auth: 负责处理鉴权证书（绕开鉴权）的脚本  </span><br><span class="line">- broadcast: 在局域网内探查更多服务开启状况，如dhcp/dns/sqlserver等服务  </span><br><span class="line">- brute: 提供暴力破解方式，针对常见的应用如http/snmp等  </span><br><span class="line">- default: 使用-sC或-A选项扫描时候默认的脚本，提供基本脚本扫描能力  </span><br><span class="line">- discovery: 对网络进行更多的信息，如SMB枚举、SNMP查询等  </span><br><span class="line">- dos: 用于进行拒绝服务攻击  </span><br><span class="line">- exploit: 利用已知的漏洞入侵系统  </span><br><span class="line">- external: 利用第三方的数据库或资源，例如进行whois解析  </span><br><span class="line">- fuzzer: 模糊测试的脚本，发送异常的包到目标机，探测出潜在漏洞</span><br><span class="line">- intrusive: 入侵性的脚本，此类脚本可能引发对方的IDS/IPS的记录或屏蔽</span><br><span class="line">- malware: 探测目标机是否感染了病毒、开启了后门等信息  </span><br><span class="line">- safe: 此类与intrusive相反，属于安全性脚本  </span><br><span class="line">- version: 负责增强服务与版本扫描（Version Detection）功能的脚本  </span><br><span class="line">- vuln: 负责检查目标机是否有常见的漏洞（Vulnerability），如是否有MS08_067</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<ul>
+<li>-sC ：根据端口识别的服务,调用默认脚本</li>
+<li>–script&#x3D;”Lua scripts”：调用的脚本名</li>
+<li>–script-args&#x3D;n1&#x3D;v1,[n2&#x3D;v2]：调用的脚本传递的参数</li>
+<li>–script-args-file&#x3D;filename：使用文本传递参数</li>
+<li>–script-trace：显示所有发送和接收到的数据</li>
+<li>–script-updatedb：更新脚本的数据库</li>
+<li>–script-help&#x3D;”Lua script”：显示指定脚本的帮助</li>
+</ul>
+</blockquote>
+<ul>
+<li><p>–script&#x3D;vuln：扫描常见漏洞</p>
+<p><img src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/200-20N/200/Nmap-02.jpg" alt="Nmap-02"></p>
+</li>
+<li><p>-n –script&#x3D;broadcast：探测局域网内更多服务开启状况</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">nmap -n --script=broadcast 192.168.0.101</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/200-20N/200/Nmap-01.png"></p>
+</li>
+<li><p>–script&#x3D;dns-brute：利用DNS进行子域名暴力破解</p>
+<blockquote>
+<p>nmap –script&#x3D;dns-brute <a href="http://www.baidu.com/">www.baidu.com</a></p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">nmap --script=dns-brute www.baidu.com</span><br><span class="line">……………………</span><br><span class="line">Host script results:</span><br><span class="line">| dns-brute: </span><br><span class="line">|   DNS Brute-force hostnames: </span><br><span class="line">|     mx.baidu.com - 61.135.163.61</span><br><span class="line">|     id.baidu.com - 112.34.111.67</span><br><span class="line">|     id.baidu.com - 112.34.111.74</span><br><span class="line">|     id.baidu.com - 112.34.111.75</span><br><span class="line">|     images.baidu.com - 182.61.62.50</span><br><span class="line">|     info.baidu.com - 111.45.3.140</span><br><span class="line">|     info.baidu.com - 112.34.113.75</span><br><span class="line">|     mx1.baidu.com - 111.202.115.85</span><br><span class="line">|     mx1.baidu.com - 220.181.3.85</span><br><span class="line">|     dns.baidu.com - 110.242.68.134</span><br><span class="line">Nmap done: 1 IP address (1 host up) scanned in 43.16 seconds</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="部分参数"><a href="#部分参数" class="headerlink" title="部分参数"></a>部分参数</h2><ul>
+<li><p>-sn：Ping Scan，只进行主机发现，不进行端口扫描</p>
+</li>
+<li><p>-sS：SYN 半连接扫描（TCP SYN）</p>
+<blockquote>
+<p>使 Nmap 无需通过完整的握手，就能获得远程主机的信息</p>
+</blockquote>
+</li>
+<li><p>-sA：TCP ACK 扫描</p>
+</li>
+<li><p>-sT：TCP全连接扫描（TCP connect）</p>
+</li>
+<li><p>-sU：使用UDP扫描（扫描 UDP 开放的端口）</p>
+<blockquote>
+<p>​	发送UDP数据包到目标主机等待响应，如果返回ICMP不可达的错误消息，说明端口是关闭的；如果得到正确的适当的回应，说明端口是开放的</p>
+</blockquote>
+</li>
+<li><p>-sN&#x2F;sF&#x2F;sX：使用 TCP NULL &#x2F; FIN &#x2F; Xmas scans 秘密扫描 的方式协助探测对方的TCP端口状态</p>
+<blockquote>
+<p>FIN扫描<strong>不会在目标主机上创建日志</strong>(FIN扫描的优势之一)，FIN扫描发送的包只包含FIN标识</p>
+<p>NULL扫描不发送数据包上的任何字节，XMAS扫描发送FIN、PSH和URG标识的数据包</p>
+</blockquote>
+</li>
+<li><p>-O：通过指纹识别技术识别 目标主机 的操作系统的版本（可惜很不准）</p>
+</li>
+<li><p>-PN：No ping扫描（可以绕过PING命令，但是不影响主机的系统的发现）</p>
+<blockquote>
+<p>​	如果远程主机有防火墙、IDS和IPS系统，可以使用 -PN 命令来确保不ping远程主机，因为有时候防火墙会阻止掉ping请求，-PN命令告诉 Nmap 不用ping远程主机</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="TCP全连接扫描"><a href="#TCP全连接扫描" class="headerlink" title="TCP全连接扫描"></a>TCP全连接扫描</h3><p>​	扫描器 发起一次真实的TCP连接，如果连接成功表明端口是开放的。这种扫描得到的结果最精确，但速度最慢；还容易被 目标主机 记录到日志文件中，易暴露。而 SYN、ACK、FIN 则利用了TCP协议的特性，通过发送一些 包含特殊标志位的数据包，根据返回信息的不同判定端口状态，更加 快速 和 稳定</p>
+<h3 id="FIN-扫描"><a href="#FIN-扫描" class="headerlink" title="FIN 扫描"></a>FIN 扫描</h3><ul>
+<li>在 TCP 报文结构中，FIN端 标识数据是否传输完毕。若 FIN&#x3D;1，则表示数据发送完成，可以释放连接</li>
+<li>当我们发送 FIN&#x3D;1的报文到一个关闭的端口时，该报文会被丢弃，并返回一个 RST报文；</li>
+<li>若我们发送给一个开放的端口，该报文只是被丢掉，而不回应消息</li>
+<li>不用建立 TCP连接，减少了被目标主机记录的可能，安全性高</li>
+</ul>
+]]></content>
+      <categories>
+        <category>锻体</category>
+      </categories>
+      <tags>
+        <tag>通向成神之路的N%之力(中二病犯了)</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>估计以后不会遇到的漏洞</title>
     <url>/2023/01/17/104%E2%80%94%E4%BC%B0%E8%AE%A1%E4%BB%A5%E5%90%8E%E4%B8%8D%E4%BC%9A%E9%81%87%E5%88%B0%E6%BC%8F%E6%B4%9E/</url>
     <content><![CDATA[<p>​	闲来无事，偶尔打打CTF，<del>每打一道题都是我的知识盲区，可恶</del>，姑且先都记下来留个记录（不知道以后还会不会碰到，就算碰到我能想起来吗）</p>
@@ -2786,145 +2960,6 @@
       <tags>
         <tag>Web安全</tag>
         <tag>CTF</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Nmap常见用法总结</title>
-    <url>/2022/09/30/200%E2%80%94Nmap,SQLmap%E7%94%A8%E6%B3%95(%E6%9C%AA%E5%AE%8C%E6%88%90)/</url>
-    <content><![CDATA[<h1 id="Nmap"><a href="#Nmap" class="headerlink" title="Nmap"></a>Nmap</h1><p>Nmap，一款开源的 网络探测 和 安全审核 工具，可用来 快速扫描大型网络，特点如下：</p>
-<ul>
-<li>主机探测：探测网络上的主机</li>
-<li>端口扫描：探测 目标主机 开放的端口</li>
-<li>版本检测：探测 目标主机 的网络服务，判断其服务名称 和 版本号</li>
-<li>系统监测：探测 目标主机 的操作系统 和 网络设备的硬件特性</li>
-<li>探测脚本</li>
-</ul>
-<p>扫描格式：nmap+扫描参数+目标地址或网段。略完整的扫描命令：<code>nmap -T4 -A ip</code></p>
-<p>​	-A 表示使用 进攻性(Aggressive) 方式扫描，-T4 表示指定扫描过程使用的时序(Timing)，共6个级别(0~5)，级别越高，扫描速度越快，但也易被 防火墙 或 IDS 检测并屏蔽。</p>
-<h2 id="主机探测"><a href="#主机探测" class="headerlink" title="主机探测"></a>主机探测</h2><p>相关参数：</p>
-<ul>
-<li><p>-iL：从文件中导入 目标主机 或 目标网段</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">nmap -iL /home/kali/Desktop/targets.txt		#扫描 targets.txt文件中的所有目标地址</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>-exclude：将后面跟着的 主机 或 网段 剔除出扫描范围</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">nmap 192.168.0.110/24 -exclude 192.168.0.110			 </span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">扫描除0.110之外的 在此网段中的 所有主机地址，相当于扫描 192.168.0.x（x≠110且在1~255之间）</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>-excludefile：同上，不过是以文件的形式</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">namp 192.168.0.110/24 -exclude /home/kali/Desktop/notargets.txt</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>–traceroute：路由跟踪扫描，追踪每个路由节点</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">nmap --traceroute www.baidu.com</span><br></pre></td></tr></table></figure>
-
-<p>​	能够了解网络通行情况，通过路由器追踪可以轻松的查处从 我们电脑所在地 到 目标地之间所经过的网络节点，并可以看到通过各个节点所花费的时间</p>
-</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">nmap 192.168.0.110			# 扫描单个目标地址（ping扫描）</span><br><span class="line">nmap 192.168.0.110-120		# 扫描一个范围内的目标地址，一个连续的网段中间用 “-” 连接</span><br><span class="line">nmap 192.168.0.110/24		# 扫描目标地址所在的网段，扫描范围为：192.168.0.1~255</span><br></pre></td></tr></table></figure>
-
-
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">┌──(root㉿kali)-[~]</span><br><span class="line">└─# nmap 192.168.0.110/24 </span><br><span class="line">……………………</span><br><span class="line">Not shown: 999 closed tcp ports (reset)</span><br><span class="line">PORT   STATE SERVICE</span><br><span class="line">22/tcp open  ssh</span><br><span class="line"></span><br><span class="line">Nmap done: 256 IP addresses (12 hosts up) scanned in 1095.08 seconds</span><br><span class="line"><span class="meta prompt_">	#</span><span class="language-bash">192.168.0.108 是 kali的 IP，其他的 11 个主机的扫描结果大体类似，就不展示了</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="端口扫描"><a href="#端口扫描" class="headerlink" title="端口扫描"></a>端口扫描</h2><p>相关参数：</p>
-<ul>
-<li><p>-p：扫描指定端口</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">nmap -p 21,22,23,80 192.168.0.110		# 扫描 目标主机 的21、22、23、80 端口</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>-F：Fast mode，快速模式，仅扫描 TOP100 的端口</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">nmap -F 192.168.0.110		# 扫描 TOP100 的端口</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>–top-ports number：扫描开放率最高的 number 个端口。Nmap的作者做过大规模的扫描，统计网络上各个端口可能开放的概率，并列出最有可能开放的端口列表</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">┌──(root㉿kali)-[~]</span><br><span class="line">└─# nmap --top-ports 156 192.168.0.110 </span><br><span class="line">……………………</span><br><span class="line">Not shown: 155 filtered tcp ports (no-response)</span><br><span class="line">PORT     STATE SERVICE</span><br><span class="line">5357/tcp open  wsdapi</span><br><span class="line">MAC Address: 00:E9:3A:96:10:AB (AzureWave Technology)</span><br></pre></td></tr></table></figure></li>
-</ul>
-<p>​	大部分 扫描器 会对所有端口分为 开放(open) 或 关闭(closed) 两种类型，Nmap对端口状态的分析更加细致分为：开放(open)、关闭(closed)、被过滤(filtered)、未过滤(unfiltered)、开放或被过滤(open|filtered)、关闭或被过滤(closed|filtered)</p>
-<ul>
-<li>open：渗透测试中最关注的一类端口，往往能够为我们提供一条能够进入系统的攻击路径</li>
-<li>closed：主机已相应，但没有应用程序监听。</li>
-<li>filtered：不确认 端口 是否开放，可能被 防火墙 等设备过滤</li>
-<li>unfiltered：在使用 ACK 扫描时，Nmap 无法确认 端口 是否开放，回归为此类。可以用其他扫描</li>
-</ul>
-<h2 id="版本探测"><a href="#版本探测" class="headerlink" title="版本探测"></a>版本探测</h2><p>-sV：检测 目标地址 开放的端口对应的服务版本信息</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">┌──(root㉿kali)-[~]</span><br><span class="line">└─# nmap -sV  192.168.0.110 </span><br><span class="line">……………………</span><br><span class="line">Not shown: 993 filtered tcp ports (no-response)</span><br><span class="line">PORT     STATE SERVICE         VERSION</span><br><span class="line">80/tcp   open  http            nginx 1.15.11</span><br><span class="line">81/tcp   open  http            nginx 1.15.11</span><br><span class="line">82/tcp   open  http            nginx 1.15.11</span><br><span class="line">83/tcp   open  http            nginx 1.15.11</span><br><span class="line">903/tcp  open  ssl/vmware-auth VMware Authentication Daemon 1.10 (Uses VNC, SOAP)</span><br><span class="line">3306/tcp open  mysql           MySQL (unauthorized)</span><br><span class="line">5357/tcp open  http            Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)</span><br><span class="line">MAC Address: 00:E9:3A:96:10:AB (AzureWave Technology)</span><br><span class="line">Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows</span><br><span class="line"></span><br><span class="line">Nmap done: 1 IP address (1 host up) scanned in 17.21 seconds</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>–version-intensity “level”：设置版本扫描强度，强度水平说明了应该使用哪些探测报文。数值越高，服务越有可能被正确识别，默认是7</p>
-</li>
-<li><p>–version-light：打开轻量级模式，为–version-intensity 2的别名</p>
-</li>
-<li><p>–version-all：尝试所有探测，为–version-intensity 9的别名</p>
-</li>
-</ul>
-<h2 id="脚本使用"><a href="#脚本使用" class="headerlink" title="脚本使用"></a>脚本使用</h2><p><strong>脚本分类</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">- auth: 负责处理鉴权证书（绕开鉴权）的脚本  </span><br><span class="line">- broadcast: 在局域网内探查更多服务开启状况，如dhcp/dns/sqlserver等服务  </span><br><span class="line">- brute: 提供暴力破解方式，针对常见的应用如http/snmp等  </span><br><span class="line">- default: 使用-sC或-A选项扫描时候默认的脚本，提供基本脚本扫描能力  </span><br><span class="line">- discovery: 对网络进行更多的信息，如SMB枚举、SNMP查询等  </span><br><span class="line">- dos: 用于进行拒绝服务攻击  </span><br><span class="line">- exploit: 利用已知的漏洞入侵系统  </span><br><span class="line">- external: 利用第三方的数据库或资源，例如进行whois解析  </span><br><span class="line">- fuzzer: 模糊测试的脚本，发送异常的包到目标机，探测出潜在漏洞</span><br><span class="line">- intrusive: 入侵性的脚本，此类脚本可能引发对方的IDS/IPS的记录或屏蔽</span><br><span class="line">- malware: 探测目标机是否感染了病毒、开启了后门等信息  </span><br><span class="line">- safe: 此类与intrusive相反，属于安全性脚本  </span><br><span class="line">- version: 负责增强服务与版本扫描（Version Detection）功能的脚本  </span><br><span class="line">- vuln: 负责检查目标机是否有常见的漏洞（Vulnerability），如是否有MS08_067</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<ul>
-<li>-sC ：根据端口识别的服务,调用默认脚本</li>
-<li>–script&#x3D;”Lua scripts”：调用的脚本名</li>
-<li>–script-args&#x3D;n1&#x3D;v1,[n2&#x3D;v2]：调用的脚本传递的参数</li>
-<li>–script-args-file&#x3D;filename：使用文本传递参数</li>
-<li>–script-trace：显示所有发送和接收到的数据</li>
-<li>–script-updatedb：更新脚本的数据库</li>
-<li>–script-help&#x3D;”Lua script”：显示指定脚本的帮助</li>
-</ul>
-</blockquote>
-<ul>
-<li><p>–script&#x3D;vuln：扫描常见漏洞</p>
-<p><img src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/200-20N/200/Nmap-02.jpg" alt="Nmap-02"></p>
-</li>
-<li><p>-n –script&#x3D;broadcast：探测局域网内更多服务开启状况</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">nmap -n --script=broadcast 192.168.0.101</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/200-20N/200/Nmap-01.png"></p>
-</li>
-<li><p>–script&#x3D;dns-brute：利用DNS进行子域名暴力破解</p>
-<blockquote>
-<p>nmap –script&#x3D;dns-brute <a href="http://www.baidu.com/">www.baidu.com</a></p>
-</blockquote>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">nmap --script=dns-brute www.baidu.com</span><br><span class="line">……………………</span><br><span class="line">Host script results:</span><br><span class="line">| dns-brute: </span><br><span class="line">|   DNS Brute-force hostnames: </span><br><span class="line">|     mx.baidu.com - 61.135.163.61</span><br><span class="line">|     id.baidu.com - 112.34.111.67</span><br><span class="line">|     id.baidu.com - 112.34.111.74</span><br><span class="line">|     id.baidu.com - 112.34.111.75</span><br><span class="line">|     images.baidu.com - 182.61.62.50</span><br><span class="line">|     info.baidu.com - 111.45.3.140</span><br><span class="line">|     info.baidu.com - 112.34.113.75</span><br><span class="line">|     mx1.baidu.com - 111.202.115.85</span><br><span class="line">|     mx1.baidu.com - 220.181.3.85</span><br><span class="line">|     dns.baidu.com - 110.242.68.134</span><br><span class="line">Nmap done: 1 IP address (1 host up) scanned in 43.16 seconds</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="部分参数"><a href="#部分参数" class="headerlink" title="部分参数"></a>部分参数</h2><ul>
-<li><p>-sn：Ping Scan，只进行主机发现，不进行端口扫描</p>
-</li>
-<li><p>-sS：SYN 半连接扫描（TCP SYN）</p>
-<blockquote>
-<p>使 Nmap 无需通过完整的握手，就能获得远程主机的信息</p>
-</blockquote>
-</li>
-<li><p>-sA：TCP ACK 扫描</p>
-</li>
-<li><p>-sT：TCP全连接扫描（TCP connect）</p>
-</li>
-<li><p>-sU：使用UDP扫描（扫描 UDP 开放的端口）</p>
-<blockquote>
-<p>​	发送UDP数据包到目标主机等待响应，如果返回ICMP不可达的错误消息，说明端口是关闭的；如果得到正确的适当的回应，说明端口是开放的</p>
-</blockquote>
-</li>
-<li><p>-sN&#x2F;sF&#x2F;sX：使用 TCP NULL &#x2F; FIN &#x2F; Xmas scans 秘密扫描 的方式协助探测对方的TCP端口状态</p>
-<blockquote>
-<p>FIN扫描<strong>不会在目标主机上创建日志</strong>(FIN扫描的优势之一)，FIN扫描发送的包只包含FIN标识</p>
-<p>NULL扫描不发送数据包上的任何字节，XMAS扫描发送FIN、PSH和URG标识的数据包</p>
-</blockquote>
-</li>
-<li><p>-O：通过指纹识别技术识别 目标主机 的操作系统的版本（可惜很不准）</p>
-</li>
-<li><p>-PN：No ping扫描（可以绕过PING命令，但是不影响主机的系统的发现）</p>
-<blockquote>
-<p>​	如果远程主机有防火墙、IDS和IPS系统，可以使用 -PN 命令来确保不ping远程主机，因为有时候防火墙会阻止掉ping请求，-PN命令告诉 Nmap 不用ping远程主机</p>
-</blockquote>
-</li>
-</ul>
-<h3 id="TCP全连接扫描"><a href="#TCP全连接扫描" class="headerlink" title="TCP全连接扫描"></a>TCP全连接扫描</h3><p>​	扫描器 发起一次真实的TCP连接，如果连接成功表明端口是开放的。这种扫描得到的结果最精确，但速度最慢；还容易被 目标主机 记录到日志文件中，易暴露。而 SYN、ACK、FIN 则利用了TCP协议的特性，通过发送一些 包含特殊标志位的数据包，根据返回信息的不同判定端口状态，更加 快速 和 稳定</p>
-<h3 id="FIN-扫描"><a href="#FIN-扫描" class="headerlink" title="FIN 扫描"></a>FIN 扫描</h3><ul>
-<li>在 TCP 报文结构中，FIN端 标识数据是否传输完毕。若 FIN&#x3D;1，则表示数据发送完成，可以释放连接</li>
-<li>当我们发送 FIN&#x3D;1的报文到一个关闭的端口时，该报文会被丢弃，并返回一个 RST报文；</li>
-<li>若我们发送给一个开放的端口，该报文只是被丢掉，而不回应消息</li>
-<li>不用建立 TCP连接，减少了被目标主机记录的可能，安全性高</li>
-</ul>
-]]></content>
-      <categories>
-        <category>锻体</category>
-      </categories>
-      <tags>
-        <tag>通向成神之路的N%之力(中二病犯了)</tag>
       </tags>
   </entry>
   <entry>
